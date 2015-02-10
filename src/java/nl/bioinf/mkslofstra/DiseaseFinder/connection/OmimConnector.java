@@ -6,8 +6,10 @@
 package nl.bioinf.mkslofstra.DiseaseFinder.connection;
 
 import java.io.*;
-import java.net.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
+import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.*;
 
 /**
@@ -29,8 +31,8 @@ public class OmimConnector {
         return omimSite;
     }
 
-    private HashMap setOmimResult(String omimSite) throws IOException {
-        HashMap <String, String> omimMatch = new ObjectMapper().readValue(omimSite, HashMap.class);
+    private HashMap setOmimResult(String omimSite) throws IOException, JsonGenerationException, JsonMappingException {
+        HashMap<String, String> omimMatch = new ObjectMapper().readValue(omimSite, HashMap.class);
         return new HashMap();
     }
 
