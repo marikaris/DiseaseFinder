@@ -5,8 +5,9 @@
  */
 package nl.bioinf.mkslofstra.DiseaseFinder.connection;
 
-import java.net.*;
 import java.io.*;
+import java.net.*;
+import java.util.HashMap;
 
 /**
  *
@@ -15,15 +16,21 @@ import java.io.*;
 public class OmimConnector {
 
     public String getData(String omimId) throws IOException {
-        String omimKey = "3F48B5AE34656CC9211E0A476E28AF0C370E3F94";        
+        String omimKey = "3F48B5AE34656CC9211E0A476E28AF0C370E3F94";
         String omimSite = getOmimUrl(omimId, omimKey);
         String omimResult = getOmimResult(omimSite);
         return omimResult;
     }
 
     private String getOmimUrl(String number, String key) {
-        String omimSite = String.format("http://api.europe.omim.org/api/entry?mimNumber=%1$s&include=all&format=json&apiKey=%2$s", number, key);
+//        String omimSite = String.format("http://api.europe.omim.org/api/entry?mimNumber=%1$s&include=all&format=json&apiKey=%2$s", number, key);
+        String omimSite = String.format("http://api.europe.omim.org/api/clinicalSynopsis?mimNumber=%1$S&include=all&format=html&apiKey=%2$s", number, key);
         return omimSite;
+    }
+
+    private HashMap setOmimResult(String omimSite) {
+        HashMap <String, String> omimMatch = new ObjectMapper().readValue(omimSite, HashMap.class);
+        return new HashMap();
     }
 
     private String getOmimResult(String omimSite) throws MalformedURLException, IOException {
