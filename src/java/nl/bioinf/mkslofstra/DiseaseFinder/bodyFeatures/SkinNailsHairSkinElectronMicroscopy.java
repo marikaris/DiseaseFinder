@@ -10,6 +10,6 @@ package nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures;
  *
  * @author mkslofstra
  */
-public class laboratoryAbnormalities extends DiseaseFeatures{
+public class SkinNailsHairSkinElectronMicroscopy extends SkinNailsHairSkin{
     
 }
