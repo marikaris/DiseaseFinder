@@ -11,5 +11,16 @@ package nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures;
  * @author aroeters
  */
 public class HeadAndNeckNose extends HeadAndNeck {
-
+    /**
+    * Contains the name of the feature.
+    */
+    private final String name = "headAndNeckNose";
+    /**
+     * Contains the boolean for the feature if there is something wrong with it.
+     */
+    private Boolean exist;
+    /**
+     * Contains the information about the feature if the feature is present.
+     */
+    private String text;
 }
