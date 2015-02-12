@@ -20,9 +20,7 @@ public class DiseaseFenotypeGetter {
     public static void main(String[] args) throws IOException, JSONException {
         DiseaseFenotypeGetter fenotype = new DiseaseFenotypeGetter();
         String data = fenotype.getOmimData();
-        System.out.println(data);
         JSONObject features = fenotype.makeJSONObject(data);
-
     }
 
     /**
