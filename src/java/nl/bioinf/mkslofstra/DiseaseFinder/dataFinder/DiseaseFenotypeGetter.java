@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 /**
+ * DiseaseFenotypeGetter gets the fenotype of a disease.
  *
  * @author mkslofstra
  */
@@ -31,11 +32,11 @@ public class DiseaseFenotypeGetter {
     private String getOmimData() throws IOException {
         OmimConnector omimConnection = new OmimConnector();
         String omimData = omimConnection.getData("606232");
-        
+
         int length = omimData.length();
-        System.out.println(omimData.substring(length-8));
-        omimData= omimData.substring(75, length-8);
-        
+        System.out.println(omimData.substring(length - 8));
+        omimData = omimData.substring(75, length - 8);
+
         return omimData;
     }
 
