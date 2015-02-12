@@ -6,12 +6,9 @@
 package nl.bioinf.mkslofstra.DiseaseFinder.dataFinder;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import nl.bioinf.mkslofstra.DiseaseFinder.connection.OmimConnector;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONArray;
 
 /**
  * DiseaseFenotypeGetter gets the fenotype of a disease.
@@ -25,31 +22,42 @@ public class DiseaseFenotypeGetter {
         String data = fenotype.getOmimData();
         System.out.println(data);
         JSONObject features = fenotype.makeJSONObject(data);
-//        String features = fenotype.findClinicalFeatures(data);
 
     }
 
+    /**
+     * getOmimData gets all the data from the omim page of a given omim number
+     * in a String.
+     *
+     * @throws IOException when the string of the website cannot be made.
+     * @return omimData the webpage of omim in a string.
+     */
     private String getOmimData() throws IOException {
         OmimConnector omimConnection = new OmimConnector();
         String omimData = omimConnection.getData("606232");
-
         int length = omimData.length();
-        System.out.println(omimData.substring(length - 8));
+        /*The webpage is be shortend, so that a jsonobject can be made
+         later, wherefrom information about the clinical features of a
+         disease can be gotten easily.*/
         omimData = omimData.substring(75, length - 8);
-
         return omimData;
     }
 
-    private JSONObject makeJSONObject(String jsonString) throws JSONException {
+    /**
+     * makeJSONObject makes a JSONObject from which can easily information be
+     * obtained.
+     *
+     * @author mkslofstra
+     * @param jsonString a string with json content from the omim website.
+     * @return jsonSite the page in a json object.
+     * @throws JSONException when the given structure in the string is not a
+     * viable json structure.
+     */
+    private JSONObject makeJSONObject(final String jsonString)
+            throws JSONException {
         JSONObject jsonSite = new JSONObject(jsonString);
 //        Integer number = jsonSite.getInt("mimNumber");
 //        String feature = jsonSite.getString("growthHeight");
         return jsonSite;
-    }
-
-    public String findClinicalFeatures(String omimData) {
-        Pattern pattern = Pattern.compile("(?s)\"Clinical Features\", \"textSectionContent\": \".+} }?");
-        Matcher matchFeatures = pattern.matcher(omimData);
-        return matchFeatures.group(1);
     }
 }
