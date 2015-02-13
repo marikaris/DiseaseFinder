@@ -10,6 +10,17 @@ package nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures;
  *
  * @author aroeters
  */
-public class RespiratoryLung extends Respiratory{
-
+public class RespiratoryLung extends Respiratory {
+    /**
+    * Contains the name of the feature.
+    */
+    private final String name = "respiratoryLung";
+    /**
+     * Contains the boolean for the feature if there is something wrong with it.
+     */
+    private Boolean exist;
+    /**
+     * Contains the information about the feature if the feature is present.
+     */
+    private String text;
 }

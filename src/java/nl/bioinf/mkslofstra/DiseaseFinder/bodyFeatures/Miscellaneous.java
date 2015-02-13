@@ -10,7 +10,7 @@ package nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures;
  *
  * @author mkslofstra
  */
-public class Miscellaneous extends DiseaseFeatures{
+public class Miscellaneous extends DiseaseFeatures {
     /**
     * Contains the name of the feature.
     */
