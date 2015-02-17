@@ -9,10 +9,12 @@ package nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures;
  *
  * @author mkslofstra
  */
-public enum BodyFeatures {
+public enum BodyFeature {
 
-    growth, headAndNeck,
-    cardiovascular, respiratory, chest, abdomen,
+    /**The growth feature is the information about the growth if this is
+     * affected by a given disease.*/
+    growth,    
+    headAndNeck, cardiovascular, respiratory, chest, abdomen,
     genitourinary, skeletal, skinNailsHair, muscleSoftTissue,
     neurologic, voice, metabolicFeatures, endocrineFeatures,
     hematology, immunology, neoplasia, prenatalManifestations,

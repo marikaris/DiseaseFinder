@@ -6,8 +6,8 @@
 package nl.bioinf.mkslofstra.DiseaseFinder.dataFinder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures.FeatureCollection;
 import nl.bioinf.mkslofstra.DiseaseFinder.connection.OmimConnector;
 import org.json.JSONException;
@@ -27,7 +27,8 @@ public class DiseaseFenotypeGetter {
         String data = fenotype.getOmimData();
         JSONObject features = fenotype.makeJSONObject(data);
         fenotype.checkFeature("growth");
-        fenotype.getFeatures();
+        String [] allFeatures = fenotype.getFeatures();
+        ArrayList<String> fenotypes = fenotype.collectFenotypes(allFeatures);
     }
 
     /**
@@ -73,22 +74,33 @@ public class DiseaseFenotypeGetter {
         return check;
     }
 
-    public String getFenotype(JSONObject features) {
-
-        return "";
+    private String getFenotypeOfFeature(String feature) throws JSONException {
+        String fenotype = features.getString(feature);
+        return fenotype;
     }
 
-    private String getFeatures() throws JSONException {
+    public ArrayList<String> collectFenotypes(String[] allFeatures) throws JSONException {
+        ArrayList<String> fenotypes = new ArrayList();
+        for (String feature : allFeatures){
+            System.out.println(feature);
+            String fenotype = getFenotypeOfFeature(feature);
+            System.out.println(fenotype);
+            fenotypes.add(fenotype);
+        }
+        return fenotypes;
+    }
+
+    private String [] getFeatures() throws JSONException {
+        String [] allFeatures = new String[]{};
         FeatureCollection possibleFeatures = new FeatureCollection();
-        for (String pf: possibleFeatures.globalFeatures) {
+        for (String pf : possibleFeatures.globalFeatures) {
             Boolean check = checkFeature(pf);
             if (check) {
-                System.out.println(pf+": true");
-            }else{
-                System.out.println(pf+": false");
+                allFeatures = possibleFeatures.extendFeature(pf);
+                System.out.println(Arrays.toString(allFeatures));
             }
         }
-            
-        return "";
+
+        return allFeatures;
     }
 }
