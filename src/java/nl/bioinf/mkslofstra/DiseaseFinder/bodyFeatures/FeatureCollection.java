@@ -5,10 +5,6 @@
  */
 package nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures;
 
-import java.lang.Iterable;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 /**
  *
  * @author mkslofstra
