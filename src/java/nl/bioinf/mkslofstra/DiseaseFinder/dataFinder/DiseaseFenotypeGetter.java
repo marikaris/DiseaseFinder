@@ -21,14 +21,17 @@ import org.json.JSONObject;
 public class DiseaseFenotypeGetter {
 
     JSONObject features;
+    ArrayList<String> featuresToFind = new ArrayList();
 
     public static void main(String[] args) throws IOException, JSONException {
         DiseaseFenotypeGetter fenotype = new DiseaseFenotypeGetter();
         String data = fenotype.getOmimData();
         JSONObject features = fenotype.makeJSONObject(data);
         fenotype.checkFeature("growth");
-        String [] allFeatures = fenotype.getFeatures();
-        ArrayList<String> fenotypes = fenotype.collectFenotypes(allFeatures);
+
+//        allFeatures.add(fenotype.getFeatures());
+        ArrayList<String> featuresToFind = fenotype.getFeatures();
+        ArrayList<String> fenotypes = fenotype.collectFenotypes(featuresToFind);
     }
 
     /**
@@ -79,9 +82,9 @@ public class DiseaseFenotypeGetter {
         return fenotype;
     }
 
-    public ArrayList<String> collectFenotypes(String[] allFeatures) throws JSONException {
+    public ArrayList<String> collectFenotypes(ArrayList<String> allFeatures) throws JSONException {
         ArrayList<String> fenotypes = new ArrayList();
-        for (String feature : allFeatures){
+        for (String feature : allFeatures) {
             System.out.println(feature);
             String fenotype = getFenotypeOfFeature(feature);
             System.out.println(fenotype);
@@ -90,17 +93,20 @@ public class DiseaseFenotypeGetter {
         return fenotypes;
     }
 
-    private String [] getFeatures() throws JSONException {
-        String [] allFeatures = new String[]{};
+    private ArrayList<String> getFeatures() throws JSONException {
+        String[] allFeatures = new String[]{};
         FeatureCollection possibleFeatures = new FeatureCollection();
         for (String pf : possibleFeatures.globalFeatures) {
             Boolean check = checkFeature(pf);
             if (check) {
                 allFeatures = possibleFeatures.extendFeature(pf);
-                System.out.println(Arrays.toString(allFeatures));
+                for (String feature : allFeatures) {
+                    featuresToFind.add(feature);
+                }
             }
-        }
 
-        return allFeatures;
+        }
+        return featuresToFind;
+
     }
 }
