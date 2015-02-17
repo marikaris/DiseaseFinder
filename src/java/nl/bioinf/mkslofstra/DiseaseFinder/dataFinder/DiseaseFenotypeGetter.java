@@ -6,6 +6,9 @@
 package nl.bioinf.mkslofstra.DiseaseFinder.dataFinder;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Iterator;
+import nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures.FeatureCollection;
 import nl.bioinf.mkslofstra.DiseaseFinder.connection.OmimConnector;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,10 +20,14 @@ import org.json.JSONObject;
  */
 public class DiseaseFenotypeGetter {
 
+    JSONObject features;
+
     public static void main(String[] args) throws IOException, JSONException {
         DiseaseFenotypeGetter fenotype = new DiseaseFenotypeGetter();
         String data = fenotype.getOmimData();
         JSONObject features = fenotype.makeJSONObject(data);
+        fenotype.checkFeature("growth");
+        fenotype.getFeatures();
     }
 
     /**
@@ -56,6 +63,32 @@ public class DiseaseFenotypeGetter {
         JSONObject jsonSite = new JSONObject(jsonString);
 //        Integer number = jsonSite.getInt("mimNumber");
 //        String feature = jsonSite.getString("growthHeight");
+        features = jsonSite;
         return jsonSite;
+    }
+
+    private Boolean checkFeature(String feature) throws JSONException {
+        feature = feature + "Exists";
+        Boolean check = features.getBoolean(feature);
+        return check;
+    }
+
+    public String getFenotype(JSONObject features) {
+
+        return "";
+    }
+
+    private String getFeatures() throws JSONException {
+        FeatureCollection possibleFeatures = new FeatureCollection();
+        for (String pf: possibleFeatures.globalFeatures) {
+            Boolean check = checkFeature(pf);
+            if (check) {
+                System.out.println(pf+": true");
+            }else{
+                System.out.println(pf+": false");
+            }
+        }
+            
+        return "";
     }
 }
