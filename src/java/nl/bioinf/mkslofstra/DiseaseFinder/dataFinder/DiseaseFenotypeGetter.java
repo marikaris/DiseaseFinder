@@ -43,9 +43,8 @@ public class DiseaseFenotypeGetter {
     public static void main(final String[] args) throws IOException,
             JSONException {
         DiseaseFenotypeGetter fenotype = new DiseaseFenotypeGetter();
-        String data = fenotype.getOmimData();
+        String data = fenotype.getOmimData("606232");
         JSONObject features = fenotype.makeJSONObject(data);
-        fenotype.checkFeature("growth");
         ArrayList<String> featuresToFind = fenotype.getFeatures();
         ArrayList<String> fenotypes = fenotype.collectFenotypes(featuresToFind);
     }
@@ -58,9 +57,9 @@ public class DiseaseFenotypeGetter {
      * @return omimData the webpage of omim in a string.
      * @author mkslofstra
      */
-    private String getOmimData() throws IOException {
+    private String getOmimData(String omimNr) throws IOException {
         OmimConnector omimConnection = new OmimConnector();
-        String omimData = omimConnection.getData("606232");
+        String omimData = omimConnection.getData(omimNr);
         int length = omimData.length();
         /*The webpage is be shortend, so that a jsonobject can be made
          later, wherefrom information about the clinical features of a
