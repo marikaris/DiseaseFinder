@@ -96,6 +96,8 @@ public class DiseaseFenotypeGetter {
      */
     private Boolean checkFeature(final String feature) throws JSONException {
         String featureExists = feature + "Exists";
+        //getBoolean gets the value of the given String in featureExists which
+        //is in the json structure.
         Boolean check = features.getBoolean(featureExists);
         return check;
     }
@@ -111,6 +113,8 @@ public class DiseaseFenotypeGetter {
      */
     private String getFenotypeOfFeature(final String feature)
             throws JSONException {
+        //getString gets the string which belongs to the given
+        //string in the json structure.
         String fenotype = features.getString(feature);
         return fenotype;
     }
@@ -128,12 +132,15 @@ public class DiseaseFenotypeGetter {
             final ArrayList<String> allFeatures) throws JSONException {
         ArrayList<String> fenotypes = new ArrayList();
         for (String feature : allFeatures) {
-            if (features.getBoolean(feature + "Exists")) {
-                System.out.println(feature);
-                String fenotype = getFenotypeOfFeature(feature);
-                System.out.println(fenotype);
-                fenotypes.add(fenotype);
-            }
+            //check for each feature if the value of it is true or false.
+            System.out.println(feature);
+            //get the value of the feature from the json structure
+            //if the feature does exist.
+            String fenotype = getFenotypeOfFeature(feature);
+            System.out.println(fenotype);
+            //add the fenotype to the global variable fenotypes
+            //which contains the full fenotype of a disease.
+            fenotypes.add(fenotype);
         }
         return fenotypes;
     }
@@ -149,17 +156,23 @@ public class DiseaseFenotypeGetter {
      * @author mkslofstra
      */
     private ArrayList<String> getFeatures() throws JSONException {
-        String[] allFeatures = new String[]{};
+        String[] allFeatures;
         FeatureCollection possibleFeatures = new FeatureCollection();
+        //iterate over all possible features.
         for (String pf : possibleFeatures.getGlobalFeatures()) {
             Boolean check = checkFeature(pf);
             if (check) {
+                //if the check is true, get the extension of the main feature
+                //to get the specific features of the main feature.
                 allFeatures = possibleFeatures.extendFeature(pf);
+                //add all specific features to the features list,
+                //if the feature exists in the disease.
                 for (String feature : allFeatures) {
-                    featuresToFind.add(feature);
+                    if (features.getBoolean(feature + "Exists")) {
+                        featuresToFind.add(feature);
+                    }
                 }
             }
-
         }
         return featuresToFind;
 
