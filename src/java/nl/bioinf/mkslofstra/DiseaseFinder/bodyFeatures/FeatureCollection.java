@@ -8,17 +8,44 @@ package nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures;
 import java.util.Arrays;
 
 /**
+ * FeatureCollectiion collects all the main features and their specific features
+ * which are possible in a disease.
  *
  * @author mkslofstra
  */
 public class FeatureCollection {
 
-    public String[] globalFeatures;
+    /**
+     * globalFeatures are the groups of features.
+     */
+    private String[] globalFeatures;
 
+    /**
+     * The getter of globalFeatures.
+     *
+     * @return globalFeatures: a list of string which are the main groups of the
+     * features.
+     */
+    public final String[] getGlobalFeatures() {
+        return globalFeatures;
+    }
+
+    /**
+     * FeatureCollection is the function of FeatureCollection which is called
+     * when the class is called. This function calls fillGlobalFeatures so that
+     * this will be filled everytime when the class is called.
+     *
+     * @author mkslofstra
+     */
     public FeatureCollection() {
         this.fillGlobalFeatures();
     }
 
+    /**
+     * fillGlobal features fills the global variable globalFeatures.
+     *
+     * @author mkslofstra
+     */
     private void fillGlobalFeatures() {
         globalFeatures = new String[]{"growth", "headAndNeck",
             "cardiovascular", "respiratory", "chest", "abdomen",
@@ -28,6 +55,14 @@ public class FeatureCollection {
             "laboratoryAbnormalities", "miscellaneous", "molecularBasis"};
     }
 
+    /**
+     * extendFeatures extends the main features with more specific features.
+     *
+     * @param feature is the feature which is asked.
+     * @return extended a list of strings in which the more specific features of
+     * a main feature are.
+     * @author mkslofstra
+     */
     public final String[] extendFeature(final String feature) {
         String[] extended = new String[]{};
         BodyFeature bodyFeature = BodyFeature.valueOf(feature);
@@ -110,10 +145,10 @@ public class FeatureCollection {
                 break;
             case prenatalManifestations:
                 extended = new String[]{"prenatalManifestationsMovement",
-                "prenatalManifestationsAmnioticFluid",
-                "prenatalManifestationsPlacentaAndUmbilicalCord",
-                "prenatalManifestationsMaternal",
-                "prenatalManifestationsDelivery"};
+                    "prenatalManifestationsAmnioticFluid",
+                    "prenatalManifestationsPlacentaAndUmbilicalCord",
+                    "prenatalManifestationsMaternal",
+                    "prenatalManifestationsDelivery"};
                 break;
             case laboratoryAbnormalities:
                 extended = new String[]{"laboratoryAbnormalities"};

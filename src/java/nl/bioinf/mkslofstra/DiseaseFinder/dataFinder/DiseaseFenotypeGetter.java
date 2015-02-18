@@ -38,6 +38,7 @@ public class DiseaseFenotypeGetter {
      * invalid.
      * @throws org.json.JSONException when the structure of the website is not
      * valid json.
+     * @author mkslofstra
      */
     public static void main(final String[] args) throws IOException,
             JSONException {
@@ -55,6 +56,7 @@ public class DiseaseFenotypeGetter {
      *
      * @throws IOException when the string of the website cannot be made.
      * @return omimData the webpage of omim in a string.
+     * @author mkslofstra
      */
     private String getOmimData() throws IOException {
         OmimConnector omimConnection = new OmimConnector();
@@ -90,6 +92,7 @@ public class DiseaseFenotypeGetter {
      * @param feature the feature which should be checked.
      * @throws JSONException when the website has not a valid json structure.
      * @return check tells if the given feature in this disease is true or not.
+     * @author mkslofstra
      */
     private Boolean checkFeature(final String feature) throws JSONException {
         String featureExists = feature + "Exists";
@@ -104,6 +107,7 @@ public class DiseaseFenotypeGetter {
      * @param feature the feature wherefrom the fenotype is needed.
      * @throws JSONException when the website has not a vali json structure.
      * @return fenotpe the fenotype of the feature.
+     * @author mkslofstra
      */
     private String getFenotypeOfFeature(final String feature)
             throws JSONException {
@@ -118,6 +122,7 @@ public class DiseaseFenotypeGetter {
      * be true.
      * @throws JSONException when the website has not a valid json structure.
      * @return fenotypes all the fenotypes of the disease.
+     * @author mkslofstra
      */
     public final ArrayList<String> collectFenotypes(
             final ArrayList<String> allFeatures) throws JSONException {
@@ -141,11 +146,12 @@ public class DiseaseFenotypeGetter {
      * @throws JSONException when the website is not a valid json structure.
      * @return featuresToFind is the global ArrayList of all features which are
      * possible true.
+     * @author mkslofstra
      */
     private ArrayList<String> getFeatures() throws JSONException {
         String[] allFeatures = new String[]{};
         FeatureCollection possibleFeatures = new FeatureCollection();
-        for (String pf : possibleFeatures.globalFeatures) {
+        for (String pf : possibleFeatures.getGlobalFeatures()) {
             Boolean check = checkFeature(pf);
             if (check) {
                 allFeatures = possibleFeatures.extendFeature(pf);

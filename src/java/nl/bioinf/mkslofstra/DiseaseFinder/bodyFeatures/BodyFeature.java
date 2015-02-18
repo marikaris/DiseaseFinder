@@ -6,6 +6,7 @@
 package nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures;
 
 /**
+ * BodyFeature is the enum which specifies all the main features of a disease.
  *
  * @author mkslofstra
  */
