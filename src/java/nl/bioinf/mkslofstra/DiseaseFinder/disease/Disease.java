@@ -26,6 +26,50 @@ public class Disease {
      * features are the characteristics of the disease.
      */
     private Array features;
+    /**
+     * counts the number of hits which this disease has.
+     */
+    private Integer hits;
+    /**
+     * the score which is given for this disease given the fenotype.
+     */
+    private Double score;
+
+    /**
+     * The getter of hits.
+     *
+     * @return hits the number of hits a disease has.
+     */
+    public final Integer getHits() {
+        return hits;
+    }
+
+    /**
+     * The setter of hits.
+     *
+     * @param count the current number of hits.
+     */
+    public final void setHits(final Integer count) {
+        this.hits = count;
+    }
+
+    /**
+     * The getter of the score.
+     *
+     * @return score which is determined given the fenotype.
+     */
+    public final Double getScore() {
+        return score;
+    }
+
+    /**
+     * The setter of score.
+     *
+     * @param givenScore the score which is given.
+     */
+    public final void setScore(final Double givenScore) {
+        this.score = givenScore;
+    }
 
     /**
      * The getter of the omim number.
