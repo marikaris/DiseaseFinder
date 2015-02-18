@@ -55,9 +55,10 @@ public class DiseaseFenotypeGetter {
      *
      * @throws IOException when the string of the website cannot be made.
      * @return omimData the webpage of omim in a string.
+     * @param omimNr the number of the disease.
      * @author mkslofstra
      */
-    private String getOmimData(String omimNr) throws IOException {
+    private String getOmimData(final String omimNr) throws IOException {
         OmimConnector omimConnection = new OmimConnector();
         String omimData = omimConnection.getData(omimNr);
         int length = omimData.length();
