@@ -119,7 +119,7 @@ public class FeatureCollection {
                 extended = new String[]{"laboratoryAbnormalities"};
                 break;
             case miscellaneous:
-                extended = new String[]{"miscellanous"};
+                extended = new String[]{"miscellaneous"};
                 break;
             case molecularBasis:
                 extended = new String[]{"molecularBasis"};

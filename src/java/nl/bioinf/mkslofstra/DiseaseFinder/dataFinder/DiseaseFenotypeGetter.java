@@ -7,7 +7,6 @@ package nl.bioinf.mkslofstra.DiseaseFinder.dataFinder;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures.FeatureCollection;
 import nl.bioinf.mkslofstra.DiseaseFinder.connection.OmimConnector;
 import org.json.JSONException;
@@ -65,8 +64,6 @@ public class DiseaseFenotypeGetter {
     private JSONObject makeJSONObject(final String jsonString)
             throws JSONException {
         JSONObject jsonSite = new JSONObject(jsonString);
-//        Integer number = jsonSite.getInt("mimNumber");
-//        String feature = jsonSite.getString("growthHeight");
         features = jsonSite;
         return jsonSite;
     }
@@ -85,10 +82,12 @@ public class DiseaseFenotypeGetter {
     public ArrayList<String> collectFenotypes(ArrayList<String> allFeatures) throws JSONException {
         ArrayList<String> fenotypes = new ArrayList();
         for (String feature : allFeatures) {
-            System.out.println(feature);
-            String fenotype = getFenotypeOfFeature(feature);
-            System.out.println(fenotype);
-            fenotypes.add(fenotype);
+            if (features.getBoolean(feature + "Exists")) {
+                System.out.println(feature);
+                String fenotype = getFenotypeOfFeature(feature);
+                System.out.println(fenotype);
+                fenotypes.add(fenotype);
+            }
         }
         return fenotypes;
     }
