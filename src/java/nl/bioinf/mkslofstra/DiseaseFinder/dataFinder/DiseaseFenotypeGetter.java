@@ -19,16 +19,32 @@ import org.json.JSONObject;
  */
 public class DiseaseFenotypeGetter {
 
-    JSONObject features;
-    ArrayList<String> featuresToFind = new ArrayList();
+    /**
+     * features: The selected content of the webpage from omim in json
+     * structure.
+     */
+    private JSONObject features;
+    /**
+     * featuresToFind: the features selected from the webpage where the parent
+     * is true.
+     */
+    private ArrayList<String> featuresToFind = new ArrayList();
 
-    public static void main(String[] args) throws IOException, JSONException {
+    /**
+     * The main of this class.
+     *
+     * @param args the arguments which are given when running the file.
+     * @throws java.io.IOException thrown when the url from the connector is
+     * invalid.
+     * @throws org.json.JSONException when the structure of the website is not
+     * valid json.
+     */
+    public static void main(final String[] args) throws IOException,
+            JSONException {
         DiseaseFenotypeGetter fenotype = new DiseaseFenotypeGetter();
         String data = fenotype.getOmimData();
         JSONObject features = fenotype.makeJSONObject(data);
         fenotype.checkFeature("growth");
-
-//        allFeatures.add(fenotype.getFeatures());
         ArrayList<String> featuresToFind = fenotype.getFeatures();
         ArrayList<String> fenotypes = fenotype.collectFenotypes(featuresToFind);
     }
@@ -68,18 +84,43 @@ public class DiseaseFenotypeGetter {
         return jsonSite;
     }
 
-    private Boolean checkFeature(String feature) throws JSONException {
-        feature = feature + "Exists";
-        Boolean check = features.getBoolean(feature);
+    /**
+     * checkFeature: checks if the given feature is true in the json structure.
+     *
+     * @param feature the feature which should be checked.
+     * @throws JSONException when the website has not a valid json structure.
+     * @return check tells if the given feature in this disease is true or not.
+     */
+    private Boolean checkFeature(final String feature) throws JSONException {
+        String featureExists = feature + "Exists";
+        Boolean check = features.getBoolean(featureExists);
         return check;
     }
 
-    private String getFenotypeOfFeature(String feature) throws JSONException {
+    /**
+     * getFenotypeOfFeature gets the fenotype from a given feature of the
+     * website in the json structure.
+     *
+     * @param feature the feature wherefrom the fenotype is needed.
+     * @throws JSONException when the website has not a vali json structure.
+     * @return fenotpe the fenotype of the feature.
+     */
+    private String getFenotypeOfFeature(final String feature)
+            throws JSONException {
         String fenotype = features.getString(feature);
         return fenotype;
     }
 
-    public ArrayList<String> collectFenotypes(ArrayList<String> allFeatures) throws JSONException {
+    /**
+     * collectFenotypes collects all the fenotypes of a disease.
+     *
+     * @param allFeatures an arraylist which contains all the features which can
+     * be true.
+     * @throws JSONException when the website has not a valid json structure.
+     * @return fenotypes all the fenotypes of the disease.
+     */
+    public final ArrayList<String> collectFenotypes(
+            final ArrayList<String> allFeatures) throws JSONException {
         ArrayList<String> fenotypes = new ArrayList();
         for (String feature : allFeatures) {
             if (features.getBoolean(feature + "Exists")) {
@@ -92,6 +133,15 @@ public class DiseaseFenotypeGetter {
         return fenotypes;
     }
 
+    /**
+     * getFeatures gets all the possible features and uses checkFeature to check
+     * if they are true or false, then calls the next function to get the child
+     * features of these parent and adds this to featuresToFind.
+     *
+     * @throws JSONException when the website is not a valid json structure.
+     * @return featuresToFind is the global ArrayList of all features which are
+     * possible true.
+     */
     private ArrayList<String> getFeatures() throws JSONException {
         String[] allFeatures = new String[]{};
         FeatureCollection possibleFeatures = new FeatureCollection();
