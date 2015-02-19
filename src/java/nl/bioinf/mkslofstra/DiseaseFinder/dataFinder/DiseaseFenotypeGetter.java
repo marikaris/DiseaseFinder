@@ -53,7 +53,7 @@ public class DiseaseFenotypeGetter {
      * in a String.
      *
      * @throws IOException when the string of the website cannot be made.
-     * @throws JSONObject if the stirng from the website is not valid json.
+     * @throws JSONException if the stirng from the website is not valid json.
      * @return omimData the webpage of omim in a string.
      * @param omimNr the number of the disease.
      * @author mkslofstra
