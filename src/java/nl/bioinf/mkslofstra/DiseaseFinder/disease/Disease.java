@@ -6,6 +6,8 @@
 package nl.bioinf.mkslofstra.DiseaseFinder.disease;
 
 import java.lang.reflect.Array;
+import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Disease collects all the information about one disease which is found.
@@ -15,9 +17,24 @@ import java.lang.reflect.Array;
 public class Disease {
 
     /**
+     * constructor of the class disease.
+     *
+     * @param mimNumberValue is the id of the disease.
+     * @param titleOfDisease is the most common title of the disease.
+     * @param featuresHashMap are the properties of the disease.
+     */
+    public Disease(final String mimNumberValue,
+            final String titleOfDisease, final HashMap featuresHashMap) {
+        this.mimNumber = mimNumberValue;
+        this.title = titleOfDisease;
+        this.features = featuresHashMap;
+        this.hits++;
+    }
+
+    /**
      * mimNumber is the OMIM number of the disease.
      */
-    private int mimNumber;
+    private String mimNumber;
     /**
      * title is the name of the disease.
      */
@@ -25,11 +42,11 @@ public class Disease {
     /**
      * features are the characteristics of the disease.
      */
-    private Array features;
+    private HashMap features;
     /**
      * counts the number of hits which this disease has.
      */
-    private Integer hits;
+    private Integer hits = 0;
     /**
      * the score which is given for this disease given the fenotype.
      */
@@ -63,6 +80,24 @@ public class Disease {
     }
 
     /**
+     * toString method of the function.
+     *
+     * @return the string of the function.
+     */
+    @Override
+    public final String toString() {
+        StringBuilder sb = new StringBuilder();
+        Iterator it = features.entrySet().iterator();
+        while (it.hasNext()) {
+            HashMap.Entry pair = (HashMap.Entry) it.next();
+            sb.append("\n\n" + pair.getKey() + "\n" + pair.getValue());
+            it.remove(); // avoids a ConcurrentModificationException
+        }
+        return title + "\nmimNumber : " + mimNumber
+                + ", hits : " + hits + sb.toString();
+    }
+
+    /**
      * The setter of score.
      *
      * @param givenScore the score which is given.
@@ -76,7 +111,7 @@ public class Disease {
      *
      * @return mimNumber the omim number of the disease.
      */
-    public final int getMimNumber() {
+    public final String getMimNumber() {
         return mimNumber;
     }
 
@@ -85,7 +120,7 @@ public class Disease {
      *
      * @param setMimNumber the omim number of the disease.
      */
-    public final void setMimNumber(final int setMimNumber) {
+    public final void setMimNumber(final String setMimNumber) {
         this.mimNumber = setMimNumber;
     }
 
@@ -112,7 +147,7 @@ public class Disease {
      *
      * @return the features of the disease.
      */
-    public final Array getFeatures() {
+    public final HashMap getFeatures() {
         return features;
     }
 
@@ -121,7 +156,7 @@ public class Disease {
      *
      * @param setFeatures of the disease.
      */
-    public final void setFeatures(final Array setFeatures) {
+    public final void setFeatures(final HashMap setFeatures) {
         this.features = setFeatures;
     }
 }

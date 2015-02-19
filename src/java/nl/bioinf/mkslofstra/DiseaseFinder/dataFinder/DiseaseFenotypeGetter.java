@@ -7,8 +7,10 @@ package nl.bioinf.mkslofstra.DiseaseFinder.dataFinder;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures.FeatureCollection;
 import nl.bioinf.mkslofstra.DiseaseFinder.connection.OmimConnector;
+import nl.bioinf.mkslofstra.DiseaseFinder.disease.Disease;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,6 +33,27 @@ public class DiseaseFenotypeGetter {
     private ArrayList<String> featuresToFind = new ArrayList();
 
     /**
+     * The constructor of this class.
+     *
+     * @param omimNumber the id of the disease to get information from.
+     * @throws java.io.IOException thrown when the url from the connector is
+     * invalid.
+     * @throws org.json.JSONException when the structure of the website is not
+     * valid json.
+     * @author mkslofstra
+     */
+    public DiseaseFenotypeGetter(final String omimNumber)
+            throws IOException, JSONException {
+        this.getOmimData(omimNumber);
+        this.getFeatures();
+        HashMap<String, String> fenotypes = this.collectFenotypes(
+                featuresToFind);
+        String title = this.getTitleOfDisease();
+        this.saveDisease(omimNumber, title, fenotypes);
+
+    }
+
+    /**
      * The main of this class.
      *
      * @param args the arguments which are given when running the file.
@@ -42,10 +65,7 @@ public class DiseaseFenotypeGetter {
      */
     public static void main(final String[] args) throws IOException,
             JSONException {
-        DiseaseFenotypeGetter fenotype = new DiseaseFenotypeGetter();
-        fenotype.getOmimData("606232");
-        ArrayList<String> featuresToFind = fenotype.getFeatures();
-        ArrayList<String> fenotypes = fenotype.collectFenotypes(featuresToFind);
+        DiseaseFenotypeGetter fenotype = new DiseaseFenotypeGetter("606232");
     }
 
     /**
@@ -107,19 +127,17 @@ public class DiseaseFenotypeGetter {
      * @return fenotypes all the fenotypes of the disease.
      * @author mkslofstra
      */
-    public final ArrayList<String> collectFenotypes(
+    public final HashMap<String, String> collectFenotypes(
             final ArrayList<String> allFeatures) throws JSONException {
-        ArrayList<String> fenotypes = new ArrayList();
+        HashMap<String, String> fenotypes = new HashMap();
         for (String feature : allFeatures) {
             //check for each feature if the value of it is true or false.
-            System.out.println(feature);
             //get the value of the feature from the json structure
             //if the feature does exist.
             String fenotype = getFenotypeOfFeature(feature);
-            System.out.println(fenotype);
             //add the fenotype to the global variable fenotypes
             //which contains the full fenotype of a disease.
-            fenotypes.add(fenotype);
+            fenotypes.put(feature, fenotype);
         }
         return fenotypes;
     }
@@ -155,5 +173,31 @@ public class DiseaseFenotypeGetter {
         }
         return featuresToFind;
 
+    }
+
+    /**
+     * getTitleOfDisease gets the title of a disease from the json structure.
+     *
+     * @return title is the title of the disease.
+     * @author mkslofstra
+     */
+    private String getTitleOfDisease() throws JSONException {
+        String title = features.getString("preferredTitle");
+        return title;
+    }
+
+    /**
+     * This funcion saves the information about the disesase in a disease
+     * object.
+     *
+     * @param mimNumber is the id of the disease
+     * @param title is the name of the disease
+     * @param fenotypes are the characteristics of the disease
+     * @author mkslofstra
+     */
+    private void saveDisease(final String mimNumber,
+            final String title, final HashMap fenotypes) {
+        Disease disease = new Disease(mimNumber, title, fenotypes);
+        System.out.println(disease);
     }
 }

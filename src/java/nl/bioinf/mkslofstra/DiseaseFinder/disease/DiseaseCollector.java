@@ -33,17 +33,11 @@ public class DiseaseCollector {
     /**
      * the setter of diseaseCollection.
      *
-     * @param setDiseaseCollection the hashmap with diseases in it.
+     * @param disease the disease of the id.
+     * @param mimNumber the id of the disease.
      */
-    public final void setDiseaseCollection(
-            final HashMap<String, Disease> setDiseaseCollection) {
-        this.diseaseCollection = setDiseaseCollection;
-    }
-
-    /**
-     * The constructor of the class.
-     */
-    public DiseaseCollector() {
-        this.diseaseCollection = new HashMap();
+    public final void addToDiseaseCollection(
+            final Disease disease, final String mimNumber) {
+        this.diseaseCollection.put(mimNumber, disease);
     }
 }
