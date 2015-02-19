@@ -43,8 +43,7 @@ public class DiseaseFenotypeGetter {
     public static void main(final String[] args) throws IOException,
             JSONException {
         DiseaseFenotypeGetter fenotype = new DiseaseFenotypeGetter();
-        String data = fenotype.getOmimData("606232");
-        JSONObject features = fenotype.makeJSONObject(data);
+        fenotype.getOmimData("606232");
         ArrayList<String> featuresToFind = fenotype.getFeatures();
         ArrayList<String> fenotypes = fenotype.collectFenotypes(featuresToFind);
     }
@@ -54,36 +53,16 @@ public class DiseaseFenotypeGetter {
      * in a String.
      *
      * @throws IOException when the string of the website cannot be made.
+     * @throws JSONObject if the stirng from the website is not valid json.
      * @return omimData the webpage of omim in a string.
      * @param omimNr the number of the disease.
      * @author mkslofstra
      */
-    private String getOmimData(final String omimNr) throws IOException {
-        OmimConnector omimConnection = new OmimConnector();
-        String omimData = omimConnection.getData(omimNr);
-        int length = omimData.length();
-        /*The webpage is be shortend, so that a jsonobject can be made
-         later, wherefrom information about the clinical features of a
-         disease can be gotten easily.*/
-        omimData = omimData.substring(75, length - 8);
-        return omimData;
-    }
-
-    /**
-     * makeJSONObject makes a JSONObject from which can easily information be
-     * obtained.
-     *
-     * @author mkslofstra
-     * @param jsonString a string with json content from the omim website.
-     * @return jsonSite the page in a json object.
-     * @throws JSONException when the given structure in the string is not a
-     * viable json structure.
-     */
-    private JSONObject makeJSONObject(final String jsonString)
-            throws JSONException {
-        JSONObject jsonSite = new JSONObject(jsonString);
-        features = jsonSite;
-        return jsonSite;
+    private JSONObject getOmimData(final String omimNr)
+            throws IOException, JSONException {
+        OmimConnector omimConnection = new OmimConnector(omimNr);
+        features = omimConnection.getFeatures();
+        return features;
     }
 
     /**
