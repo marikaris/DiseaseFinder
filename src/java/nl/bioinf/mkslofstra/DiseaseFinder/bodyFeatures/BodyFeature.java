@@ -111,5 +111,8 @@ public enum BodyFeature {
     /**
      * molecularBasis: the molecular basis of the disease.
      */
-    molecularBasis
+    molecularBasis,
+    /**oldFormat: if this is true, all the information about the disease is
+     in one piece of text.*/
+    oldFormat
 }

@@ -33,21 +33,6 @@ public class OmimConnector {
     public final JSONObject getFeatures() {
         return features;
     }
-
-    /**
-     * getOmimData gets all the data from the omim page of a given omim number
-     * in a String.
-     *
-     * @throws IOException when the string of the website cannot be made.
-     * @return omimData the webpage of omim in a string.
-     * @param omimNr the number of the disease.
-     * @author mkslofstra
-     */
-    public final void OmimConnector(final String omimNr) throws
-            IOException, JSONException {
-        System.out.println("hoi");
-    }
-
     /**
      * OmimConnector gets all the data from the omim page of a given omim number
      * in a String.
