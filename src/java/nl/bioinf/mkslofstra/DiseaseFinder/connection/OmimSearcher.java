@@ -5,7 +5,10 @@
  */
 package nl.bioinf.mkslofstra.DiseaseFinder.connection;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Searches query on omim api and returns omimnumbers of possible diseases.
@@ -14,8 +17,13 @@ import java.util.ArrayList;
  */
 public class OmimSearcher {
 
-    public OmimSearcher(String[] features) {
-        this.parseFeatures(features);
+    /**
+     * OmimSearcher is the constructor of OmimSearcher.
+     *
+     * @param features are the features which should be searched on.
+     */
+    public OmimSearcher(final String[] features) {
+        String diseaseFeatures = this.parseFeatures(features);
     }
 
     /**
@@ -66,6 +74,22 @@ public class OmimSearcher {
         return featuresToReturn;
     }
 
-    
+    /**
+     * getWebContent gets the content of the omimpage which is needed.
+     *
+     * @param diseaseFeatures the features of the disease in the good format.
+     * @return the content of the webpage in a json object.
+     * @throws JSONException if the json is invalid.
+     * @throws IOException if the URL is invalid.
+     * @author mkslofstra
+     */
+    private JSONObject getWebContent(String diseaseFeatures) throws
+            IOException, JSONException {
+        String site = "http://api.europe.omim.org/api/entry/search?search="
+                + "%1$s&filter=&fields=&retrieve=&start=0&limit=10&sort="
+                + "&operator=&format=json&apiKey=%2$s";
+        OmimSite omimSite = new OmimSite(site, diseaseFeatures);
+        return omimSite.getContent();
+    }
 
 }
