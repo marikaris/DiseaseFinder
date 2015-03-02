@@ -52,7 +52,8 @@ public class FeatureCollection {
             "genitourinary", "skeletal", "skinNailsHair", "muscleSoftTissue",
             "neurologic", "voice", "metabolicFeatures", "endocrineFeatures",
             "hematology", "immunology", "neoplasia", "prenatalManifestations",
-            "laboratoryAbnormalities", "miscellaneous", "molecularBasis"};
+            "laboratoryAbnormalities", "miscellaneous", "molecularBasis",
+            "oldFormat"};
     }
 
     /**
@@ -158,6 +159,9 @@ public class FeatureCollection {
                 break;
             case molecularBasis:
                 extended = new String[]{"molecularBasis"};
+                break;
+            case oldFormat:
+                extended = new String[]{"oldFormat"};
                 break;
             default:
                 System.err.println("No extended value found for: " + feature);

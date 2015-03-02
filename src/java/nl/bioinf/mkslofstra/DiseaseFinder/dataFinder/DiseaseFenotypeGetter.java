@@ -8,6 +8,7 @@ package nl.bioinf.mkslofstra.DiseaseFinder.dataFinder;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures.FeatureCollection;
 import nl.bioinf.mkslofstra.DiseaseFinder.connection.OmimConnector;
 import nl.bioinf.mkslofstra.DiseaseFinder.disease.Disease;
@@ -31,6 +32,10 @@ public class DiseaseFenotypeGetter {
      * is true.
      */
     private ArrayList<String> featuresToFind = new ArrayList();
+    /**
+     * fenotypes are the fenotypes of the disease.
+     */
+    private HashMap<String, String> fenotypes = new HashMap();
 
     /**
      * The constructor of this class.
@@ -46,10 +51,9 @@ public class DiseaseFenotypeGetter {
             throws IOException, JSONException {
         this.getOmimData(omimNumber);
         this.getFeatures();
-        HashMap<String, String> fenotypes = this.collectFenotypes(
-                featuresToFind);
+        this.collectFenotypes(featuresToFind);
         String title = this.getTitleOfDisease();
-        this.saveDisease(omimNumber, title, fenotypes);
+        this.saveDisease(omimNumber, title);
 
     }
 
@@ -65,7 +69,8 @@ public class DiseaseFenotypeGetter {
      */
     public static void main(final String[] args) throws IOException,
             JSONException {
-        DiseaseFenotypeGetter fenotype = new DiseaseFenotypeGetter("606232");
+//        DiseaseFenotypeGetter fenotype = new DiseaseFenotypeGetter("606232");
+        DiseaseFenotypeGetter fenotype = new DiseaseFenotypeGetter("275000");
     }
 
     /**
@@ -127,19 +132,18 @@ public class DiseaseFenotypeGetter {
      * @return fenotypes all the fenotypes of the disease.
      * @author mkslofstra
      */
-    public final HashMap<String, String> collectFenotypes(
+    public final void collectFenotypes(
             final ArrayList<String> allFeatures) throws JSONException {
-        HashMap<String, String> fenotypes = new HashMap();
         for (String feature : allFeatures) {
             //check for each feature if the value of it is true or false.
             //get the value of the feature from the json structure
             //if the feature does exist.
             String fenotype = getFenotypeOfFeature(feature);
+            System.out.println(feature + " : " + fenotype);
             //add the fenotype to the global variable fenotypes
             //which contains the full fenotype of a disease.
             fenotypes.put(feature, fenotype);
         }
-        return fenotypes;
     }
 
     /**
@@ -152,26 +156,38 @@ public class DiseaseFenotypeGetter {
      * possible true.
      * @author mkslofstra
      */
-    private ArrayList<String> getFeatures() throws JSONException {
+    private void getFeatures() throws JSONException {
         String[] allFeatures;
         FeatureCollection possibleFeatures = new FeatureCollection();
         //iterate over all possible features.
         for (String pf : possibleFeatures.getGlobalFeatures()) {
             Boolean check = checkFeature(pf);
             if (check) {
-                //if the check is true, get the extension of the main feature
-                //to get the specific features of the main feature.
-                allFeatures = possibleFeatures.extendFeature(pf);
-                //add all specific features to the features list,
-                //if the feature exists in the disease.
-                for (String feature : allFeatures) {
-                    if (features.getBoolean(feature + "Exists")) {
-                        featuresToFind.add(feature);
+                if (pf.equals("oldFormat")) {
+                    Object old = features.get(pf);
+                    JSONObject jsonSite = new JSONObject(old.toString());
+                    Iterator<String> keys = jsonSite.keys();
+                    while (keys.hasNext()) {
+                        String key = keys.next();
+                        String val = jsonSite.getString(key);
+                        fenotypes.put(key, val);
+
+                    }
+                } else {
+                    //if the check is true and not oldformat, get the
+                    // extension of the main feature to get the specific
+                    //features of the main feature.
+                    allFeatures = possibleFeatures.extendFeature(pf);
+                    //add all specific features to the features list,
+                    //if the feature exists in the disease.
+                    for (String feature : allFeatures) {
+                        if (features.getBoolean(feature + "Exists")) {
+                            featuresToFind.add(feature);
+                        }
                     }
                 }
             }
         }
-        return featuresToFind;
 
     }
 
@@ -196,7 +212,7 @@ public class DiseaseFenotypeGetter {
      * @author mkslofstra
      */
     private void saveDisease(final String mimNumber,
-            final String title, final HashMap fenotypes) {
+            final String title) {
         Disease disease = new Disease(mimNumber, title, fenotypes);
         System.out.println(disease);
     }
