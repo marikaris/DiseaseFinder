@@ -36,6 +36,19 @@ public class DiseaseFenotypeGetter {
      * fenotypes are the fenotypes of the disease.
      */
     private HashMap<String, String> fenotypes = new HashMap();
+    /**
+     * Disease is the disease object of the found disease.
+     */
+    private Disease disease;
+
+    /**
+     * The getter of the created diseaseobject.
+     *
+     * @return disease the disease object.
+     */
+    public Disease getDisease() {
+        return disease;
+    }
 
     /**
      * The constructor of this class.
@@ -139,7 +152,6 @@ public class DiseaseFenotypeGetter {
             //get the value of the feature from the json structure
             //if the feature does exist.
             String fenotype = getFenotypeOfFeature(feature);
-            System.out.println(feature + " : " + fenotype);
             //add the fenotype to the global variable fenotypes
             //which contains the full fenotype of a disease.
             fenotypes.put(feature, fenotype);
@@ -213,7 +225,6 @@ public class DiseaseFenotypeGetter {
      */
     private void saveDisease(final String mimNumber,
             final String title) {
-        Disease disease = new Disease(mimNumber, title, fenotypes);
-        System.out.println(disease);
+        disease = new Disease(mimNumber, title, fenotypes);
     }
 }

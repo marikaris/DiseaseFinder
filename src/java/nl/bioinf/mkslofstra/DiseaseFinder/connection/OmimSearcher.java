@@ -21,6 +21,20 @@ import org.json.JSONObject;
 public class OmimSearcher {
 
     /**
+     * diseases is the arraylist with the omimnumbers of the found diseases.
+     */
+    private ArrayList<String> diseases;
+
+    /**
+     * The getter of the arraylist diseases.
+     *
+     * @return diseases the arraylist with omimnumbers of possible diseases.
+     */
+    public ArrayList<String> getDiseases() {
+        return diseases;
+    }
+
+    /**
      * OmimSearcher is the constructor of OmimSearcher.
      *
      * @param features are the features which should be searched on.
@@ -31,7 +45,7 @@ public class OmimSearcher {
             JSONException {
         String diseaseFeatures = this.parseFeatures(features);
         String entries = this.getWebContent(diseaseFeatures);
-        ArrayList diseases = this.getDiseases(entries);
+        diseases = this.getDiseases(entries);
     }
 
     /**
