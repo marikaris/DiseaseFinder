@@ -7,6 +7,9 @@ package nl.bioinf.mkslofstra.DiseaseFinder.connection;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,9 +24,14 @@ public class OmimSearcher {
      * OmimSearcher is the constructor of OmimSearcher.
      *
      * @param features are the features which should be searched on.
+     * @throws java.io.IOException when url is invalid.
+     * @throws org.json.JSONException when json structure is invalid.
      */
-    public OmimSearcher(final String[] features) {
+    public OmimSearcher(final String[] features) throws IOException,
+            JSONException {
         String diseaseFeatures = this.parseFeatures(features);
+        String entries = this.getWebContent(diseaseFeatures);
+        ArrayList diseases = this.getDiseases(entries);
     }
 
     /**
@@ -32,7 +40,7 @@ public class OmimSearcher {
      */
     private ArrayList omimNumbers;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, JSONException {
         String[] features = new String[]{"dizziness", "blurry vision", "ptosis"};
         OmimSearcher os = new OmimSearcher(features);
     }
@@ -83,13 +91,36 @@ public class OmimSearcher {
      * @throws IOException if the URL is invalid.
      * @author mkslofstra
      */
-    private JSONObject getWebContent(String diseaseFeatures) throws
+    private String getWebContent(final String diseaseFeatures) throws
             IOException, JSONException {
         String site = "http://api.europe.omim.org/api/entry/search?search="
                 + "%1$s&filter=&fields=&retrieve=&start=0&limit=10&sort="
                 + "&operator=&format=json&apiKey=%2$s";
         OmimSite omimSite = new OmimSite(site, diseaseFeatures);
-        return omimSite.getContent();
+        Object content = omimSite.getContent().get("omim");
+        JSONObject omimContent = new JSONObject(content.toString());
+        Object search = omimContent.get("searchResponse");
+        JSONObject entryList = new JSONObject(search.toString());
+        String foundEntries = entryList.get("entryList").toString();
+        return foundEntries;
+    }
+
+    /**
+     * getDiseases searches with regex in the entrylist of omim to get the
+     * omimnumbers.
+     *
+     * @param entries the found diseases in the format of the jsonstructure on
+     * the omim website.
+     * @return diseases is an arraylist of strings which are the omimnumbers.
+     */
+    private ArrayList<String> getDiseases(final String entries) {
+        ArrayList<String> diseases = new ArrayList();
+        Pattern numbers = Pattern.compile("\\d{6}");
+        Matcher match = numbers.matcher(entries);
+        while (match.find()) {
+            diseases.add(match.group());
+        }
+        return diseases;
     }
 
 }
