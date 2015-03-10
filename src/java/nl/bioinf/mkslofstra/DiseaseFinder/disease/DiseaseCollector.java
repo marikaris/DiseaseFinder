@@ -24,7 +24,7 @@ public class DiseaseCollector {
      * fenotype. This hashmap has as id the omim number and as value the Disease
      * object which belongs to this omim number.
      */
-    private HashMap<String, Disease> diseaseCollection;
+    private HashMap<String, Disease> diseaseCollection = new HashMap();
 
     /**
      * getDiseaseCollection is the getter of diseaseCollection.

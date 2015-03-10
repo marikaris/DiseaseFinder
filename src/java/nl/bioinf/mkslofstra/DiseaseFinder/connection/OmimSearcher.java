@@ -69,8 +69,8 @@ public class OmimSearcher {
     }
 
     /**
-     * parseFeatures creates a string which can be searhec in the omim api from
-     * a list of strings.
+     * parseFeatures creates a string which can be searched in the omim api url
+     * from a list of strings.
      *
      * @param features are the features which should be searched.
      * @return featuresToReturn is a string which can be added to a url to

@@ -39,7 +39,9 @@ public class OmimSite {
              later, wherefrom information about the clinical features of a
              disease can be gotten easily.*/
             int length = webContent.length();
+            
             webContent = webContent.substring(75, length - 8);
+            System.out.println(webContent);
         }
         this.makeJSONObject(webContent);
     }
