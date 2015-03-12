@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures.FeatureCollection;
-import nl.bioinf.mkslofstra.DiseaseFinder.connection.OmimConnector;
+import nl.bioinf.mkslofstra.DiseaseFinder.connection.OmimDataRetriever;
 import nl.bioinf.mkslofstra.DiseaseFinder.disease.Disease;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,11 +62,12 @@ public class DiseaseFenotypeGetter {
      */
     public DiseaseFenotypeGetter(final String omimNumber)
             throws IOException, JSONException {
-        this.getOmimData(omimNumber);
+        try{this.getOmimData(omimNumber);
         this.getFeatures();
         this.collectFenotypes(featuresToFind);
         String title = this.getTitleOfDisease();
-        this.saveDisease(omimNumber, title);
+        this.saveDisease(omimNumber, title);}catch(org.json.JSONException ex){
+            System.out.println(omimNumber+" not usefulll, clinical synopsis misses.");}
 
     }
 
@@ -98,8 +99,12 @@ public class DiseaseFenotypeGetter {
      */
     private JSONObject getOmimData(final String omimNr)
             throws IOException, JSONException {
-        OmimConnector omimConnection = new OmimConnector(omimNr);
-        features = omimConnection.getFeatures();
+        //this url is for testing
+        String url = "http://api.europe.omim.org/api/clinicalSynopsis?mimNumber=%1$s&include=all&format=json&apiKey=%2$s";
+        //apiKey for testing, will be in config file
+        String apiKey = "3F48B5AE34656CC9211E0A476E28AF0C370E3F94";
+        OmimDataRetriever omimConnector = new OmimDataRetriever(url, apiKey);
+        features = omimConnector.getOmimResult(omimNr);
         return features;
     }
 

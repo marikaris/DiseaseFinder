@@ -8,7 +8,7 @@ package nl.bioinf.mkslofstra.DiseaseFinder.disease;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import nl.bioinf.mkslofstra.DiseaseFinder.connection.OmimSearcher;
+import nl.bioinf.mkslofstra.DiseaseFinder.connection.OmimDataRetriever;
 import nl.bioinf.mkslofstra.DiseaseFinder.dataFinder.DiseaseFenotypeGetter;
 import org.json.JSONException;
 
@@ -53,7 +53,6 @@ public class DiseaseCollector {
         ArrayList omimNumbers = this.getOmimNumbers(features);
         for (Object id : omimNumbers) {
             Disease disease = this.getDiseaseContent(id.toString());
-//            System.out.println("____________________"+disease+"***************"+id.toString());
             addToDiseaseCollection(disease, id.toString());
         }
     }
@@ -68,8 +67,14 @@ public class DiseaseCollector {
      */
     private ArrayList<String> getOmimNumbers(final String[] features)
             throws JSONException, IOException {
-        OmimSearcher search = new OmimSearcher(features);
-        ArrayList<String> diseases = search.getDiseases();
+//        OmimSearcher search = new OmimSearcher(features);
+        //test url
+        String url = "http://api.europe.omim.org/api/entry/search?search="
+                + "%1$s&filter=&fields=&retrieve=&start=0&limit=10&sort="
+                + "&operator=&format=json&apiKey=%2$s";
+        String apiKey = "3F48B5AE34656CC9211E0A476E28AF0C370E3F94";
+        OmimDataRetriever omimResultGetter = new OmimDataRetriever(url, apiKey);
+        ArrayList<String> diseases = omimResultGetter.getOmimNumbers(features);
         return diseases;
     }
 
@@ -88,5 +93,6 @@ public class DiseaseCollector {
             final Disease disease, final String mimNumber) {
         System.out.println(mimNumber);
         diseaseCollection.put(mimNumber, disease);
+        System.out.println(disease);
     }
 }

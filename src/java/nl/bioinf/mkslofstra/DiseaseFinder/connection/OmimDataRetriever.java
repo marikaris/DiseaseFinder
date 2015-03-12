@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,13 +27,29 @@ import org.json.JSONObject;
  */
 public class OmimDataRetriever {
 
-    String omimURL;
-    String omimKey;
+    /**
+     * The url of the omimSite which should be read from.
+     */
+    private String omimURL;
+    /**
+     * The key which is needed to use the omim api.
+     */
+    private String omimKey;
+
+    public static void main(String[] args) throws IOException, JSONException {
+        OmimDataRetriever mimMumbers = new OmimDataRetriever("http://api.europe.omim.org/api/clinicalSynopsis?"
+                + "mimNumber=%1$s&include=all&format=json&apiKey=%2$s", "3F48B5AE34656CC9211E0A476E28AF0C370E3F94");
+//        mimMumbers.getOmimNumbers(new String[]{"dizziness", "blurry vision", "ptosis"});
+        mimMumbers.getOmimResult("520000");
+    }
 
     /**
      * The constructor of the class.
+     *
+     * @param url the url to reach the website.
+     * @param key the key which is needed to use the omim api.
      */
-    public OmimDataRetriever(String url, String key) {
+    public OmimDataRetriever(final String url, final String key) {
         omimURL = url;
         omimKey = key;
     }
@@ -40,8 +57,18 @@ public class OmimDataRetriever {
     /**
      * Gets the result from the website given an omim number.
      */
-    public JSONObject getOmimResult(String omimNumber) {
-        return null;
+    public JSONObject getOmimResult(String omimNumber) throws IOException, JSONException {
+        String siteUrl = this.getResultUrl(omimURL, omimNumber, omimKey);
+        String content = this.getSiteContent(siteUrl);
+        content = getSuitableContent(makeJSONObject(content), "omim");
+        content = getSuitableContent(makeJSONObject(content),
+                "clinicalSynopsisList");
+        JSONArray siteContent = new JSONArray(content);
+        JSONObject webpageObject = makeJSONObject(siteContent.get(0)
+                .toString());
+        content = getSuitableContent(webpageObject, "clinicalSynopsis");
+        webpageObject = makeJSONObject(content);
+        return webpageObject;
     }
 
     /**
@@ -59,22 +86,40 @@ public class OmimDataRetriever {
         JSONObject jsonSite = new JSONObject(jsonString);
         return jsonSite;
     }
-    private JSONObject getSuitableContent(JSONObject content, String search) throws JSONException{
+
+    /**
+     * This function gets the needed content from all content of the webpage.
+     *
+     * @param content is the greater content of the website.
+     * @param search what to get out of the content.
+     * @throws JSONException when the content is not valid jsonstructure.
+     * @return content the new content.
+     */
+    private String getSuitableContent(final JSONObject content,
+            final String search) throws JSONException {
         String found = content.get(search).toString();
-        content = makeJSONObject(found);
-        return content;
+        return found;
     }
+
     /**
      * This function gets the OmimNumbers of diseases given features of a
      * disease.
+     *
+     * @param features are the features of a hypothetical disease.
+     * @throws IOException when the URL is malformed.
+     * @throws JSONException when the sitecontent is not valid JSON.
+     * @return diseases the omimnumbers of the found diseases.
      */
-    public ArrayList getOmimNumbers(String[] features) throws IOException, JSONException {
+    public final ArrayList getOmimNumbers(final String[] features)
+            throws IOException, JSONException {
         String urlToSearch = this.buildFeatureURL(features, omimURL, omimKey);
         String siteContentString = this.getSiteContent(urlToSearch);
-        JSONObject content = getSuitableContent(makeJSONObject(siteContentString), "omim");
-        content=getSuitableContent(content, "searchResponse");
-        content=getSuitableContent(content, "entryList");
-        return null;
+        String content = getSuitableContent(makeJSONObject(
+                siteContentString), "omim");
+        content = getSuitableContent(makeJSONObject(content), "searchResponse");
+        content = getSuitableContent(makeJSONObject(content), "entryList");
+        ArrayList diseases = getDiseases(content);
+        return diseases;
     }
 
     /**
@@ -132,6 +177,7 @@ public class OmimDataRetriever {
         String siteUrl = String.format(omimSite, featuresToReturn, apiKey);
         return siteUrl;
     }
+
     /**
      * getDiseases searches with regex in the entrylist of omim to get the
      * omimnumbers.
@@ -148,5 +194,21 @@ public class OmimDataRetriever {
             diseases.add(match.group());
         }
         return diseases;
+    }
+
+    /**
+     * This function makes the url for the getOmimResult function.
+     *
+     * @param url the url to search for with stringformatting in in.
+     * @param omimNumber the id of the disease to get the page from.
+     * @param key the key that is needed to use the api.
+     * @throws IOException when the url is malformed.
+     * @throws JSONException when the json structure is malformed.
+     * @return omimSite the url of the omimSite which should be opened.
+     */
+    private String getResultUrl(final String url, final String omimNumber,
+            final String key) throws IOException, JSONException {
+        String omimUrl = String.format(url, omimNumber, key);
+        return omimUrl;
     }
 }
