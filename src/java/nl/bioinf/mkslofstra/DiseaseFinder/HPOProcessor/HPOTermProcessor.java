@@ -6,6 +6,7 @@
 package nl.bioinf.mkslofstra.DiseaseFinder.HPOProcessor;
 
 import java.io.IOException;
+import java.util.Properties;
 
 /**
  *
@@ -21,8 +22,18 @@ public class HPOTermProcessor {
     public static void main(final String[] args) throws IOException {
         HPOReader hr = new HPOReader();
 
-        HPOTermProcessor hp = new HPOTermProcessor();
-        hp.hpoObjectCreator(hp.hpoTermSplitter(hr.readFile()));
+
+        Properties configFile = new Properties();
+        try {
+            // The HPOTermProcessor should be changed in the class this is used
+            configFile.load(HPOTermProcessor.class.getClassLoader().getResourceAsStream("config.properties"));
+            String key = configFile.getProperty("omimKey");
+            System.out.println(key);
+        } catch (IOException e) {
+            System.out.println("nope nope nope!!!!!!!!!!");
+        }
+//        }
+
     }
 
     /**
@@ -40,36 +51,22 @@ public class HPOTermProcessor {
      * Creates the hpoTerm objects and adds them to the HPOTermCollector.
      *
      * @param seperateHpoTerms String array of the seperate terms in the file
+     * @return collection of HPOTerms
      */
-    public final void hpoObjectCreator(final String[] seperateHpoTerms) {
+    public final HPOTermCollector hpoObjectCreator(final String[] seperateHpoTerms) {
         HPOTermCollector hc = new HPOTermCollector();
 
         for (String hpoTerm : seperateHpoTerms) {
-            HPOTerm ht = new HPOTerm();
             String[] lines = hpoTerm.split("\n");
             for (String line : lines) {
-                if (line.startsWith("id")) {
-                    ht.setId(line.substring(line.lastIndexOf("HP")));
-                } else if (line.startsWith("name")) {
-                    ht.setName(line.split(": ")[1]);
-                } else if (line.startsWith("def")) {
-                    ht.setDef(line.split(": ")[1]);
-                } else if (line.startsWith("comment")) {
-                    ht.setComment(line.split(": ")[1]);
-                } else if (line.startsWith("property_value")) {
-                    ht.setPropertyValue(line.split(": ")[1]);
-                } else if (line.startsWith("is_a")) {
-                    ht.addIsA(line.split(": ")[1]);
-                } else if (line.startsWith("synonym")) {
-                    ht.addSynonym(line.split(": ")[1]);
-                } else if (line.startsWith("alt_id")) {
-                    ht.addAltId(line.split(": ")[1]);
-                } else if (line.startsWith("xref")) {
-                    ht.addXref(line.split(": ")[1]);
+                if (line.equals("")) {
+                    System.out.println(line + "hoi");
                 }
-            }
-            hc.addToHPOList(ht);
-        }
+//                HPOTerm ht = new HPOTerm(line.substring(line.lastIndexOf("HP")));
 
+            }
+
+        }
+        return null;
     }
 }

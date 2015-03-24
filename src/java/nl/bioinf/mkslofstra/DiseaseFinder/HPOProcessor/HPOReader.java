@@ -5,8 +5,6 @@
  */
 package nl.bioinf.mkslofstra.DiseaseFinder.HPOProcessor;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
 /**
@@ -20,22 +18,34 @@ public class HPOReader {
      *
      * @return the contents of the file
      * @throws IOException if file not found
-     */
-    final String readFile() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("/homes/aroeters/"
-                + "Desktop/Thema11/hp.obo"));
-        try {
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
+     *
+     *
+     * Direct streamen en hpoterm objects maken.
+     *         HPOTermCollector hc = new HPOTermCollector();
 
-            while (line != null) {
-                sb.append(line);
-                sb.append("\n");
-                line = br.readLine();
-            }
-            return sb.toString();
-        } finally {
-            br.close();
-        }
+        for (String hpoTerm : seperateHpoTerms) {
+            String[] lines = hpoTerm.split("\n");
+            for (String line : lines) {
+                if (line.equals("")){
+                System.out.println(line + "hoi");
+                }
+     */
+    final void readFile() throws IOException {
+
+//        BufferedReader br = new BufferedReader(new FileReader("/homes/aroeters/"
+//                + "Desktop/Thema11/hp.obo"));
+//        try {
+//            StringBuilder sb = new StringBuilder();
+//            String line = br.readLine();
+//
+//            while (line != null) {
+//                sb.append(line);
+//                sb.append("\n");
+//                line = br.readLine();
+//            }
+//            return sb.toString();
+//        } finally {
+//            br.close();
+//        }
     }
 }

@@ -15,9 +15,17 @@ import java.util.List;
  */
 public class HPOTerm {
     /**
+     * Initializes the HPOTerm with the given id.
+     * @param idGiven Should be the id of the Term
+     */
+    public HPOTerm(final String idGiven) {
+    this.id = idGiven;
+    }
+
+    /**
      * Contains the id op the HPO term.
      */
-    private String id;
+    private final String id;
     /**
      * Contains the name of the HPO term.
      */
@@ -31,38 +39,20 @@ public class HPOTerm {
      */
     private String comment;
     /**
-     * Contains the property value of the HPO term.
-     */
-    private String propertyValue;
-    /**
      * isA list contains the is_a relations ships between the HPO terms.
      */
     private final List<String> isARelations = new ArrayList<String>();
     /**
-     * altId list contains the alternative id's of the HPO term.
-     */
-    private final List<String> altIds = new ArrayList<String>();
-    /**
      * synonym list contains the synonyms of the HPO term.
      */
     private final List<String> synonyms = new ArrayList<String>();
-    /**
-     * xref list contains the xref's of the HPO term.
-     */
-    private final List<String> xrefs = new ArrayList<String>();
+
     /**
      * The getter of the id.
      * @return id of the HPO term
      */
     public final String getId() {
         return id;
-    }
-    /**
-     * The setter of the id.
-     * @param setId String containing the id
-     */
-    public final void setId(final String setId) {
-        this.id = setId;
     }
     /**
      * The getter of the name.
@@ -107,20 +97,6 @@ public class HPOTerm {
         this.comment = setComment;
     }
     /**
-     * The getter of the property value.
-     * @return propertyValue in String
-     */
-    public final String getPropertyValue() {
-        return propertyValue;
-    }
-    /**
-     * The setter of the propertyValue.
-     * @param setPropertyValue String containing the propertyValue
-     */
-    public final void setPropertyValue(final String setPropertyValue) {
-        this.propertyValue = setPropertyValue;
-    }
-    /**
      * returns all the isA relations in a list containing Strings.
      * @return isA relations in a list
      */
@@ -133,20 +109,6 @@ public class HPOTerm {
      */
     public final void addIsA(final String addIsARelation) {
         isARelations.add(addIsARelation);
-    }
-    /**
-     * returns all the alt id's in a list containing Strings.
-     * @return alt id's in a list
-     */
-    public final List getAltId() {
-        return altIds;
-    }
-    /**
-     * Should get a String with the alt id in it.
-     * @param addAltId should be a String with the alt id in it
-     */
-    public final void addAltId(final String addAltId) {
-        altIds.add(addAltId);
     }
     /**
      * returns all the synonyms in a list containing Strings.
@@ -162,19 +124,4 @@ public class HPOTerm {
     public final void addSynonym(final String addSynonym) {
         synonyms.add(addSynonym);
     }
-    /**
-     * returns all the xrefs in a list containing Strings.
-     * @return xrefs in a list
-     */
-    public final List getXrefs() {
-        return xrefs;
-    }
-    /**
-     * Should get a String with a xref in it.
-     * @param addXref should be a String with a xref in it
-     */
-    public final void addXref(final String addXref) {
-        xrefs.add(addXref);
-    }
-
 }
