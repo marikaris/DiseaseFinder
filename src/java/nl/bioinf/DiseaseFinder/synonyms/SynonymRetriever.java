@@ -1,4 +1,10 @@
-package nl.bioinf.mkslofstra.DiseaseFinder.synonyms;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package nl.bioinf.DiseaseFinder.synonyms;
 
 import edu.smu.tspell.wordnet.Synset;
 import edu.smu.tspell.wordnet.WordNetDatabase;
@@ -6,25 +12,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Displays word forms and definitions for synsets containing the word form
- * specified on the command line. To use this application, specify the word form
- * that you wish to view synsets for, as in the following example which displays
- * all synsets containing the word form "airplane":
+ *
+ * @author aroeters
  */
-public class TestJAWS {
-
+public class SynonymRetriever {
     /**
-     * Main entry point. The command-line arguments are concatenated together
-     * (separated by spaces) and used as the word form to look up.
-     *
-     * @param args
+     * searches in the WordNetDatabase for synonyms of the given word.
+     * @param word the word to get synonyms for
+     * @return an array with synonyms
      */
-    public static void main(String[] args) {
-        TestJAWS tj = new TestJAWS();
-        tj.Start("");
-    }
-
-        public void Start(String word) {
+    public final ArrayList getSynonyms(final String word) {
         System.setProperty("wordnet.database.dir", "/commons/student/2014-2015/"
                 + "Thema11/Mkslofstra/WordNet-3.0/dict");
         ArrayList synonyms = new ArrayList<String>();
@@ -52,5 +49,5 @@ public class TestJAWS {
             System.err.println("You must specify "
                     + "a word form for which to retrieve synsets.");
         }
-    }
+    return synonyms; }
 }

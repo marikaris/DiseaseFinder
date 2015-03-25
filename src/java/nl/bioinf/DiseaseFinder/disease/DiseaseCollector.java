@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.bioinf.mkslofstra.DiseaseFinder.disease;
+package nl.bioinf.DiseaseFinder.disease;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import nl.bioinf.mkslofstra.DiseaseFinder.connection.OmimDataRetriever;
-import nl.bioinf.mkslofstra.DiseaseFinder.dataFinder.DiseaseFenotypeGetter;
+import nl.bioinf.DiseaseFinder.connection.OmimDataRetriever;
+import nl.bioinf.DiseaseFinder.dataFinder.DiseaseFenotypeGetter;
 import org.json.JSONException;
 
 /**

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures;
+package nl.bioinf.DiseaseFinder.bodyFeatures;
 
 import java.util.Arrays;
 

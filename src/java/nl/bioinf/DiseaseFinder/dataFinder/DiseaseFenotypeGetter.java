@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.bioinf.mkslofstra.DiseaseFinder.dataFinder;
+package nl.bioinf.DiseaseFinder.dataFinder;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import nl.bioinf.mkslofstra.DiseaseFinder.bodyFeatures.FeatureCollection;
-import nl.bioinf.mkslofstra.DiseaseFinder.connection.OmimDataRetriever;
-import nl.bioinf.mkslofstra.DiseaseFinder.disease.Disease;
+import nl.bioinf.DiseaseFinder.bodyFeatures.FeatureCollection;
+import nl.bioinf.DiseaseFinder.connection.OmimDataRetriever;
+import nl.bioinf.DiseaseFinder.disease.Disease;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -62,12 +62,15 @@ public class DiseaseFenotypeGetter {
      */
     public DiseaseFenotypeGetter(final String omimNumber)
             throws IOException, JSONException {
-        try{this.getOmimData(omimNumber);
-        this.getFeatures();
-        this.collectFenotypes(featuresToFind);
-        String title = this.getTitleOfDisease();
-        this.saveDisease(omimNumber, title);}catch(org.json.JSONException ex){
-            System.out.println(omimNumber+" not usefulll, clinical synopsis misses.");}
+        try {
+            this.getOmimData(omimNumber);
+            this.getFeatures();
+            this.collectFenotypes(featuresToFind);
+            String title = this.getTitleOfDisease();
+            this.saveDisease(omimNumber, title);
+        } catch (org.json.JSONException ex) {
+            System.out.println(omimNumber + " not usefulll, clinical synopsis misses.");
+        }
 
     }
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.bioinf.mkslofstra.DiseaseFinder.disease;
+package nl.bioinf.DiseaseFinder.disease;
 
 import java.lang.reflect.Array;
 import java.util.HashMap;
