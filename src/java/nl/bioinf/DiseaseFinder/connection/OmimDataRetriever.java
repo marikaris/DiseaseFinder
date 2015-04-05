@@ -37,10 +37,14 @@ public class OmimDataRetriever {
     private String omimKey;
 
     public static void main(String[] args) throws IOException, JSONException {
-        OmimDataRetriever mimMumbers = new OmimDataRetriever("http://api.europe.omim.org/api/clinicalSynopsis?"
-                + "mimNumber=%1$s&include=all&format=json&apiKey=%2$s", "3F48B5AE34656CC9211E0A476E28AF0C370E3F94");
-//        mimMumbers.getOmimNumbers(new String[]{"dizziness", "blurry vision", "ptosis"});
-        mimMumbers.getOmimResult("520000");
+//        OmimDataRetriever mimMumbers = new OmimDataRetriever("http://api.europe.omim.org/api/clinicalSynopsis?"
+//                + "mimNumber=%1$s&include=all&format=json&apiKey=%2$s", "3F48B5AE34656CC9211E0A476E28AF0C370E3F94");
+        OmimDataRetriever mimMumbers = new OmimDataRetriever("http://api.europe.omim.org/api/entry/search?search="
+                + "%1$s&filter=&fields=&retrieve=&start=0&limit=10&sort="
+                + "&operator=&format=json&apiKey=%2$s", "3F48B5AE34656CC9211E0A476E28AF0C370E3F94");
+        
+//        System.out.println(mimMumbers.getOmimResult("520000"));  
+        System.out.println(mimMumbers.getOmimNumbers(new String[]{"dizziness", "blurry vision", "ptosis"}));
     }
 
     /**

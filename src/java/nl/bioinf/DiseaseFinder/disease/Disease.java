@@ -8,6 +8,7 @@ package nl.bioinf.DiseaseFinder.disease;
 import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Disease collects all the information about one disease which is found.
@@ -89,7 +90,7 @@ public class Disease {
         StringBuilder sb = new StringBuilder();
         Iterator it = features.entrySet().iterator();
         while (it.hasNext()) {
-            HashMap.Entry pair = (HashMap.Entry) it.next();
+            Map.Entry pair = (Map.Entry) it.next();
             sb.append("\n\n" + pair.getKey() + "\n" + pair.getValue());
             it.remove(); // avoids a ConcurrentModificationException
         }

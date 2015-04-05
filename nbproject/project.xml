@@ -7,8 +7,7 @@
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <web-module-libraries>
                 <library dirs="200">
-                    <file>${file.reference.java-json.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
+                    <file>${file.reference.org.json-20120521.jar}</file>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.jaws-bin.jar}</file>
