@@ -9,11 +9,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.logging.Level;
 import nl.bioinf.DiseaseFinder.bodyFeatures.FeatureCollection;
 import nl.bioinf.DiseaseFinder.connection.OmimDataRetriever;
 import nl.bioinf.DiseaseFinder.disease.Disease;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.logging.Logger;
 
 /**
  * DiseaseFenotypeGetter gets the fenotype of a disease.
@@ -69,7 +71,11 @@ public class DiseaseFenotypeGetter {
             String title = this.getTitleOfDisease();
             this.saveDisease(omimNumber, title);
         } catch (org.json.JSONException ex) {
-            System.out.println(omimNumber + " not usefulll, clinical synopsis misses.");
+            Logger logger = Logger.getLogger(DiseaseFenotypeGetter.class
+                    .getName());
+            logger.log(Level.FINEST, omimNumber + " not usefulll, clinical"
+                    + " synopsis misses, which causes invalid JSON. This"
+                    + " disease is deleted from the results.", ex);
         }
 
     }
@@ -153,7 +159,7 @@ public class DiseaseFenotypeGetter {
      * @return fenotypes all the fenotypes of the disease.
      * @author mkslofstra
      */
-    public final void collectFenotypes(
+    private final void collectFenotypes(
             final ArrayList<String> allFeatures) throws JSONException {
         for (String feature : allFeatures) {
             //check for each feature if the value of it is true or false.
