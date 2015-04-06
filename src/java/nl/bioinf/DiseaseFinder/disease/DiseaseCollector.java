@@ -91,8 +91,11 @@ public class DiseaseCollector {
      */
     public final void addToDiseaseCollection(
             final Disease disease, final String mimNumber) {
-        System.out.println(mimNumber);
-        diseaseCollection.put(mimNumber, disease);
-        System.out.println(disease);
+        //input should not be null
+        if(mimNumber != null && disease != null){
+        diseaseCollection.put(mimNumber, disease);}else{
+            throw new NullPointerException("Neighter omimNumber nor the"
+                    + "diseaseobject should be null.");
+        }
     }
 }

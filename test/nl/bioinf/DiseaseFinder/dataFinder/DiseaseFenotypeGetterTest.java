@@ -17,7 +17,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * This class tests the diseasefenotypegetter object.
  * @author mkslofstra
  */
 public class DiseaseFenotypeGetterTest {

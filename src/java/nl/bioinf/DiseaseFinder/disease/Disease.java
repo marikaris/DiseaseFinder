@@ -26,10 +26,16 @@ public class Disease {
      */
     public Disease(final String mimNumberValue,
             final String titleOfDisease, final HashMap featuresHashMap) {
+        //the mimNumber length should always be 6, otherwise, it is invalid.
+        if (mimNumberValue.length() != 6){
+            throw new IllegalArgumentException("The omimNumber should be a"
+                    + "String of exactly six characters.");
+        }
         this.mimNumber = mimNumberValue;
         this.title = titleOfDisease;
         this.features = featuresHashMap;
         this.hits++;
+        System.out.println(this.features);
     }
 
     /**
@@ -117,15 +123,6 @@ public class Disease {
     }
 
     /**
-     * The setter of the mimNumber.
-     *
-     * @param setMimNumber the omim number of the disease.
-     */
-    public final void setMimNumber(final String setMimNumber) {
-        this.mimNumber = setMimNumber;
-    }
-
-    /**
      * The getter of the title of the disease.
      *
      * @return title of the disease.
@@ -135,29 +132,11 @@ public class Disease {
     }
 
     /**
-     * The setter of the title.
-     *
-     * @param setTitle the title which should be set.
-     */
-    public final void setTitle(final String setTitle) {
-        this.title = setTitle;
-    }
-
-    /**
      * The getter of getFeatures.
      *
      * @return the features of the disease.
      */
     public final HashMap getFeatures() {
         return features;
-    }
-
-    /**
-     * The setter of features.
-     *
-     * @param setFeatures of the disease.
-     */
-    public final void setFeatures(final HashMap setFeatures) {
-        this.features = setFeatures;
     }
 }
