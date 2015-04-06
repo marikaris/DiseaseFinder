@@ -75,7 +75,7 @@ public class DiseaseFenotypeGetter {
                     .getName());
             logger.log(Level.FINEST, omimNumber + " not usefulll, clinical"
                     + " synopsis misses, which causes invalid JSON. This"
-                    + " disease is deleted from the results.", ex);
+                    + " disease is excluded from the results.", ex);
         }
 
     }
