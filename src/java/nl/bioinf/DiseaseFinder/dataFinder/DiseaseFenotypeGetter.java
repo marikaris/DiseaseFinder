@@ -234,7 +234,6 @@ public class DiseaseFenotypeGetter {
      *
      * @param mimNumber is the id of the disease
      * @param title is the name of the disease
-     * @param fenotypes are the characteristics of the disease
      * @author mkslofstra
      */
     private void saveDisease(final String mimNumber,

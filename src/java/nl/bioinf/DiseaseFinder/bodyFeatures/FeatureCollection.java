@@ -66,6 +66,10 @@ public class FeatureCollection {
      */
     public final String[] extendFeature(final String feature) {
         String[] extended = new String[]{};
+        if (!Arrays.asList(globalFeatures).contains(feature)) {
+            throw new IllegalArgumentException(feature + "is not a global "
+                    + "feature of diseases on omim.");
+        }
         BodyFeature bodyFeature = BodyFeature.valueOf(feature);
         switch (bodyFeature) {
             case growth:
