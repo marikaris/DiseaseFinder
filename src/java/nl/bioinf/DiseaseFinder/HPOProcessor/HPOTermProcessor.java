@@ -20,7 +20,7 @@ public class HPOTermProcessor {
      * @throws IOException
      */
     public static void main(final String[] args) throws IOException {
-        HPOReader hr = new HPOReader();
+//        HPOFileReader hr = new HPOFileReader();
 
 
         Properties configFile = new Properties();
@@ -43,6 +43,9 @@ public class HPOTermProcessor {
      * @return a list of strings with all the seperate hpo terms
      */
     public final String[] hpoTermSplitter(final String hpoFile) {
+        if (hpoFile == null) {
+            throw new NullPointerException();
+        }
         String[] hpoTerms = hpoFile.split("\\[Term\\]");
         return hpoTerms;
     }
@@ -67,6 +70,6 @@ public class HPOTermProcessor {
             }
 
         }
-        return null;
+        return hc;
     }
 }
