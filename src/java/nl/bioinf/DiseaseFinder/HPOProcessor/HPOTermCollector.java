@@ -23,6 +23,9 @@ public class HPOTermCollector {
      * @param hpoTerm Object of a HPOTerm
      */
     public final void addToHPOList(final Object hpoTerm) {
+        if(hpoTerm == null) {
+            throw new NullPointerException("hpoTerm is empty");
+        }
         hpoList.add(hpoTerm);
     }
     /**

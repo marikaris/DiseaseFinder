@@ -11,8 +11,12 @@ import java.io.IOException;
  *
  * @author aroeters
  */
-public class HPOReader {
-
+public class HPOFileReader {
+    public HPOFileReader(final String inFile) {
+        if (inFile == null) {
+            throw new NullPointerException();
+        }
+    }
     /**
      * Reads the file and returns it as a String.
      *

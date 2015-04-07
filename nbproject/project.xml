@@ -10,7 +10,18 @@
                     <file>${file.reference.org.json-20120521.jar}</file>
                 </library>
                 <library dirs="200">
+                    <file>${file.reference.java_lib-apache-tomcat-7.0.57}</file>
+                    <path-in-war>WEB-INF/classes</path-in-war>
+                </library>
+                <library dirs="200">
                     <file>${file.reference.jaws-bin.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jaws-bin.jar-1}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.org.json-20120521.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
