@@ -17,6 +17,7 @@
         <script src="js_plugins/jstree.min.js" type="text/javascript"></script>
         <script src="js/autoSize.js" type="text/javascript"></script>
         <script src="js/buildTree.js" type="text/javascript"></script>
+        <script src="js/getSymptoms.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Disease Phenotype Matcher</title>       
 
@@ -31,6 +32,8 @@
                     <input type="text" id="search-symptome" value="Search symptoms" class="input" />
                 </div>
                 <div id="ontology-tree" class="demo" style="margin-top:2em;"></div>
+                <div id="event_result"></div>
+                <button id="search-button" class="button">Search for diseases</button>
             </div>
             <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id ="result">        
                 <h2>Results</h2>

@@ -124,3 +124,6 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
     float:right;
     color:grey !important;
 }
+#search-button{
+    float:right;
+}
