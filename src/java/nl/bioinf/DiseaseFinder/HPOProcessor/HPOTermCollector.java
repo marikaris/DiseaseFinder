@@ -7,7 +7,6 @@
 package nl.bioinf.DiseaseFinder.HPOProcessor;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -17,13 +16,13 @@ public class HPOTermCollector {
         /**
          * Contains the HPOTerm objects.
          */
-    private final List<Object> hpoList = new ArrayList<Object>();
+    private final ArrayList<HPOTerm> hpoList = new ArrayList<HPOTerm>();
     /**
      * Adds a hpo term to the hpoList.
      * @param hpoTerm Object of a HPOTerm
      */
-    public final void addToHPOList(final Object hpoTerm) {
-        if(hpoTerm == null) {
+    public final void addToHPOList(final HPOTerm hpoTerm) {
+        if (hpoTerm == null) {
             throw new NullPointerException("hpoTerm is empty");
         }
         hpoList.add(hpoTerm);
@@ -32,7 +31,7 @@ public class HPOTermCollector {
      * The getter of the hpoList.
      * @return list containing the HPOTerm objects
      */
-    public final List getHPOList() {
+    public final ArrayList getHPOList() {
         return hpoList;
     }
 }

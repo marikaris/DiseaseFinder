@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 public class HPOTermCollectorTest {
     public HPOTermCollectorTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
@@ -40,7 +40,7 @@ public class HPOTermCollectorTest {
     @Test
     public final void testAddToHPOList() {
         System.out.println("addToHPOList");
-        Object hpoTerm = "hpoTerm";
+        HPOTerm hpoTerm = new HPOTerm();
         HPOTermCollector instance = new HPOTermCollector();
         instance.addToHPOList(hpoTerm);
     }
@@ -51,7 +51,7 @@ public class HPOTermCollectorTest {
     @Test(expected = NullPointerException.class)
     public final void testAddToHPOListNull() {
         System.out.println("addToHPOList");
-        Object hpoTerm = null;
+        HPOTerm hpoTerm = null;
         HPOTermCollector instance = new HPOTermCollector();
         instance.addToHPOList(hpoTerm);
     }

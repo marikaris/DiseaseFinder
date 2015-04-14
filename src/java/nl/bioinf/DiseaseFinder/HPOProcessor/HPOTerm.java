@@ -18,14 +18,13 @@ public class HPOTerm {
      * Initializes the HPOTerm with the given id.
      * @param idGiven Should be the id of the Term
      */
-    public HPOTerm(final String idGiven) {
-    this.id = idGiven;
+    public HPOTerm() {
     }
 
     /**
      * Contains the id op the HPO term.
      */
-    private final String id;
+    private String id;
     /**
      * Contains the name of the HPO term.
      */
@@ -53,6 +52,13 @@ public class HPOTerm {
      */
     public final String getId() {
         return id;
+    }
+    /**
+     * The setter of the id.
+     * @param newId the id of the HPOTerm
+     */
+    public final void setId(final String newId) {
+        this.id = newId;
     }
     /**
      * The getter of the name.
