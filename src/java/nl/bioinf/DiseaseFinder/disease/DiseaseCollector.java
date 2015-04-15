@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import nl.bioinf.DiseaseFinder.connection.OmimDataRetriever;
-import nl.bioinf.DiseaseFinder.dataFinder.DiseaseFenotypeGetter;
+import nl.bioinf.DiseaseFinder.dataFinder.DiseasePhenotypeGetter;
 import org.json.JSONException;
 
 /**
@@ -26,14 +26,6 @@ public class DiseaseCollector {
      */
     private HashMap<String, Disease> diseaseCollection = new HashMap();
 
-    /**
-     * getDiseaseCollection is the getter of diseaseCollection.
-     *
-     * @return diseaseCollection the collection of all found diseases.
-     */
-    public final HashMap<String, Disease> getDiseaseCollection() {
-        return diseaseCollection;
-    }
 
     public static void main(String[] args) throws JSONException, IOException {
         String[] features = new String[]{"dizziness", "blurry vision",
@@ -54,9 +46,18 @@ public class DiseaseCollector {
         for (Object id : omimNumbers) {
             Disease disease = this.getDiseaseContent(id.toString());
             addToDiseaseCollection(disease, id.toString());
-        }
+//            System.out.println(disease);
+        }        
     }
 
+    /**
+     * getDiseaseCollection is the getter of diseaseCollection.
+     *
+     * @return diseaseCollection the collection of all found diseases.
+     */
+    public final HashMap<String, Disease> getDiseaseCollection() {
+        return diseaseCollection;
+    }
     /**
      * getOmimNumbers gets the id's of the possible diseases.
      *
@@ -79,7 +80,7 @@ public class DiseaseCollector {
     }
 
     private Disease getDiseaseContent(String disease) throws IOException, JSONException {
-        DiseaseFenotypeGetter diseaseFenotype = new DiseaseFenotypeGetter(disease);
+        DiseasePhenotypeGetter diseaseFenotype = new DiseasePhenotypeGetter(disease);
         return diseaseFenotype.getDisease();
     }
 
@@ -94,8 +95,10 @@ public class DiseaseCollector {
         //input should not be null
         if(mimNumber != null && disease != null){
         diseaseCollection.put(mimNumber, disease);}else{
-            throw new NullPointerException("Neighter omimNumber nor the"
-                    + "diseaseobject should be null.");
+//            System.out.println(mimNumber);
+//            System.out.println(disease.printSummary());
+//            throw new NullPointerException("Neighter omimNumber nor the"
+//                    + "diseaseobject should be null.");
         }
     }
 }

@@ -47,7 +47,7 @@ public class DiseaseFenotypeGetterTest {
     @Test
     public void testGetDisease() throws IOException, JSONException {
         System.out.println("getDisease");
-        DiseaseFenotypeGetter instance = new DiseaseFenotypeGetter("520000");
+        DiseasePhenotypeGetter instance = new DiseasePhenotypeGetter("520000");
         String expResult = "DIABETES AND DEAFNESS, MATERNALLY INHERITED; MIDD";
         //Test if the title can be given, if not, the disease object is not made
         //correctly.

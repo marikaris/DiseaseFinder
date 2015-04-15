@@ -1,11 +1,11 @@
 $(document).ready(initialize);
 
 function initialize() {
-    $("#search-symptome").click(function(){
+    $("#search-symptome").click(function() {
         $("#search-symptome").val("");
     });
     var symptoms;
-    $("#ontology-tree").on('changed.jstree', function (e, data) {
+    $("#ontology-tree").on('changed.jstree', function(e, data) {
         var i, j, r = [];
         //run through all selected nodes
         for (i = 0, j = data.selected.length; i < j; i++) {
@@ -21,7 +21,7 @@ function initialize() {
             if (parents.length !== 1) {
                 //check for each parent, if the parent is in the array of 
                 //selected nodes
-                $.each(parents, function (index, value) {
+                $.each(parents, function(index, value) {
                     if ($.inArray(value, r) === -1) {
                         console.log(value + " not in " + r);
                         r.push(value);
@@ -44,7 +44,8 @@ function initialize() {
             localStorage.setItem("symptoms", r);
 
         }
-        $("#search-button").click(function () {
+        $("#search-button").click(function() {
+            $("#result").text("");
             sendSymptoms();
         });
         //add the selected nodes (and their parents) to the page, below the tree
@@ -57,8 +58,8 @@ function sendSymptoms(symptoms) {
     //the name of the servlet
     var servlet = "getDisease.do";
     //use the servlet
-    $.get(servlet, {"symptoms[]": localStorage.getItem("symptoms")}, function (diseases) {
-
+    $.get(servlet, {"symptoms[]": localStorage.getItem("symptoms")}, function(diseases) {
+        $("#result").append(diseases);
     });
 }
 //from Ravi Kumar Raman on Stack overflow

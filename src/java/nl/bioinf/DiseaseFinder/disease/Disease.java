@@ -27,7 +27,7 @@ public class Disease {
     public Disease(final String mimNumberValue,
             final String titleOfDisease, final HashMap featuresHashMap) {
         //the mimNumber length should always be 6, otherwise, it is invalid.
-        if (mimNumberValue.length() != 6){
+        if (mimNumberValue.length() != 6) {
             throw new IllegalArgumentException("The omimNumber should be a"
                     + "String of exactly six characters.");
         }
@@ -35,7 +35,6 @@ public class Disease {
         this.title = titleOfDisease;
         this.features = featuresHashMap;
         this.hits++;
-        System.out.println(this.features);
     }
 
     /**
@@ -55,7 +54,7 @@ public class Disease {
      */
     private Integer hits = 0;
     /**
-     * the score which is given for this disease given the fenotype.
+     * the score which is given for this disease given the phenotype.
      */
     private Double score;
 
@@ -138,5 +137,31 @@ public class Disease {
      */
     public final HashMap getFeatures() {
         return features;
+    }
+
+    /**
+     * printSummary prints the summary of the disease.
+     *
+     * @return summary, the summary of the disease which can be shown on the
+     * website.
+     */
+    public final String printSummary() {
+        StringBuilder diseaseSummary = new StringBuilder();
+        diseaseSummary.append("<div class =\"disease\" id=\"")
+                .append(mimNumber).append("\">");
+        diseaseSummary.append("<table>");
+        diseaseSummary.append("<tr class=\"diseaseTitle\">"
+                + "<td class=\"title\" colspan=\"3\">"
+                + "<a href=\"#\"><b>").append(title).append("</td></tr>");
+        diseaseSummary.append("<tr>\n"
+                + "<td class=\"label\">Omimnumber: </td><td class=\"value\">")
+                .append(mimNumber).append("</td></tr>");
+        diseaseSummary.append("<tr><td class=\"label\">Score: "
+                + "</td><td class=\"value\">").append(score)
+                .append("</td></tr>");
+        diseaseSummary.append("</table>");
+        diseaseSummary.append("</div><br/><br/>");
+        String summary = diseaseSummary.toString();
+        return summary;
     }
 }

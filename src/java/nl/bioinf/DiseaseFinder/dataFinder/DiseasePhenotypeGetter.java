@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @author mkslofstra
  */
-public class DiseaseFenotypeGetter {
+public class DiseasePhenotypeGetter {
 
     /**
      * features: The selected content of the webpage from omim in json
@@ -62,7 +62,7 @@ public class DiseaseFenotypeGetter {
      * valid json.
      * @author mkslofstra
      */
-    public DiseaseFenotypeGetter(final String omimNumber)
+    public DiseasePhenotypeGetter(final String omimNumber)
             throws IOException, JSONException {
         try {
             this.getOmimData(omimNumber);
@@ -71,7 +71,7 @@ public class DiseaseFenotypeGetter {
             String title = this.getTitleOfDisease();
             this.saveDisease(omimNumber, title);
         } catch (org.json.JSONException ex) {
-            Logger logger = Logger.getLogger(DiseaseFenotypeGetter.class
+            Logger logger = Logger.getLogger(DiseasePhenotypeGetter.class
                     .getName());
             logger.log(Level.FINEST, omimNumber + " not usefulll, clinical"
                     + " synopsis misses, which causes invalid JSON. This"
@@ -93,7 +93,7 @@ public class DiseaseFenotypeGetter {
     public static void main(final String[] args) throws IOException,
             JSONException {
 //        DiseaseFenotypeGetter fenotype = new DiseaseFenotypeGetter("606232");
-        DiseaseFenotypeGetter fenotype = new DiseaseFenotypeGetter("275000");
+        DiseasePhenotypeGetter fenotype = new DiseasePhenotypeGetter("275000");
     }
 
     /**
