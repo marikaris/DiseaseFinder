@@ -147,7 +147,7 @@ public class Disease {
      */
     public final String printSummary() {
         StringBuilder diseaseSummary = new StringBuilder();
-        diseaseSummary.append("<div class =\"disease\" id=\"")
+        diseaseSummary.append("<li class =\"disease\" id=\"")
                 .append(mimNumber).append("\">");
         diseaseSummary.append("<table>");
         diseaseSummary.append("<tr class=\"diseaseTitle\">"
@@ -160,7 +160,7 @@ public class Disease {
                 + "</td><td class=\"value\">").append(score)
                 .append("</td></tr>");
         diseaseSummary.append("</table>");
-        diseaseSummary.append("</div><br/><br/>");
+        diseaseSummary.append("</li><br/>");
         String summary = diseaseSummary.toString();
         return summary;
     }

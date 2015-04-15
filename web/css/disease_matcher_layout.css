@@ -8,6 +8,9 @@ body {
     padding:0;
     height:100%;
 }
+body{
+    position: relative;
+}
 #logo h1{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
          font-weight: normal;
          font-size: 3em;
@@ -86,6 +89,7 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
     padding-bottom: 4em;
     width:50%;
     margin-bottom:4em;
+    list-style-type: none;
 
 }
 .label{
@@ -130,6 +134,7 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
 }
 #search-button{
     float:right;
+    margin-top: 2em;
 }
 #wrapper{
     border-bottom-left-radius: 25px;

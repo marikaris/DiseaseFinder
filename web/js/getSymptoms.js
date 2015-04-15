@@ -44,14 +44,12 @@ function initialize() {
             localStorage.setItem("symptoms", r);
 
         }
-        $("#search-button").click(function() {
-            $("#result").text("");
+        $("#search-button").click(function() {            
             sendSymptoms();
         });
         //add the selected nodes (and their parents) to the page, below the tree
         $('#event_result').html('<br/>Selected:<br/>' + r.join(', '));
     });
-
 }
 //this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
@@ -59,7 +57,11 @@ function sendSymptoms(symptoms) {
     var servlet = "getDisease.do";
     //use the servlet
     $.get(servlet, {"symptoms[]": localStorage.getItem("symptoms")}, function(diseases) {
+        $("#result").text("");
+        $("#result").append("<h2>Results</h2>");
+        $("#result").append("<ul>");
         $("#result").append(diseases);
+        $("#result").append("</ul>");
     });
 }
 //from Ravi Kumar Raman on Stack overflow
