@@ -1,6 +1,9 @@
 $(document).ready(initialize);
 
 function initialize() {
+    $("#search-symptome").click(function(){
+        $("#search-symptome").val("");
+    });
     var symptoms;
     $("#ontology-tree").on('changed.jstree', function (e, data) {
         var i, j, r = [];
@@ -54,7 +57,7 @@ function sendSymptoms(symptoms) {
     //the name of the servlet
     var servlet = "getDisease.do";
     //use the servlet
-    $.get(servlet, {"symptoms[]": localStorage.getItem("symptoms")}, function (selected) {
+    $.get(servlet, {"symptoms[]": localStorage.getItem("symptoms")}, function (diseases) {
 
     });
 }
