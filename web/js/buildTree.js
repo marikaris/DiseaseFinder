@@ -1,8 +1,9 @@
 $(document).ready(initialize);
 function initialize() {
+
     $(function() {
-        $('#ontology-tree').jstree({'plugins': ["checkbox", "search"], 'core': {
-                'data': [
+    var data = 
+            [
                     {
                         "text": "Phenotypic abnormality",
                         "icon": "glyphicon glyphicon-user",
@@ -20,8 +21,11 @@ function initialize() {
                                 "icon": "glyphicon glyphicon-user"}
                         ]
                     }
-                ]
-            }});
+                ];
+        $('#ontology-tree').jstree(
+                {'plugins': ["checkbox", "search"],
+                    'core': {'data': data}
+                });
         var to = false;
         $('#search-symptome').keyup(function() {
             if (to) {

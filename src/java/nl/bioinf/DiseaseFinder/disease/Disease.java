@@ -147,12 +147,12 @@ public class Disease {
      */
     public final String printSummary() {
         StringBuilder diseaseSummary = new StringBuilder();
-        diseaseSummary.append("<li class =\"disease\" id=\"")
-                .append(mimNumber).append("\">");
+        diseaseSummary.append("<li class =\"disease\">");
         diseaseSummary.append("<table>");
         diseaseSummary.append("<tr class=\"diseaseTitle\">"
                 + "<td class=\"title\" colspan=\"3\">"
-                + "<a href=\"#\"><b>").append(title).append("</td></tr>");
+                + "<a class = \"clickTitle\" id=\"").append(mimNumber)
+                .append("\"><b>").append(title).append("</td></tr>");
         diseaseSummary.append("<tr>\n"
                 + "<td class=\"label\">Omimnumber: </td><td class=\"value\">")
                 .append(mimNumber).append("</td></tr>");
