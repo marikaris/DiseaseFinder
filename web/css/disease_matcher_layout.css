@@ -21,11 +21,11 @@ body{
          text-transform: uppercase;
          -webkit-mask-image: -webkit-linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.5) 50%, rgba(0,0,0,1));
          -webkit-mask-image: linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.5) 50%, rgba(0,0,0,1));
-         /*text-shadow: 5px 5px #adadad;*/
          width: 100%;
          border-top-left-radius: 20px;
          border-top-right-radius: 20px;
 }
+/*the head of the page with the logo*/
 #logo{
     background: rgb(160,216,239); /* Old browsers */
     background: -moz-linear-gradient(top, rgba(160,216,239,1) 0%, rgba(221,241,249,1) 65%, rgba(206,206,206,1) 100%); /* FF3.6+ */
@@ -55,21 +55,22 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
    text-transform: uppercase;
    -webkit-mask-image: -webkit-linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.5) 50%, rgba(0,0,0,1));
    -webkit-mask-image: linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.5) 50%, rgba(0,0,0,1));
-   /*text-shadow: 2px 2px #2aabd2;*/
    padding:1em;
 }
+/*the searchbar itself*/
 #search-symptome{
     border-radius: 5px;
     border-color: silver;
     color: grey;
     padding-left: 1.5em;
-    width: 11em;
+    width: 12em;
 
 }
+/*the div in which is the searchbar*/
 #search-bar{
     float: right;
 }
-
+/*the div with the tree and search bar*/
 #search{
     border-right-style: ridge;
     border-color: #9acfea;
@@ -82,24 +83,26 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
     margin-bottom:4em;
     margin-top:-0.1em;
 }
+/*the div with the results*/
 #result{
     height: 100%;
     padding:2em;
-    margin-top:-0.1em;
     padding-bottom: 4em;
     width:50%;
     margin-bottom:4em;
     list-style-type: none;
+    overflow: auto;
 
 }
+/*the color of the label in the results*/
 .label{
     color: grey !important;
 }
-
+/*the pipe sign in the footer*/
 #pipe{
     color:#9acfea;
 }
-
+/*the title of the results*/
 .clickUp:hover{
     font-weight: bold !important;
     cursor: pointer !important;
@@ -128,6 +131,7 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
     border-top-style: ridge;
     border-color: #9acfea;
 }
+/*the copyright text in the footer*/
 #copyright{
     float:right;
     color:grey !important;
@@ -136,6 +140,7 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
     float:right;
     margin-top: 2em;
 }
+/*the content on the background*/ 
 #wrapper{
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
@@ -144,7 +149,7 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
     width:75%;
     margin-left:12.5%;
     margin-bottom: 3em;
-    height: 200%;
+    height: 100%;
     max-width: 100em;
     background: rgb(226,226,226); /* Old browsers */
     background: -moz-linear-gradient(top, rgba(226,226,226,1) 0%, rgba(219,219,219,1) 33%, rgba(219,219,219,1) 34%, rgba(219,219,219,1) 34%, rgba(254,254,254,1) 62%); /* FF3.6+ */
@@ -154,4 +159,48 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
     background: -ms-linear-gradient(top, rgba(226,226,226,1) 0%,rgba(219,219,219,1) 33%,rgba(219,219,219,1) 34%,rgba(219,219,219,1) 34%,rgba(254,254,254,1) 62%); /* IE10+ */
     background: linear-gradient(to bottom, rgba(226,226,226,1) 0%,rgba(219,219,219,1) 33%,rgba(219,219,219,1) 34%,rgba(219,219,219,1) 34%,rgba(254,254,254,1) 62%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
+}
+/*align the result data*/
+td.label{
+    width: 20em;
+}
+td.value{
+    width: 20em;
+}
+/*http://stackoverflow.com/questions/18838964/add-bootstrap-glyphicon-to-input-box*/
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { 
+    right: 0px;
+}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { 
+    padding-right: 10px;
+}
+/*https://css-tricks.com/almanac/properties/s/scrollbar/*/
+body::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }
