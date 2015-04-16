@@ -46,7 +46,7 @@ public class HPOFileReader {
      * @return HPOTermCollector
      * @throws IOException when file not found
      */
-    final HPOTermCollector readFile() throws IOException {
+    public final HPOTermCollector readFile() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(this.file));
         HPOTermCollector hc = new HPOTermCollector();
         String line;
