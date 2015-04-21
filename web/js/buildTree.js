@@ -18,7 +18,7 @@ function initialize() {
                                                 "children": [{"text": "big nose", "icon": "glyphicon glyphicon-user"},
                                                     {"text": "big mouth", "icon": "glyphicon glyphicon-user"},
                                                     {"text": "ptosis", "icon": "glyphicon glyphicon-user"}]},
-                                            {"text": "headache", "icon": "glyphicon glyphicon-user"}]},
+                                            {"text": "headache", "icon": "glyphicon glyphicon-user", "children": []}]},
                                     {"text": "Abnormality of the neck", "icon": "glyphicon glyphicon-user"}],
                                 "icon": "glyphicon glyphicon-user"}
                         ]

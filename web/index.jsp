@@ -17,7 +17,6 @@
         <script src="js_plugins/jstree.min.js" type="text/javascript"></script>
         <script src="js/autoSize.js" type="text/javascript"></script>
         <script src="js/buildTree.js" type="text/javascript"></script>
-        <script src="js/getDisease.js" type="text/javascript"></script>
         <script src="js/getSymptoms.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Phenotype to disease converter</title>       

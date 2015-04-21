@@ -96,11 +96,12 @@ public class Disease {
         Iterator it = features.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
-            sb.append("\n\n" + pair.getKey() + "\n" + pair.getValue());
+            sb.append("<br/><br/><b>" + pair.getKey() + "</b><br/>" + pair.getValue());
             it.remove(); // avoids a ConcurrentModificationException
         }
-        return title + "\nmimNumber : " + mimNumber
-                + ", hits : " + hits + sb.toString();
+        return "<h2>"+title + "</h2><div id =\"disease\"><b>mimNumber :</b>"
+                + "<a href=\"http://omim.org/entry/" + mimNumber+"\"target=\"blank\">"+mimNumber+"</a>"
+                + ", <b>hits :</b> " + hits + sb.toString()+"</div>";
     }
 
     /**
@@ -112,7 +113,8 @@ public class Disease {
         this.score = givenScore;
     }
 
-    /**
+    /**ALBINISM, OCULAR, TYPE I; OA1
+
      * The getter of the omim number.
      *
      * @return mimNumber the omim number of the disease.
@@ -152,7 +154,7 @@ public class Disease {
         diseaseSummary.append("<tr class=\"diseaseTitle\">"
                 + "<td class=\"title\" colspan=\"3\">"
                 + "<a class = \"clickTitle\" id=\"").append(mimNumber)
-                .append("\"><b>").append(title).append("</td></tr>");
+                .append("\"><b>").append(title).append("</a></td></tr>");
         diseaseSummary.append("<tr>\n"
                 + "<td class=\"label\">Omimnumber: </td><td class=\"value\">")
                 .append(mimNumber).append("</td></tr>");

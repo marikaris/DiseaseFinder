@@ -1,5 +1,5 @@
-$(document).ready(initialize);
 
+$(document).ready(initialize);
 function initialize() {
     $("#search-symptome").click(function() {
         $("#search-symptome").val("");
@@ -39,12 +39,10 @@ function initialize() {
                     r.push(parents[0]);
                 }
                 ;
-
             }
             localStorage.setItem("symptoms", r);
-
         }
-        $("#search-button").click(function() {            
+        $("#search-button").click(function() {
             sendSymptoms();
         });
         //add the selected nodes (and their parents) to the page, below the tree
@@ -53,7 +51,7 @@ function initialize() {
 }
 //this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
-    //the name of the servlet
+//the name of the servlet
     var servlet = "getDisease.do";
     //use the servlet
     $.get(servlet, {"symptoms[]": localStorage.getItem("symptoms")}, function(diseases) {
@@ -62,12 +60,24 @@ function sendSymptoms(symptoms) {
         $("#result").append("<ul>");
         $("#result").append(diseases);
         $("#result").append("</ul>");
+        $(".clickTitle").click(function() {
+            localStorage.setItem("omimNumber", $(this).attr("id"));
+            loadDisease();
+        });
     });
 }
+function loadDisease() {
+    var diseaseServlet = "RetrieveDisease.do";
+    $.get(diseaseServlet, {"omimNumber": localStorage.getItem("omimNumber")}, function(disease) {
+        $("#result").text("");
+        $("#result").append(disease);
+    });
+}
+;
 //from Ravi Kumar Raman on Stack overflow
 function uiGetParents(loSelectedNode) {
     try {
-        //the length of the list of parents
+//the length of the list of parents
         var lnLevel = loSelectedNode.parents.length;
         //the id of the selected node
         var lsSelectedID = loSelectedNode.id;
@@ -76,18 +86,18 @@ function uiGetParents(loSelectedNode) {
         var parents = [];
         //as long as there are more parents, do this
         for (var ln = 0; ln <= lnLevel - 1; ln++) {
-            //check for new parent
+//check for new parent
             var loParent = loParent.parent().parent();
             //if parent has no children (and is last)
             if (loParent.children()[1] != undefined) {
-                //push parent to parents
+//push parent to parents
                 parents.push(loParent.children()[1].text);
             }
         }
         return(parents);
     }
     catch (err) {
-        //log if there is an error in this code (hope not)
+//log if there is an error in this code (hope not)
         console.log('Error in uiGetParents');
     }
 }

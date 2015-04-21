@@ -53,8 +53,6 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
    margin:0px;
    text-align: center;
    text-transform: uppercase;
-   -webkit-mask-image: -webkit-linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.5) 50%, rgba(0,0,0,1));
-   -webkit-mask-image: linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.5) 50%, rgba(0,0,0,1));
    padding:1em;
 }
 /*the searchbar itself*/
@@ -203,4 +201,8 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
+}
+#disease{
+    margin-left: 5em;
+    margin-right: 5em;
 }

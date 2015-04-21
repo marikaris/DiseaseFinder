@@ -8,11 +8,15 @@ package nl.bioinf.DiseaseFinder.view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import nl.bioinf.DiseaseFinder.dataFinder.DiseasePhenotypeGetter;
+import org.json.JSONException;
 
 /**
  *
@@ -31,10 +35,13 @@ public class WebDiseaseRetrieverServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, JSONException {
         response.setContentType("text/html;charset=UTF-8");
+        String omimNumber = request.getParameter("omimNumber");
+        DiseasePhenotypeGetter diseaseGetter = new DiseasePhenotypeGetter(omimNumber);
+        String information = diseaseGetter.getDisease().toString();
         PrintWriter out = response.getWriter();
-        
+         out.println(information);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -49,7 +56,11 @@ public class WebDiseaseRetrieverServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (JSONException ex) {
+            Logger.getLogger(WebDiseaseRetrieverServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -63,7 +74,11 @@ public class WebDiseaseRetrieverServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (JSONException ex) {
+            Logger.getLogger(WebDiseaseRetrieverServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
