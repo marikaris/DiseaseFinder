@@ -80,6 +80,7 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
     width:50%;
     margin-bottom:4em;
     margin-top:-0.1em;
+    overflow: auto;
 }
 /*the div with the results*/
 #result{
@@ -212,4 +213,8 @@ body::-webkit-scrollbar-thumb {
 #back2results :hover{
     color: black;
     text-decoration: underline;
+    cursor: pointer;
+}
+.clickTitle :hover{
+    cursor:pointer;
 }
