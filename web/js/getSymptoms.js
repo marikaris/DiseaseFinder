@@ -1,4 +1,4 @@
-
+//Created by mkslofstra
 $(document).ready(initialize);
 function initialize() {
     $("#search-symptome").click(function() {
@@ -70,7 +70,14 @@ function loadDisease() {
     var diseaseServlet = "RetrieveDisease.do";
     $.get(diseaseServlet, {"omimNumber": localStorage.getItem("omimNumber")}, function(disease) {
         $("#result").text("");
+        //put the disease data in the results div
         $("#result").append(disease);
+        //set the bootstrap styling on the tooltip 
+        $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+        //load results again
+        $("#back2results").click(function(){
+            sendSymptoms();
+        });
     });
 }
 ;
@@ -89,7 +96,7 @@ function uiGetParents(loSelectedNode) {
 //check for new parent
             var loParent = loParent.parent().parent();
             //if parent has no children (and is last)
-            if (loParent.children()[1] != undefined) {
+            if (loParent.children()[1] !== undefined) {
 //push parent to parents
                 parents.push(loParent.children()[1].text);
             }

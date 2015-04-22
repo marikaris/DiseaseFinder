@@ -9,9 +9,13 @@ import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Disease collects all the information about one disease which is found.
+ * The toString method and summary method of this class print html, so the
+ * servlets can use this output.
  *
  * @author mkslofstra
  */
@@ -86,7 +90,8 @@ public class Disease {
     }
 
     /**
-     * toString method of the function.
+     * toString method of the function changed to
+     * a readable output which is html.
      *
      * @return the string of the function.
      */
@@ -96,12 +101,23 @@ public class Disease {
         Iterator it = features.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
-            sb.append("<br/><br/><b>" + pair.getKey() + "</b><br/>" + pair.getValue());
+            String info = pair.getValue().toString();
+            //this replaces the ugly links and unreadable information on the omim api
+            info = info.replaceAll("\\{[A-Za-z0-9:_,. -]+\\}", "");
+            sb.append("<br/><br/><b>").append(pair.getKey())
+                    .append("</b><br/>").append(info);            
             it.remove(); // avoids a ConcurrentModificationException
         }
-        return "<h2>"+title + "</h2><div id =\"disease\"><b>mimNumber :</b>"
-                + "<a href=\"http://omim.org/entry/" + mimNumber+"\"target=\"blank\">"+mimNumber+"</a>"
-                + ", <b>hits :</b> " + hits + sb.toString()+"</div>";
+        return "<h2>" + title + "</h2><div id =\"disease\">"
+                + "<p id=\"back2results\"><span class = \"glyphicon"
+                + " glyphicon-arrow-left\" aria-hidden=\"true\""
+                + "</span>  Back to results</p><br/>"
+                + "<b>Omim number : </b>"
+                + "<a href=\"http://omim.org/entry/" + mimNumber
+                + "\"target=\"blank\"data-toggle=\"tooltip\""
+                + " title=\"Click here to open the disease on"
+                + " the omim website\"id=\"omimSiteLink\">" + mimNumber + "</a>"
+                + ", <b>hits :</b> " + hits + sb.toString() + "</div>";
     }
 
     /**
@@ -113,8 +129,7 @@ public class Disease {
         this.score = givenScore;
     }
 
-    /**ALBINISM, OCULAR, TYPE I; OA1
-
+    /**
      * The getter of the omim number.
      *
      * @return mimNumber the omim number of the disease.
@@ -142,7 +157,7 @@ public class Disease {
     }
 
     /**
-     * printSummary prints the summary of the disease.
+     * printSummary prints the summary of the disease in html.
      *
      * @return summary, the summary of the disease which can be shown on the
      * website.
