@@ -102,10 +102,11 @@ public class Disease {
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             String info = pair.getValue().toString();
-            //this replaces the ugly links and unreadable information on the omim api
+            //this replaces the ugly links and unreadable information
+            //on the omim api
             info = info.replaceAll("\\{[A-Za-z0-9:_,. -]+\\}", "");
             sb.append("<br/><br/><b>").append(pair.getKey())
-                    .append("</b><br/>").append(info);            
+                    .append("</b><br/>").append(info);      
             it.remove(); // avoids a ConcurrentModificationException
         }
         return "<h2>" + title + "</h2><div id =\"disease\">"
