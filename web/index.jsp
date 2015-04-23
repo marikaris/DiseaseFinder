@@ -24,7 +24,7 @@
     </head>
     <body>
         <div id="container">
-            <div id="logo" class="jumbotron"><h1>Phenotype to disease converter</h1></div>
+            <div id="logo" class="jumbotron"><h1>Phenotype to Disease Converter</h1></div>
             <div id="wrapper" class ="col-md-10 col-xs-10 col-sm-10 col-lg-10">
                 <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id = "search">                
                     <h2>Select symptoms</h2>

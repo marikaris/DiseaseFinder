@@ -6,16 +6,19 @@
 package nl.bioinf.DiseaseFinder.disease;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Disease collects all the information about one disease which is found.
- * The toString method and summary method of this class print html, so the
- * servlets can use this output.
+ * Disease collects all the information about one disease which is found. The
+ * toString method and summary method of this class print html, so the servlets
+ * can use this output.
  *
  * @author mkslofstra
  */
@@ -29,7 +32,7 @@ public class Disease {
      * @param featuresHashMap are the properties of the disease.
      */
     public Disease(final String mimNumberValue,
-            final String titleOfDisease, final HashMap featuresHashMap) {
+            final String titleOfDisease, final TreeMap featuresHashMap) {
         //the mimNumber length should always be 6, otherwise, it is invalid.
         if (mimNumberValue.length() != 6) {
             throw new IllegalArgumentException("The omimNumber should be a"
@@ -52,7 +55,7 @@ public class Disease {
     /**
      * features are the characteristics of the disease.
      */
-    private HashMap features;
+    private TreeMap features;
     /**
      * counts the number of hits which this disease has.
      */
@@ -90,8 +93,8 @@ public class Disease {
     }
 
     /**
-     * toString method of the function changed to
-     * a readable output which is html.
+     * toString method of the function changed to a readable output which is
+     * html that will be nicelooking on the webpage.
      *
      * @return the string of the function.
      */
@@ -105,7 +108,24 @@ public class Disease {
             //this replaces the ugly links and unreadable information
             //on the omim api
             info = info.replaceAll("\\{[A-Za-z0-9:_,. -]+\\}", "");
-            sb.append("<br/><br/><b>").append(pair.getKey())
+           //name the key of the hashmap, this is the ontology of the symptom in camelcase
+            String wholeKey = (String) pair.getKey();
+            //make a stringbuilder
+            StringBuilder key = new StringBuilder();
+            //nicely format the symptom ontology
+            for (int i = 0; i < wholeKey.length(); i++) {
+                char letter = wholeKey.charAt(i);
+                //check for each character if the character is uppercase (then it is a new word)
+                if (Character.isUpperCase(letter)) {
+                    //append space if character is uppercase and make the character lowercase
+                    key.append(" ").append(Character.toString(letter)
+                            .toLowerCase());
+                } else {
+                    //just append the character
+                    key.append(letter);
+                }
+            }
+            sb.append("<br/><br/><b>").append(key.toString())
                     .append("</b><br/>").append(info);
             it.remove(); // avoids a ConcurrentModificationException
         }
@@ -153,7 +173,7 @@ public class Disease {
      *
      * @return the features of the disease.
      */
-    public final HashMap getFeatures() {
+    public final TreeMap getFeatures() {
         return features;
     }
 

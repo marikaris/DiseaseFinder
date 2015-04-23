@@ -7,7 +7,7 @@ package nl.bioinf.DiseaseFinder.dataFinder;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Iterator;
 import java.util.logging.Level;
 import nl.bioinf.DiseaseFinder.bodyFeatures.FeatureCollection;
@@ -37,7 +37,7 @@ public class DiseasePhenotypeGetter {
     /**
      * fenotypes are the fenotypes of the disease.
      */
-    private HashMap<String, String> fenotypes = new HashMap();
+    private TreeMap<String, String> fenotypes = new TreeMap();
     /**
      * Disease is the disease object of the found disease.
      */

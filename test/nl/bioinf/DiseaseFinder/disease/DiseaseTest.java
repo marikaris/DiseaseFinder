@@ -5,7 +5,7 @@
  */
 package nl.bioinf.DiseaseFinder.disease;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -44,7 +44,7 @@ public class DiseaseTest {
     @Test
     public void testGetHits() {
         System.out.println("getHits");
-        HashMap features = new HashMap();
+        TreeMap features = new TreeMap();
         features.put("Horns", "yes");
         features.put("Evil", "yes");
         Disease instance = new Disease("666666", "devils disease", features);
@@ -59,7 +59,7 @@ public class DiseaseTest {
     @Test
     public void testSetHits() {
         System.out.println("setHits");
-        HashMap features = new HashMap();
+        TreeMap features = new TreeMap();
         features.put("Horns", "yes");
         features.put("Evil", "yes");
         Disease instance = new Disease("666666", "devils disease", features);
@@ -73,7 +73,7 @@ public class DiseaseTest {
     @Test
     public void testGetScore() {
         System.out.println("getScore");
-        HashMap features = new HashMap();
+        TreeMap features = new TreeMap();
         features.put("Horns", "yes");
         features.put("Evil", "yes");
         Disease instance = new Disease("666666", "devils disease", features);
@@ -89,7 +89,7 @@ public class DiseaseTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        HashMap features = new HashMap();
+        TreeMap features = new TreeMap();
         features.put("Horns", "yes");
         features.put("Evil", "yes");
         Disease instance = new Disease("666666", "devils disease", features);
@@ -112,7 +112,7 @@ public class DiseaseTest {
     public void testSetScore() {
         System.out.println("setScore");
         Double givenScore = 3.2;
-        HashMap features = new HashMap();
+        TreeMap features = new TreeMap();
         features.put("Horns", "yes");
         features.put("Evil", "yes");
         Disease instance = new Disease("666666", "devils disease", features);
@@ -125,7 +125,7 @@ public class DiseaseTest {
     @Test
     public void testGetMimNumber() {
         System.out.println("getMimNumber");
-        HashMap features = new HashMap();
+        TreeMap features = new TreeMap();
         features.put("Horns", "yes");
         features.put("Evil", "yes");
         Disease instance = new Disease("666666", "devils disease", features);
@@ -140,7 +140,7 @@ public class DiseaseTest {
     @Test
     public void testGetTitle() {
         System.out.println("getTitle");
-        HashMap features = new HashMap();
+        TreeMap features = new TreeMap();
         features.put("Horns", "yes");
         features.put("Evil", "yes");
         Disease instance = new Disease("666666", "devils disease", features);
@@ -155,12 +155,12 @@ public class DiseaseTest {
     @Test
     public void testGetFeatures() {
         System.out.println("getFeatures");
-        HashMap features = new HashMap();
+        TreeMap features = new TreeMap();
         features.put("Horns", "yes");
         features.put("Evil", "yes");
         Disease instance = new Disease("666666", "devils disease", features);
-        HashMap expResult = features;
-        HashMap result = instance.getFeatures();
+        TreeMap expResult = features;
+        TreeMap result = instance.getFeatures();
         assertEquals(expResult, result);
     }
 
@@ -171,7 +171,7 @@ public class DiseaseTest {
     @Test (expected=IllegalArgumentException.class)
     public void testLengthMimNumber() {
         System.out.println("getFeatures");
-        HashMap features = new HashMap();
+        TreeMap features = new TreeMap();
         features.put("Horns", "yes");
         features.put("Evil", "yes");
         Disease instance = new Disease("666", "devils disease", features);

@@ -47,7 +47,7 @@ public class DiseaseCollector {
             Disease disease = this.getDiseaseContent(id.toString());
             addToDiseaseCollection(disease, id.toString());
 //            System.out.println(disease);
-        }        
+        }
     }
 
     /**

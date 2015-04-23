@@ -7,6 +7,7 @@ package nl.bioinf.DiseaseFinder.disease;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.TreeMap;
 import org.json.JSONException;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -47,7 +48,7 @@ public class DiseaseCollectorTest {
     public void testGetDiseaseCollection() throws JSONException, IOException {
         System.out.println("getDiseaseCollection");
         String mimNumber = "666666";
-        HashMap features = new HashMap();
+        TreeMap features = new TreeMap();
         features.put("Horns", "yes");
         features.put("Evil", "yes");
         Disease devilsDisease = new Disease("666666", "devils disease",
@@ -68,7 +69,7 @@ public class DiseaseCollectorTest {
     public void testAddToDiseaseCollection() throws JSONException, IOException {
         System.out.println("addToDiseaseCollection");
         String mimNumber = "666666";
-        HashMap features = new HashMap();
+        TreeMap features = new TreeMap();
         features.put("Horns", "yes");
         features.put("Evil", "yes");
         Disease devilsDisease = new Disease("666666", "devils disease",
@@ -85,7 +86,7 @@ public class DiseaseCollectorTest {
     public void testAddNull() throws JSONException, IOException {
         System.out.println("addToDiseaseCollection");
         String mimNumber = null;
-        HashMap features = new HashMap();
+        TreeMap features = new TreeMap();
         features.put("Horns", "yes");
         features.put("Evil", "yes");
         Disease devilsDisease = new Disease("666666", "devils disease",
