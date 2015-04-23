@@ -8,6 +8,8 @@ package nl.bioinf.DiseaseFinder.view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import nl.bioinf.DiseaseFinder.HPOProcessor.HPOFileReader;
 import nl.bioinf.DiseaseFinder.HPOProcessor.HPOJsonObjectCreator;
+import org.json.JSONException;
 
 /**
  *
@@ -31,17 +34,18 @@ public class JsTreePasserServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws org.json.JSONException
      */
     protected void processRequest(final HttpServletRequest request,
             final HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, JSONException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
         HPOFileReader hr =
                 new HPOFileReader("/homes/aroeters/Desktop/Thema11/hp.obo");
 
-        out.print(hj.makeJSONObject(hr.readFile().getHPOList()));
+        out.print(hj.createJSONTree(hr.readFile().getHPOList()));
         out.close();
     }
 
@@ -57,7 +61,11 @@ public class JsTreePasserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (JSONException ex) {
+            Logger.getLogger(JsTreePasserServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -71,7 +79,11 @@ public class JsTreePasserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (JSONException ex) {
+            Logger.getLogger(JsTreePasserServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

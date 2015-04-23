@@ -7,6 +7,8 @@
 package nl.bioinf.DiseaseFinder.HPOProcessor;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -45,6 +47,37 @@ public class HPOTerm {
      * synonym list contains the synonyms of the HPO term.
      */
     private final List<String> synonyms = new ArrayList<String>();
+
+    private HashMap<String, HPOTerm> children;
+
+    public boolean hasChildren() {
+        return children != null && !children.isEmpty();
+    }
+
+    public void addChild(HPOTerm hpoTerm) {
+        if (children == null) {
+            children = new HashMap<String, HPOTerm>();
+        }
+        if (children.containsKey(hpoTerm.getId())) {
+            throw new IllegalArgumentException("child already exists on this node: " + hpoTerm);
+        }
+        children.put(hpoTerm.getId(), hpoTerm);
+    }
+
+    public HPOTerm getChild(String id) {
+        return null;
+    }
+
+    public List<HPOTerm> getChildren() {
+        List<HPOTerm> terms = new ArrayList<HPOTerm>();
+        if(this.children == null) {
+            terms.addAll(Collections.EMPTY_LIST);
+        } else {
+            terms.addAll(this.children.values());
+        }
+        return terms;
+    }
+
 
     /**
      * The getter of the id.
