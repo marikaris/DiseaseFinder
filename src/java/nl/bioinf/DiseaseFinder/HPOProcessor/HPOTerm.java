@@ -47,38 +47,52 @@ public class HPOTerm {
      * synonym list contains the synonyms of the HPO term.
      */
     private final List<String> synonyms = new ArrayList<String>();
-
+    /**
+     * Contains all the children of the HPOTerm.
+     */
     private HashMap<String, HPOTerm> children;
-
-    public boolean hasChildren() {
+    /**
+     * Checks if the HPOTerm has children.
+     * @return True if the HPOTerm has children
+     */
+    public final boolean hasChildren() {
         return children != null && !children.isEmpty();
     }
-
-    public void addChild(HPOTerm hpoTerm) {
+    /**
+     * Adds children to the HPOTerm.
+     * @param hpoTerm the term that has to be added.
+     */
+    public final void addChild(final HPOTerm hpoTerm) {
         if (children == null) {
             children = new HashMap<String, HPOTerm>();
         }
         if (children.containsKey(hpoTerm.getId())) {
-            throw new IllegalArgumentException("child already exists on this node: " + hpoTerm);
+            throw new IllegalArgumentException("child already "
+                    + "exists on this node: " + hpoTerm);
         }
         children.put(hpoTerm.getId(), hpoTerm);
     }
-
-    public HPOTerm getChild(String id) {
-        return null;
+    /**
+     * Gets a single child out of the HPOTerm.
+     * @param childId the id of the child
+     * @return the child with the given id
+     */
+    public final HPOTerm getChild(final String childId) {
+        return children.get(childId);
     }
-
-    public List<HPOTerm> getChildren() {
+    /**
+     * Returns all the children of the HPOTerm.
+     * @return all the children in a List
+     */
+    public final List<HPOTerm> getChildren() {
         List<HPOTerm> terms = new ArrayList<HPOTerm>();
-        if(this.children == null) {
+        if (this.children == null) {
             terms.addAll(Collections.EMPTY_LIST);
         } else {
             terms.addAll(this.children.values());
         }
         return terms;
     }
-
-
     /**
      * The getter of the id.
      * @return id of the HPO term

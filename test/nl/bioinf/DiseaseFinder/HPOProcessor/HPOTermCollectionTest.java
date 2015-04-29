@@ -18,8 +18,8 @@ import static org.junit.Assert.*;
  *
  * @author Arne
  */
-public class HPOTermCollectorTest {
-    public HPOTermCollectorTest() {
+public class HPOTermCollectionTest {
+    public HPOTermCollectionTest() {
     }
 
     @BeforeClass
@@ -35,36 +35,36 @@ public class HPOTermCollectorTest {
     public void tearDown() {
     }
     /**
-     * Test of addToHPOList method, of class HPOTermCollector.
+     * Test of addToHPOList method, of class HPOTermCollection.
      */
     @Test
     public final void testAddToHPOList() {
         System.out.println("addToHPOList");
         HPOTerm hpoTerm = new HPOTerm();
-        HPOTermCollector instance = new HPOTermCollector();
+        HPOTermCollection instance = new HPOTermCollection();
         instance.addToHPOList(hpoTerm);
     }
     /**
-     * Test of addToHPOList method, of class HPOTermCollector.
+     * Test of addToHPOList method, of class HPOTermCollection.
      * With hpoTerm null
      */
     @Test(expected = NullPointerException.class)
     public final void testAddToHPOListNull() {
         System.out.println("addToHPOList");
         HPOTerm hpoTerm = null;
-        HPOTermCollector instance = new HPOTermCollector();
+        HPOTermCollection instance = new HPOTermCollection();
         instance.addToHPOList(hpoTerm);
     }
 
     /**
-     * Test of getHPOList method, of class HPOTermCollector.
+     * Test of getHPOHashMap method, of class HPOTermCollection.
      */
     @Test
-    public final void testGetHPOList() {
+    public final void testGetHPOHashMap() {
         System.out.println("getHPOList");
-        HPOTermCollector instance = new HPOTermCollector();
+        HPOTermCollection instance = new HPOTermCollection();
         List expResult = new ArrayList();
-        List result = instance.getHPOList();
+        List result = instance.getHPOHashMap();
         assertEquals(expResult.getClass(), result.getClass());
     }
 }

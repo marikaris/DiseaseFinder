@@ -6,32 +6,34 @@
 
 package nl.bioinf.DiseaseFinder.HPOProcessor;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author aroeters
  */
-public class HPOTermCollector {
+public class HPOTermCollection {
         /**
          * Contains the HPOTerm objects.
          */
-    private final ArrayList<HPOTerm> hpoList = new ArrayList<HPOTerm>();
+    private final HashMap<String, HPOTerm> hpoList =
+            new HashMap<String, HPOTerm>();
     /**
-     * Adds a hpo term to the hpoList.
+     * Puts a hpo term into the hpoHashMap.
+     * @param id the id of the hpoTerm
      * @param hpoTerm Object of a HPOTerm
      */
-    public final void addToHPOList(final HPOTerm hpoTerm) {
+    public final void addToHPOList(final String id, final HPOTerm hpoTerm) {
         if (hpoTerm == null) {
             throw new NullPointerException("hpoTerm is empty");
         }
-        hpoList.add(hpoTerm);
+        hpoList.put(id, hpoTerm);
     }
     /**
      * The getter of the hpoList.
      * @return list containing the HPOTerm objects
      */
-    public final ArrayList getHPOList() {
+    public final HashMap getHPOHashMap() {
         return hpoList;
     }
 }

@@ -25,8 +25,9 @@ public class HPOJsonObjectCreator {
 
     public HPOJsonObjectCreator() throws IOException {
         HPOFileReader hr = new HPOFileReader(
-                "/homes/aroeters/Desktop/Thema11/hp.obo");
-        makeTree(hr.readFile().getHPOList());
+                "C:/Users/Arne/Desktop/hp.obo");
+//                "/homes/aroeters/Desktop/Thema11/hp.obo");
+//        makeTree(hr.readFile().getHPOHashMap());
     }
 
     /**
@@ -37,11 +38,10 @@ public class HPOJsonObjectCreator {
      * @throws org.json.JSONException
      */
     public static void main(final String[] args) throws IOException, JSONException {
-        HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
+//        HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
         HPOFileReader hr = new HPOFileReader(
-                "/homes/aroeters/Desktop/Thema11/hp.obo");
-        hj.createJSONTree(hr.readFile().getHPOList());
-
+                "C:/Users/Arne/Desktop/hp.obo");
+//        hj.createJSONTree(hr.readFile().getHPOHashMap());
     }
 
     /**
@@ -128,12 +128,10 @@ public class HPOJsonObjectCreator {
 
         JSONObject childTree = new JSONObject();
         jsonTree = this._createJSONSubTree(this.hpoCollection.get("HP:0000001"), childTree);
-        System.out.println(jsonTree);
         return jsonTree;
     }
 
     public final JSONObject _createJSONSubTree(final HPOTerm hpoTerm, JSONObject tree) throws JSONException {
-//        HashMap root = (HashMap) hash.get(id);
         System.out.println("recursing from " + hpoTerm);
         JSONObject state = new JSONObject();
         if (hpoTerm.getId().equals("HP:0000001")) {
@@ -143,7 +141,6 @@ public class HPOJsonObjectCreator {
             state.put("opened", false);
             state.put("selected", false);
         }
-
         if (hpoTerm.hasChildren()) {
             JSONArray childArray = new JSONArray();
             for (HPOTerm child : hpoTerm.getChildren()) {
@@ -154,33 +151,7 @@ public class HPOJsonObjectCreator {
         } else {
             System.out.println("no children on " + hpoTerm);
         }
-//        ArrayList children = (ArrayList) root.get("children");
-//        HashMap child = (HashMap) hash.get(id);
-//        JSONObject childTree = new JSONObject();
-//        JSONObject state = new JSONObject();
-//
-//        childTree.put("id", id);
-//        childTree.put("text", child.get("name"));
-//        if (id.equals("HP:0000001")) {
-//            state.put("opened", true);
-//            state.put("selected", false);
-//        } else {
-//            state.put("opened", false);
-//            state.put("selected", false);
-//        }
-//        if (!children.isEmpty()) {
-////            System.out.println(children);
-//            JSONArray childArray = new JSONArray();
-//            for (Object newChild : children) {
-//                childArray.put(this._createJSONSubTree(newChild.toString()));
-//            }
-//            childTree.put("children", childArray);
-//        } else {
-//            System.out.println(id + children);
-//        }
-//        return childTree;
-    }
-
+    return state; }
 }
 //"[{\"id\":1,\"text\":\"Root node\",\"children\":[{\"id\":2,\"text\":\"Child node 1\","
 //+ "\"children\":[\"child3\",\"child4\"]}, {\"id\":3,\"text\":\"Child node 2\"}]}]"
