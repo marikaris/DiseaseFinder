@@ -45,7 +45,7 @@ public class JsTreePasserServlet extends HttpServlet {
         HPOFileReader hr =
                 new HPOFileReader("/homes/aroeters/Desktop/Thema11/hp.obo");
 
-        out.print(hj.createJSONTree(hr.readFile().getHPOHashMap()));
+        out.print(hj.createJSONTree());
         out.close();
     }
 

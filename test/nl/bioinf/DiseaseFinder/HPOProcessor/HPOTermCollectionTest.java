@@ -35,17 +35,17 @@ public class HPOTermCollectionTest {
     public void tearDown() {
     }
     /**
-     * Test of addToHPOList method, of class HPOTermCollection.
+     * Test of addToHPOHashMap method, of class HPOTermCollection.
      */
     @Test
-    public final void testAddToHPOList() {
+    public final void testAddToHPOHashMap() {
         System.out.println("addToHPOList");
         HPOTerm hpoTerm = new HPOTerm();
         HPOTermCollection instance = new HPOTermCollection();
         instance.addToHPOList(hpoTerm);
     }
     /**
-     * Test of addToHPOList method, of class HPOTermCollection.
+     * Test of addToHPOHashMap method, of class HPOTermCollection.
      * With hpoTerm null
      */
     @Test(expected = NullPointerException.class)

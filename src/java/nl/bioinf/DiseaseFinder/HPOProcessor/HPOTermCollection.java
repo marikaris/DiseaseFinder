@@ -23,7 +23,7 @@ public class HPOTermCollection {
      * @param id the id of the hpoTerm
      * @param hpoTerm Object of a HPOTerm
      */
-    public final void addToHPOList(final String id, final HPOTerm hpoTerm) {
+    public final void addToHPOHashMap(final String id, final HPOTerm hpoTerm) {
         if (hpoTerm == null) {
             throw new NullPointerException("hpoTerm is empty");
         }

@@ -32,8 +32,6 @@ public class HPOFileReader {
         file = inFile;
         if (inFile == null) {
             throw new NullPointerException();
-        } else {
-            this.readFile();
         }
     }
 
@@ -63,11 +61,14 @@ public class HPOFileReader {
                 hp.addSynonym(line.substring(9));
             } else if (line.contains("Term")) {
                 if (hp.getId() != null) {
-                    hc.addToHPOList(hp.getId(), hp);
+                    hc.addToHPOHashMap(hp.getId(), hp);
                     hp = new HPOTerm();
                 }
             }
         }
+        // To add the last HPOTerm
+        hc.addToHPOHashMap(hp.getId(), hp);
+
         HashMap allTerms = hc.getHPOHashMap();
         for (Object key : allTerms.keySet()) {
             HPOTerm child = (HPOTerm) allTerms.get(key);
