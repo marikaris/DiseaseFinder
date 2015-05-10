@@ -16,7 +16,7 @@ public class HPOTermCollection {
         /**
          * Contains the HPOTerm objects.
          */
-    private final HashMap<String, HPOTerm> hpoList =
+    private final HashMap<String, HPOTerm> hpoHashMap =
             new HashMap<String, HPOTerm>();
     /**
      * Puts a hpo term into the hpoHashMap.
@@ -27,13 +27,13 @@ public class HPOTermCollection {
         if (hpoTerm == null) {
             throw new NullPointerException("hpoTerm is empty");
         }
-        hpoList.put(id, hpoTerm);
+        hpoHashMap.put(id, hpoTerm);
     }
     /**
      * The getter of the hpoList.
      * @return list containing the HPOTerm objects
      */
     public final HashMap getHPOHashMap() {
-        return hpoList;
+        return hpoHashMap;
     }
 }

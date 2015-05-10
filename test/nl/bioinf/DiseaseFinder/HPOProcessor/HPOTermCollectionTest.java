@@ -6,6 +6,7 @@
 package nl.bioinf.DiseaseFinder.HPOProcessor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -41,8 +42,12 @@ public class HPOTermCollectionTest {
     public final void testAddToHPOHashMap() {
         System.out.println("addToHPOList");
         HPOTerm hpoTerm = new HPOTerm();
+        hpoTerm.setId("hpoTerm");
         HPOTermCollection instance = new HPOTermCollection();
-        instance.addToHPOList(hpoTerm);
+        instance.addToHPOHashMap(hpoTerm.getId(), hpoTerm);
+        HashMap<String, HPOTerm> hpoHash = new HashMap();
+        hpoHash.put("hpoTerm", hpoTerm);
+        assertEquals(instance.getHPOHashMap(), hpoHash);
     }
     /**
      * Test of addToHPOHashMap method, of class HPOTermCollection.
@@ -53,7 +58,7 @@ public class HPOTermCollectionTest {
         System.out.println("addToHPOList");
         HPOTerm hpoTerm = null;
         HPOTermCollection instance = new HPOTermCollection();
-        instance.addToHPOList(hpoTerm);
+        instance.addToHPOHashMap("hpoTerm", hpoTerm);
     }
 
     /**
@@ -63,8 +68,8 @@ public class HPOTermCollectionTest {
     public final void testGetHPOHashMap() {
         System.out.println("getHPOList");
         HPOTermCollection instance = new HPOTermCollection();
-        List expResult = new ArrayList();
-        List result = instance.getHPOHashMap();
+        HashMap<String, HPOTerm> expResult = new HashMap();
+        HashMap<String, HPOTerm> result = instance.getHPOHashMap();
         assertEquals(expResult.getClass(), result.getClass());
     }
 }

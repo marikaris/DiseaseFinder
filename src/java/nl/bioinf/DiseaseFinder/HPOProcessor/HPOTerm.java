@@ -17,13 +17,6 @@ import java.util.List;
  */
 public class HPOTerm {
     /**
-     * Initializes the HPOTerm with the given id.
-     * @param idGiven Should be the id of the Term
-     */
-    public HPOTerm() {
-    }
-
-    /**
      * Contains the id op the HPO term.
      */
     private String id;
@@ -36,17 +29,13 @@ public class HPOTerm {
      */
     private String def;
     /**
-     * Contains the comment of the HPO term.
-     */
-    private String comment;
-    /**
      * isA list contains the is_a relations ships between the HPO terms.
      */
     private final List<String> isARelations = new ArrayList<String>();
-    /**
-     * synonym list contains the synonyms of the HPO term.
-     */
-    private final List<String> synonyms = new ArrayList<String>();
+//    /**
+//     * synonym list contains the synonyms of the HPO term.
+//     */
+//    private final List<String> synonyms = new ArrayList<String>();
     /**
      * Contains all the children of the HPOTerm.
      */
@@ -105,6 +94,9 @@ public class HPOTerm {
      * @param newId the id of the HPOTerm
      */
     public final void setId(final String newId) {
+        if (newId == null) {
+            throw new NullPointerException("No id is given.");
+        }
         this.id = newId;
     }
     /**
@@ -119,6 +111,9 @@ public class HPOTerm {
      * @param setName String containing the name of the HPO term
      */
     public final void setName(final String setName) {
+        if (setName ==  null) {
+            throw new NullPointerException("No name is given.");
+        }
         this.name = setName;
     }
     /**
@@ -133,22 +128,25 @@ public class HPOTerm {
      * @param setDef String containing the def
      */
     public final void setDef(final String setDef) {
+        if (setDef == null) {
+            throw new NullPointerException("No definition is given.");
+        }
         this.def = setDef;
     }
-    /**
-     * The getter of the comment.
-     * @return String containing the comment
-     */
-    public final String getComment() {
-        return comment;
-    }
-    /**
-     * The setter of the comment.
-     * @param setComment String containing the comment
-     */
-    public final void setComment(final String setComment) {
-        this.comment = setComment;
-    }
+//    /**
+//     * The getter of the comment.
+//     * @return String containing the comment
+//     */
+//    public final String getComment() {
+//        return comment;
+//    }
+//    /**
+//     * The setter of the comment.
+//     * @param setComment String containing the comment
+//     */
+//    public final void setComment(final String setComment) {
+//        this.comment = setComment;
+//    }
     /**
      * returns all the isA relations in a list containing Strings.
      * @return isA relations in a list
@@ -161,20 +159,23 @@ public class HPOTerm {
      * @param addIsARelation should be a String with the isA relation
      */
     public final void addIsA(final String addIsARelation) {
+        if (addIsARelation == null) {
+            throw new NullPointerException("No relation given");
+        }
         isARelations.add(addIsARelation);
     }
-    /**
-     * returns all the synonyms in a list containing Strings.
-     * @return synonyms in a list
-     */
-    public final List getSynonyms() {
-        return synonyms;
-    }
-    /**
-     * Should get a String with a synonym in it.
-     * @param addSynonym should be a String with a synonym in it
-     */
-    public final void addSynonym(final String addSynonym) {
-        synonyms.add(addSynonym);
-    }
+//    /**
+//     * returns all the synonyms in a list containing Strings.
+//     * @return synonyms in a list
+//     */
+//    public final List getSynonyms() {
+//        return synonyms;
+//    }
+//    /**
+//     * Should get a String with a synonym in it.
+//     * @param addSynonym should be a String with a synonym in it
+//     */
+//    public final void addSynonym(final String addSynonym) {
+//        synonyms.add(addSynonym);
+//    }
 }

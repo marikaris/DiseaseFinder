@@ -53,12 +53,12 @@ public class HPOFileReader {
                 hp.setName(line.substring(6));
             } else if (line.startsWith("def:")) {
                 hp.setDef(line.substring(5));
-            } else if (line.startsWith("comment:")) {
-                hp.setComment(line.substring(9));
+//            } else if (line.startsWith("comment:")) {
+//                hp.setComment(line.substring(9));
             } else if (line.startsWith("is_a:")) {
                 hp.addIsA(line.substring(6, 16));
-            } else if (line.startsWith("synonym:")) {
-                hp.addSynonym(line.substring(9));
+//            } else if (line.startsWith("synonym:")) {
+//                hp.addSynonym(line.substring(9));
             } else if (line.contains("Term")) {
                 if (hp.getId() != null) {
                     hc.addToHPOHashMap(hp.getId(), hp);
