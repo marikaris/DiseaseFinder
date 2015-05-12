@@ -18,7 +18,7 @@ import org.json.JSONObject;
 import java.util.logging.Logger;
 
 /**
- * DiseaseFenotypeGetter gets the fenotype of a disease.
+ * DiseasePhenotypeGetter gets the pgenotype of a disease.
  *
  * @author mkslofstra
  */
@@ -35,9 +35,9 @@ public class DiseasePhenotypeGetter {
      */
     private ArrayList<String> featuresToFind = new ArrayList();
     /**
-     * fenotypes are the fenotypes of the disease.
+     * phenotypes are the phenotypes of the disease.
      */
-    private TreeMap<String, String> fenotypes = new TreeMap();
+    private TreeMap<String, String> phenotypes = new TreeMap();
     /**
      * Disease is the disease object of the found disease.
      */
@@ -67,7 +67,7 @@ public class DiseasePhenotypeGetter {
         try {
             this.getOmimData(omimNumber);
             this.getFeatures();
-            this.collectFenotypes(featuresToFind);
+            this.collectPhenotypes(featuresToFind);
             String title = this.getTitleOfDisease();
             this.saveDisease(omimNumber, title);
         } catch (org.json.JSONException ex) {
@@ -92,8 +92,8 @@ public class DiseasePhenotypeGetter {
      */
     public static void main(final String[] args) throws IOException,
             JSONException {
-//        DiseaseFenotypeGetter fenotype = new DiseaseFenotypeGetter("606232");
-        DiseasePhenotypeGetter fenotype = new DiseasePhenotypeGetter("275000");
+//        DiseasePhenotypeGetter phenotype = new DiseasePhenotypeGetter("606232");
+        DiseasePhenotypeGetter phenotype = new DiseasePhenotypeGetter("275000");
     }
 
     /**
@@ -134,41 +134,41 @@ public class DiseasePhenotypeGetter {
     }
 
     /**
-     * getFenotypeOfFeature gets the fenotype from a given feature of the
+     * getPhenotypeOfFeature gets the phenotype from a given feature of the
      * website in the json structure.
      *
      * @param feature the feature wherefrom the fenotype is needed.
      * @throws JSONException when the website has not a vali json structure.
-     * @return fenotpe the fenotype of the feature.
+     * @return fenotpe the phenotype of the feature.
      * @author mkslofstra
      */
-    private String getFenotypeOfFeature(final String feature)
+    private String getPhenotypeOfFeature(final String feature)
             throws JSONException {
         //getString gets the string which belongs to the given
         //string in the json structure.
-        String fenotype = features.getString(feature);
-        return fenotype;
+        String phenotype = features.getString(feature);
+        return phenotype;
     }
 
     /**
-     * collectFenotypes collects all the fenotypes of a disease.
+     * collectPhenotypes collects all the phenotypes of a disease.
      *
      * @param allFeatures an arraylist which contains all the features which can
      * be true.
      * @throws JSONException when the website has not a valid json structure.
-     * @return fenotypes all the fenotypes of the disease.
+     * @return phenotypes all the phenotypes of the disease.
      * @author mkslofstra
      */
-    private final void collectFenotypes(
+    private final void collectPhenotypes(
             final ArrayList<String> allFeatures) throws JSONException {
         for (String feature : allFeatures) {
             //check for each feature if the value of it is true or false.
             //get the value of the feature from the json structure
             //if the feature does exist.
-            String fenotype = getFenotypeOfFeature(feature);
-            //add the fenotype to the global variable fenotypes
+            String phenotype = getPhenotypeOfFeature(feature);
+            //add the phenotype to the global variable phenotypes
             //which contains the full fenotype of a disease.
-            fenotypes.put(feature, fenotype);
+            phenotypes.put(feature, phenotype);
         }
     }
 
@@ -196,7 +196,7 @@ public class DiseasePhenotypeGetter {
                     while (keys.hasNext()) {
                         String key = keys.next();
                         String val = jsonSite.getString(key);
-                        fenotypes.put(key, val);
+                        phenotypes.put(key, val);
 
                     }
                 } else {
@@ -229,7 +229,7 @@ public class DiseasePhenotypeGetter {
     }
 
     /**
-     * This funcion saves the information about the disesase in a disease
+     * This function saves the information about the disease in a disease
      * object.
      *
      * @param mimNumber is the id of the disease
@@ -238,6 +238,6 @@ public class DiseasePhenotypeGetter {
      */
     private void saveDisease(final String mimNumber,
             final String title) {
-        disease = new Disease(mimNumber, title, fenotypes);
+        disease = new Disease(mimNumber, title, phenotypes);
     }
 }

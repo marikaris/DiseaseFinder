@@ -66,7 +66,7 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
 }
 /*the div in which is the searchbar*/
 #search-bar{
-    float: right;
+    float: right;    
 }
 /*the div with the tree and search bar*/
 #search{

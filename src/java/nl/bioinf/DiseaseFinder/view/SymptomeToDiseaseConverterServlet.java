@@ -53,7 +53,7 @@ public class SymptomeToDiseaseConverterServlet extends HttpServlet {
                 Map.Entry pair = (Map.Entry) it.next();
                 Disease disease = (Disease) pair.getValue();
                 out.println(disease.printSummary());
-                System.out.println(disease.printSummary());
+//                System.out.println(disease.printSummary());
                 it.remove(); // avoids a ConcurrentModificationException
             }
         } finally {

@@ -7,15 +7,16 @@ package nl.bioinf.DiseaseFinder.connection;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  * This class tests the omimdataretriever object.
@@ -209,7 +210,7 @@ public class OmimDataRetrieverTest {
         expResult.add("243310");
         expResult.add("613627");
         expResult.add("221320");
-        ArrayList result = instance.getOmimNumbers(features);
+        HashMap result = instance.getOmimNumbers(features);
         assertEquals(expResult, result);
     }
 
@@ -229,7 +230,7 @@ public class OmimDataRetrieverTest {
                 "3F48B5AE34656CC9211E0A476E28AF0C370E3F94");
         String[] features = new String[]{"dizziness", "blurry vision",
             "ptosis"};
-        ArrayList result = instance.getOmimNumbers(features);
+        HashMap result = instance.getOmimNumbers(features);
     }
 
     /**
@@ -245,7 +246,7 @@ public class OmimDataRetrieverTest {
                 "3F48B5AE34656CC9211E0A476E28AF0C370E3F94");
         String[] features = new String[]{"dizziness", "blurry vision",
             "ptosis"};
-        ArrayList result = instance.getOmimNumbers(features);
+        HashMap result = instance.getOmimNumbers(features);
     }
 
 }
