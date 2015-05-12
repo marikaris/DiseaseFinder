@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.json.JSONArray;
@@ -114,7 +115,7 @@ public class OmimDataRetriever {
      * @throws JSONException when the sitecontent is not valid JSON.
      * @return diseases the omimnumbers of the found diseases.
      */
-    public final ArrayList getOmimNumbers(final String[] features)
+    public final HashMap getOmimNumbers(final String[] features)
             throws IOException, JSONException {
         String urlToSearch = this.buildFeatureURL(features, omimURL, omimKey);
         String siteContentString = this.getSiteContent(urlToSearch);
@@ -122,7 +123,7 @@ public class OmimDataRetriever {
                 siteContentString), "omim");
         content = getSuitableContent(makeJSONObject(content), "searchResponse");
         content = getSuitableContent(makeJSONObject(content), "entryList");
-        ArrayList diseases = getDiseases(content);
+        HashMap<String, String> diseases = getDiseases(content);
         return diseases;
     }
 
@@ -190,14 +191,20 @@ public class OmimDataRetriever {
      * the omim website.
      * @return diseases is an arraylist of strings which are the omimnumbers.
      */
-    private ArrayList<String> getDiseases(final String entries) {
+    private HashMap<String, String> getDiseases(final String entries) {
         ArrayList<String> diseases = new ArrayList();
+        HashMap<String, String> diseaseMatches = new HashMap();
         Pattern numbers = Pattern.compile("\\d{6}");
         Matcher match = numbers.matcher(entries);
-        while (match.find()) {
+        Pattern symptomMatches = Pattern.compile("(\"matches\":\")([^}]+\")");
+        Matcher symptomMatcher = symptomMatches.matcher(entries);
+        while (match.find() && symptomMatcher.find()) {
             diseases.add(match.group());
+            String matches = symptomMatcher.group(2).replace("\\", "");
+            matches = matches.replace("\"", "");
+            diseaseMatches.put(match.group(), matches); 
         }
-        return diseases;
+        return diseaseMatches;
     }
 
     /**

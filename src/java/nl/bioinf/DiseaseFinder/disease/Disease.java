@@ -5,15 +5,10 @@
  */
 package nl.bioinf.DiseaseFinder.disease;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Disease collects all the information about one disease which is found. The
@@ -43,7 +38,10 @@ public class Disease {
         this.features = featuresHashMap;
         this.hits++;
     }
-
+    /**
+     * matches is the list of matches found with the symptoms.
+     */
+    private List<String> matches;
     /**
      * mimNumber is the OMIM number of the disease.
      */
@@ -108,16 +106,19 @@ public class Disease {
             //this replaces the ugly links and unreadable information
             //on the omim api
             info = info.replaceAll("\\{[A-Za-z0-9:_,. -]+\\}", "");
-           //name the key of the hashmap, this is the ontology of the symptom in camelcase
+            //name the key of the hashmap, this is the ontology of the
+            //symptom in camelcase
             String wholeKey = (String) pair.getKey();
             //make a stringbuilder
             StringBuilder key = new StringBuilder();
             //nicely format the symptom ontology
             for (int i = 0; i < wholeKey.length(); i++) {
                 char letter = wholeKey.charAt(i);
-                //check for each character if the character is uppercase (then it is a new word)
+                //check for each character if the character is uppercase
+                //(then it is a new word)
                 if (Character.isUpperCase(letter)) {
-                    //append space if character is uppercase and make the character lowercase
+                    //append space if character is uppercase and make
+                    //the character lowercase
                     key.append(" ").append(Character.toString(letter)
                             .toLowerCase());
                 } else {
@@ -196,10 +197,35 @@ public class Disease {
                 .append(mimNumber).append("</td></tr>");
         diseaseSummary.append("<tr><td class=\"label\">Score: "
                 + "</td><td class=\"value\">").append(score)
+                .append("</td></tr>").append("<tr><td class=\"label\">Matches: "
+                + "</td><td class=\"value\">").append(matches)
                 .append("</td></tr>");
         diseaseSummary.append("</table>");
         diseaseSummary.append("</li><br/>");
         String summary = diseaseSummary.toString();
         return summary;
+    }
+
+    /**
+     * The getter of the list matches.
+     *
+     * @return the list of matches.
+     */
+    public final List getMatches() {
+        try {
+            return this.matches;
+        } catch (Exception e) {
+            throw new NullPointerException("matches is not filled");
+        }
+    }
+
+    /**
+     * This method adds a given string to the matches stringlist.
+     *
+     * @param match the list of matches.
+     */
+    public final void setMatches(final List match) {
+        System.out.println("***");
+        this.matches = match;
     }
 }
