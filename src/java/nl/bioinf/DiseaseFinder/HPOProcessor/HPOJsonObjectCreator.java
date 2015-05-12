@@ -8,7 +8,6 @@ package nl.bioinf.DiseaseFinder.HPOProcessor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,9 +17,14 @@ import org.json.JSONObject;
  * @author aroeters
  */
 public class HPOJsonObjectCreator {
-
-    private HashMap<String, HPOTerm> hpoCollection;
-
+    /**
+     * Contains the hpoTerms.
+     */
+    private final HashMap<String, HPOTerm> hpoCollection;
+    /**
+     * The constructor of the class.
+     * @throws IOException when the file is not found
+     */
     public HPOJsonObjectCreator() throws IOException {
         HPOFileReader hr = new HPOFileReader(
                 "/homes/aroeters/Desktop/Thema11/hp.obo");
@@ -46,19 +50,20 @@ public class HPOJsonObjectCreator {
             throws JSONException {
         HashMap jsonTree = new HashMap();
         HashMap childTree = new HashMap();
-        jsonTree = this.createJSONSubTree(this.hpoCollection.get("HP:0000001"));
+//        jsonTree = this.createJSONSubTree(this.hpoCollection.get("HP:0000001"));
         ArrayList<HashMap> rootArray = new ArrayList();
         rootArray.add(jsonTree);
         JSONObject finishedTree = new JSONObject(jsonTree);
         JSONArray arr = new JSONArray();
         arr.put(finishedTree);
-        System.out.println(arr);
         return arr;
     }
 
-    public final HashMap createJSONSubTree(final HPOTerm hpoTerm) throws JSONException {
+    public final HashMap createJSONSubTree(final HPOTerm hpoTerm, final String parent)
+            throws JSONException {
         HashMap tree = new HashMap();
         HashMap<String, String> state = new HashMap<String, String>();
+
         if (hpoTerm.getId().equals("HP:0000001")) {
             state.put("opened", "true");
             state.put("selected", "false");
@@ -66,17 +71,22 @@ public class HPOJsonObjectCreator {
             state.put("opened", "false");
             state.put("selected", "false");
         }
-        List<HashMap> childList = new ArrayList<HashMap>();
-        if (hpoTerm.hasChildren()) {
-            for (HPOTerm child : hpoTerm.getChildren()) {
-                childList.add(this.createJSONSubTree(child));
-            }
-        }
+//        List<HashMap> childList = new ArrayList<HashMap>();
+//        if (hpoTerm.hasChildren()) {
+//            for (HPOTerm child : hpoTerm.getChildren()) {
+//                childList.add(this.createJSONSubTree(child));
+//            }
+//        }
         tree.put("id", hpoTerm.getId());
         tree.put("text", hpoTerm.getName());
+        tree.put("parent", parent);
+        tree.put("icon", "glyphicon glyphicon-user");
         tree.put("state", state);
-        tree.put("children", childList);
-
+        if (hpoTerm.hasChildren()) {
+            tree.put("children", "true");
+        } else {
+            tree.put("children", "false");
+        }
         return tree;
     }
 }

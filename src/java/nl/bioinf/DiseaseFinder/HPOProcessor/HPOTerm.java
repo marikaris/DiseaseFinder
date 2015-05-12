@@ -32,10 +32,6 @@ public class HPOTerm {
      * isA list contains the is_a relations ships between the HPO terms.
      */
     private final List<String> isARelations = new ArrayList<String>();
-//    /**
-//     * synonym list contains the synonyms of the HPO term.
-//     */
-//    private final List<String> synonyms = new ArrayList<String>();
     /**
      * Contains all the children of the HPOTerm.
      */
@@ -73,8 +69,8 @@ public class HPOTerm {
      * Returns all the children of the HPOTerm.
      * @return all the children in a List
      */
-    public final List<HPOTerm> getChildren() {
-        List<HPOTerm> terms = new ArrayList<HPOTerm>();
+    public final ArrayList<HPOTerm> getChildren() {
+        ArrayList<HPOTerm> terms = new ArrayList<HPOTerm>();
         if (this.children == null) {
             terms.addAll(Collections.EMPTY_LIST);
         } else {
@@ -133,20 +129,6 @@ public class HPOTerm {
         }
         this.def = setDef;
     }
-//    /**
-//     * The getter of the comment.
-//     * @return String containing the comment
-//     */
-//    public final String getComment() {
-//        return comment;
-//    }
-//    /**
-//     * The setter of the comment.
-//     * @param setComment String containing the comment
-//     */
-//    public final void setComment(final String setComment) {
-//        this.comment = setComment;
-//    }
     /**
      * returns all the isA relations in a list containing Strings.
      * @return isA relations in a list
