@@ -1,4 +1,4 @@
-//Created by mkslofstra
+//Created by mkslofstra and aroeters
 $(document).ready(initialize);
 function initialize() {
     $("#search-symptome").click(function() {
