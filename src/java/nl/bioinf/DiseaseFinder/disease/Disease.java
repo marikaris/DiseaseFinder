@@ -139,7 +139,8 @@ public class Disease {
                 + "\"target=\"blank\"data-toggle=\"tooltip\""
                 + " title=\"Click here to open the disease on"
                 + " the omim website\"id=\"omimSiteLink\">" + mimNumber + "</a>"
-                + ", <b>hits :</b> " + hits + sb.toString() + "</div>";
+                + "<br/><b>Matches: </b>" + this.matches + "<br/>"
+                + "<b>hits :</b> " + hits + sb.toString() + "</div>";
     }
 
     /**
@@ -225,7 +226,6 @@ public class Disease {
      * @param match the list of matches.
      */
     public final void setMatches(final List match) {
-        System.out.println("***");
         this.matches = match;
     }
 }

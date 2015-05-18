@@ -7,7 +7,6 @@ package nl.bioinf.DiseaseFinder.view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -47,8 +46,8 @@ public class SymptomeToDiseaseConverterServlet extends HttpServlet {
             String[] symptoms = request.getParameter("symptoms[]").split(",");
 //            System.out.println(symptoms);
             DiseaseCollector diseases = new DiseaseCollector(symptoms);
-            HashMap<String, Disease> arrayOfDiseases = diseases.getDiseaseCollection();
-            Iterator it = arrayOfDiseases.entrySet().iterator();
+            HashMap<String, Disease> HashMapOfDiseases = diseases.getDiseaseCollection();
+            Iterator it = HashMapOfDiseases.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry) it.next();
                 Disease disease = (Disease) pair.getValue();

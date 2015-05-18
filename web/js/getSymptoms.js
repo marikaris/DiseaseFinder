@@ -23,10 +23,8 @@ function initialize() {
                 //selected nodes
                 $.each(parents, function(index, value) {
                     if ($.inArray(value, r) === -1) {
-                        console.log(value + " not in " + r);
                         r.push(value);
                     } else {
-                        console.log(value + " in array at position " + $.inArray(value, r));
                     }
                 }
 
@@ -61,21 +59,22 @@ function sendSymptoms(symptoms) {
         $("#result").append(diseases);
         $("#result").append("</ul>");
         $(".clickTitle").click(function() {
-            localStorage.setItem("omimNumber", $(this).attr("id"));
+            localStorage.setItem("omimNumber", $(this).attr("id"));            
             loadDisease();
         });
     });
 }
 function loadDisease() {
-    var diseaseServlet = "RetrieveDisease.do";
-    $.get(diseaseServlet, {"omimNumber": localStorage.getItem("omimNumber")}, function(disease) {
+    var diseaseServlet = "RetrieveDisease.do";    
+    $.get(diseaseServlet, {"omimNumber": localStorage.getItem("omimNumber"),
+        "symptoms[]": localStorage.getItem("symptoms")}, function(disease) {
         $("#result").text("");
         //put the disease data in the results div
-        $("#result").append(disease);
+        $("#result").append(disease);        
         //set the bootstrap styling on the tooltip 
-        $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+        $("body").tooltip({selector: '[data-toggle=tooltip]'});
         //load results again
-        $("#back2results").click(function(){
+        $("#back2results").click(function() {
             sendSymptoms();
         });
     });

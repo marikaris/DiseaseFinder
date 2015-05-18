@@ -6,14 +6,11 @@
 package nl.bioinf.DiseaseFinder.disease;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import nl.bioinf.DiseaseFinder.connection.OmimDataRetriever;
 import nl.bioinf.DiseaseFinder.dataFinder.DiseasePhenotypeGetter;
 import org.json.JSONException;
@@ -122,5 +119,18 @@ public class DiseaseCollector {
 //            throw new NullPointerException("Neighter omimNumber nor the"
 //                    + "diseaseobject should be null.");
         }
+    }
+
+    /**
+     * getInfoOfDisease needs an omim number and gets the information of this
+     * disease.
+     *
+     * @param omimNumber is the omimnumber of the disease a person wants
+     * information of.
+     * @return info the information about the disease.
+     */
+    public final String getInfoOfDisease(final String omimNumber) {
+        String info = this.diseaseCollection.get(omimNumber).toString();
+        return info;
     }
 }

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import nl.bioinf.DiseaseFinder.dataFinder.DiseasePhenotypeGetter;
+import nl.bioinf.DiseaseFinder.disease.DiseaseCollector;
 import org.json.JSONException;
 
 /**
@@ -38,8 +39,13 @@ public class WebDiseaseRetrieverServlet extends HttpServlet {
             throws ServletException, IOException, JSONException {
         response.setContentType("text/html;charset=UTF-8");
         String omimNumber = request.getParameter("omimNumber");
-        DiseasePhenotypeGetter diseaseGetter = new DiseasePhenotypeGetter(omimNumber);
-        String information = diseaseGetter.getDisease().toString();
+        System.out.println("****"+request.getParameter(
+                "symptoms[]"));
+        DiseasePhenotypeGetter diseaseGetter = new DiseasePhenotypeGetter(
+                omimNumber);
+        DiseaseCollector diseases = new DiseaseCollector(request
+                .getParameter("symptoms[]").split(","));
+        String information = diseases.getInfoOfDisease(omimNumber);
         PrintWriter out = response.getWriter();
          out.println(information);
     }
