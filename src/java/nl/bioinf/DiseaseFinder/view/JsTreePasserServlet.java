@@ -38,9 +38,9 @@ public class JsTreePasserServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws org.json.JSONException
+     * @throws JSONException when the JSON format is not correct
      */
-    protected void processRequest(final HttpServletRequest request,
+    protected final void processRequest(final HttpServletRequest request,
             final HttpServletResponse response)
             throws ServletException, IOException, JSONException {
         response.setContentType("application/json");
@@ -55,19 +55,21 @@ public class JsTreePasserServlet extends HttpServlet {
         if (requestedNodeChildren.equals("#")) {
             /*based on request attribute "id", fetch the children for that ID.*/
             jsonChildren = "["
-                    + "{\"children\":true,\"icon\":\"glyphicon glyphicon-user\",\"id\":\"HP:0000001\", \"text\": \"All\", \"state\": {\"opened\": \"true\", \"selected\": \"false\"}}"
+                    + "{\"children\":true,\"icon\":\"glyphicon glyphicon-user\""
+                    + ",\"id\":\"HP:0000001\", \"text\": \"All\", "
+                    + "\"state\": {\"opened\": true,"
+                    + " \"selected\": false}}"
                     + "]";
         } else {
             HPOTerm parent = (HPOTerm) collection.get(requestedNodeChildren);
             JSONArray children = new JSONArray();
             for (HPOTerm child : parent.getChildren()) {
-                JSONObject childNode = new JSONObject(hj.createJSONSubTree(
+                JSONObject childNode = new JSONObject(hj.createSubTree(
                         child, parent.getId()));
                 children.put(childNode);
             }
             jsonChildren = children.toString();
         }
-        System.out.println("***" + jsonChildren);
         PrintWriter out = response.getWriter();
         out.write(jsonChildren);
         out.close();

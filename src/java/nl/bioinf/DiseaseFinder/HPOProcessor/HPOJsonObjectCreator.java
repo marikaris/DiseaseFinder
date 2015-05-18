@@ -7,7 +7,6 @@ package nl.bioinf.DiseaseFinder.HPOProcessor;
 
 import java.io.IOException;
 import java.util.HashMap;
-import org.json.JSONException;
 
 /**
  *
@@ -27,37 +26,14 @@ public class HPOJsonObjectCreator {
                 "/homes/aroeters/Desktop/Thema11/hp.obo");
         this.hpoCollection = hr.readFile().getHPOHashMap();
     }
-
     /**
-     * main.
-     *
-     * @param args arguments
-     * @throws IOException when file not found
-     * @throws org.json.JSONException when Json structure is not correct
+     * Creates the child branch of the requested parent.
+     * @param hpoTerm the HPoTerm object of the parent
+     * @param parent the id of the parent
+     * @return a HashMap with all the information for jsTree.js
      */
-    public static void main(final String[] args) throws IOException,
-            JSONException {
-        HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
-        HPOFileReader hr = new HPOFileReader(
-                "/homes/aroeters/Desktop/Thema11/hp2.obo");
-//        hj.createJSONTree();
-    }
-
-//    public final JSONArray createJSONTree()
-//            throws JSONException {
-//        HashMap jsonTree = new HashMap();
-//        HashMap childTree = new HashMap();
-////        jsonTree = this.createJSONSubTree(this.hpoCollection.get("HP:0000001"));
-//        ArrayList<HashMap> rootArray = new ArrayList();
-//        rootArray.add(jsonTree);
-//        JSONObject finishedTree = new JSONObject(jsonTree);
-//        JSONArray arr = new JSONArray();
-//        arr.put(finishedTree);
-//        return arr;
-//    }
-
-    public final HashMap createJSONSubTree(final HPOTerm hpoTerm, final String parent)
-            throws JSONException {
+    public final HashMap createSubTree(final HPOTerm hpoTerm,
+            final String parent) {
         HashMap tree = new HashMap();
         HashMap<String, Boolean> state = new HashMap<String, Boolean>();
 
