@@ -6,11 +6,8 @@
 package nl.bioinf.DiseaseFinder.HPOProcessor;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  *
@@ -43,49 +40,43 @@ public class HPOJsonObjectCreator {
         HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
         HPOFileReader hr = new HPOFileReader(
                 "/homes/aroeters/Desktop/Thema11/hp2.obo");
-        hj.createJSONTree();
+//        hj.createJSONTree();
     }
 
-    public final JSONArray createJSONTree()
-            throws JSONException {
-        HashMap jsonTree = new HashMap();
-        HashMap childTree = new HashMap();
-//        jsonTree = this.createJSONSubTree(this.hpoCollection.get("HP:0000001"));
-        ArrayList<HashMap> rootArray = new ArrayList();
-        rootArray.add(jsonTree);
-        JSONObject finishedTree = new JSONObject(jsonTree);
-        JSONArray arr = new JSONArray();
-        arr.put(finishedTree);
-        return arr;
-    }
+//    public final JSONArray createJSONTree()
+//            throws JSONException {
+//        HashMap jsonTree = new HashMap();
+//        HashMap childTree = new HashMap();
+////        jsonTree = this.createJSONSubTree(this.hpoCollection.get("HP:0000001"));
+//        ArrayList<HashMap> rootArray = new ArrayList();
+//        rootArray.add(jsonTree);
+//        JSONObject finishedTree = new JSONObject(jsonTree);
+//        JSONArray arr = new JSONArray();
+//        arr.put(finishedTree);
+//        return arr;
+//    }
 
     public final HashMap createJSONSubTree(final HPOTerm hpoTerm, final String parent)
             throws JSONException {
         HashMap tree = new HashMap();
-        HashMap<String, String> state = new HashMap<String, String>();
+        HashMap<String, Boolean> state = new HashMap<String, Boolean>();
 
         if (hpoTerm.getId().equals("HP:0000001")) {
-            state.put("opened", "true");
-            state.put("selected", "false");
+            state.put("opened", true);
+            state.put("selected", false);
         } else {
-            state.put("opened", "false");
-            state.put("selected", "false");
+            state.put("opened", false);
+            state.put("selected", false);
         }
-//        List<HashMap> childList = new ArrayList<HashMap>();
-//        if (hpoTerm.hasChildren()) {
-//            for (HPOTerm child : hpoTerm.getChildren()) {
-//                childList.add(this.createJSONSubTree(child));
-//            }
-//        }
         tree.put("id", hpoTerm.getId());
         tree.put("text", hpoTerm.getName());
         tree.put("parent", parent);
         tree.put("icon", "glyphicon glyphicon-user");
         tree.put("state", state);
         if (hpoTerm.hasChildren()) {
-            tree.put("children", "true");
+            tree.put("children", true);
         } else {
-            tree.put("children", "false");
+            tree.put("children", false);
         }
         return tree;
     }

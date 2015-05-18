@@ -57,8 +57,7 @@ public class JsTreePasserServlet extends HttpServlet {
             jsonChildren = "["
                     + "{\"children\":true,\"icon\":\"glyphicon glyphicon-user\",\"id\":\"HP:0000001\", \"text\": \"All\", \"state\": {\"opened\": \"true\", \"selected\": \"false\"}}"
                     + "]";
-            System.out.println(jsonChildren);
-        } else if (requestedNodeChildren.equals("HP:0000001")) {
+        } else {
             HPOTerm parent = (HPOTerm) collection.get(requestedNodeChildren);
             JSONArray children = new JSONArray();
             for (HPOTerm child : parent.getChildren()) {
@@ -68,7 +67,7 @@ public class JsTreePasserServlet extends HttpServlet {
             }
             jsonChildren = children.toString();
         }
-        System.out.println(jsonChildren);
+        System.out.println("***" + jsonChildren);
         PrintWriter out = response.getWriter();
         out.write(jsonChildren);
         out.close();
