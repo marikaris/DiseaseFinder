@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import nl.bioinf.DiseaseFinder.dataFinder.DiseasePhenotypeGetter;
 import nl.bioinf.DiseaseFinder.disease.DiseaseCollector;
+import nl.bioinf.DiseaseFinder.score.ScoreCalculator;
 import org.json.JSONException;
 
 /**
@@ -41,10 +42,9 @@ public class WebDiseaseRetrieverServlet extends HttpServlet {
         String omimNumber = request.getParameter("omimNumber");
         System.out.println("****"+request.getParameter(
                 "symptoms[]"));
-        DiseasePhenotypeGetter diseaseGetter = new DiseasePhenotypeGetter(
-                omimNumber);
         DiseaseCollector diseases = new DiseaseCollector(request
                 .getParameter("symptoms[]").split(","));
+        ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
         String information = diseases.getInfoOfDisease(omimNumber);
         PrintWriter out = response.getWriter();
          out.println(information);
