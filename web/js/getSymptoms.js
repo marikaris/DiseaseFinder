@@ -11,21 +11,21 @@ function initialize() {
         for (i = 0, j = data.selected.length; i < j; i++) {
             //get the selected node
             var selected = data.instance.get_node(data.selected[i]);
-            if ($.inArray(selected.id, selectedNodes) === -1) {
+            if ($.inArray(selected.id, selectedNodes) === -1 && selected.text !== "All") {
                 selectedNodes.push(selected.text);
             }
             //get all parents
             parents = selected.parents;
-//The if makes sure that the parents are more than one, so if it
+            //The if makes sure that the parents are more than one, so if it
             //is one word, it will not be divided in characters
             if (parents.length !== 1) {
                 //check for each parent, if the parent is in the array of 
                 //selected nodes
                 $.each(parents, function(index, value) {
                     if ($.inArray(value, selectedNodes) === -1 && value !== "#") {
+                        console.log(value);
                         var thisNode = $("#ontology-tree").jstree("get_node", value);
-                        if ($.inArray(thisNode.text, selectedNodes) === -1) {
-//                        console.log(thisNode.text);
+                        if ($.inArray(thisNode.text, selectedNodes) === -1 && thisNode.text !== "All") {
                             selectedNodes.push(thisNode.text);
                         }
                     }
@@ -35,7 +35,7 @@ function initialize() {
                 //if the list of parents consist of one parent, check if that
                 //parent is in the list of selected items, if not, add it to
                 //the list
-                if ($.inArray(parents[0], selectedNodes) === -1) {
+                if ($.inArray(parents[0], selectedNodes) === -1 && parents[0] !== "#") {
                     selectedNodes.push(parents[0]);
                 }
                 ;
@@ -80,32 +80,4 @@ function loadDisease() {
             sendSymptoms();
         });
     });
-}
-;
-//from Ravi Kumar Raman on Stack overflow
-function uiGetParents(loSelectedNode) {
-    try {
-//the length of the list of parents
-        var lnLevel = loSelectedNode.parents.length;
-        //the id of the selected node
-        var lsSelectedID = loSelectedNode.id;
-        //select the node 
-        var loParent = $("#" + lsSelectedID);
-        var parents = [];
-        //as long as there are more parents, do this
-        for (var ln = 0; ln <= lnLevel - 1; ln++) {
-//check for new parent
-            var loParent = loParent.parent().parent();
-            //if parent has no children (and is last)
-            if (loParent.children()[1] !== undefined) {
-//push parent to parents
-                parents.push(loParent.children()[1].text);
-            }
-        }
-        return(parents);
-    }
-    catch (err) {
-//log if there is an error in this code (hope not)
-        console.log('Error in uiGetParents');
-    }
-}
+};
