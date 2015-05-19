@@ -18,6 +18,7 @@ import java.util.TreeMap;
  * @author mkslofstra
  */
 public class Disease {
+
     /**
      * constructor of the class disease.
      *
@@ -61,6 +62,7 @@ public class Disease {
      * the score which is given for this disease given the phenotype.
      */
     private Double score;
+
     /**
      * The getter of hits.
      *
@@ -69,6 +71,7 @@ public class Disease {
     public final Integer getHits() {
         return hits;
     }
+
     /**
      * The setter of hits.
      *
@@ -77,6 +80,7 @@ public class Disease {
     public final void setHits(final Integer count) {
         this.hits = count;
     }
+
     /**
      * The getter of the score.
      *
@@ -126,6 +130,11 @@ public class Disease {
                     .append("</b><br/>").append(info);
             it.remove(); // avoids a ConcurrentModificationException
         }
+        String diseaseInfo = sb.toString();
+        for (String match : this.matches) {
+            diseaseInfo = diseaseInfo.replaceAll("(?i)" + match.toLowerCase(), "<span class=\"highlight\">" + match + "</span>");
+            System.out.println(diseaseInfo);
+        }
         return "<h2>" + title + "</h2><div id =\"disease\">"
                 + "<p id=\"back2results\"><span class = \"glyphicon"
                 + " glyphicon-arrow-left\" aria-hidden=\"true\""
@@ -136,15 +145,19 @@ public class Disease {
                 + " title=\"Click here to open the disease on"
                 + " the omim website\"id=\"omimSiteLink\">" + mimNumber + "</a>"
                 + "<br/><b>Matches: </b>" + this.matches + "<br/>"
-                + "<b>hits :</b> " + hits + sb.toString() + "</div>";
+                + "<b>hits :</b> " + hits + "<br/><br/><button id=\"highlightButton\" class=\"button btn btn-info\">"
+                + "Highlight matches</button>" + diseaseInfo + "</div>";
     }
+
     /**
      * The setter of score.
+     *
      * @param givenScore the score which is given.
      */
     public final void setScore(final Double givenScore) {
         this.score = givenScore;
     }
+
     /**
      * The getter of the OMIM number.
      *
@@ -153,6 +166,7 @@ public class Disease {
     public final String getMimNumber() {
         return mimNumber;
     }
+
     /**
      * The getter of the title of the disease.
      *
@@ -161,6 +175,7 @@ public class Disease {
     public final String getTitle() {
         return title;
     }
+
     /**
      * The getter of getFeatures.
      *
@@ -169,6 +184,7 @@ public class Disease {
     public final TreeMap getFeatures() {
         return features;
     }
+
     /**
      * printSummary prints the summary of the disease in HTML.
      *
@@ -189,17 +205,19 @@ public class Disease {
         diseaseSummary.append("<tr><td class=\"label\">Score: "
                 + "</td><td class=\"value\">").append(score)
                 .append("<tr><td class=\"label\">Hits: "
-                + "</td><td class=\"value\">").append(hits)
+                        + "</td><td class=\"value\">").append(hits)
                 .append("</td></tr>").append("<tr><td class=\"label\">Matches: "
-                + "</td><td class=\"value\">").append(matches)
+                        + "</td><td class=\"value\">").append(matches)
                 .append("</td></tr>");
         diseaseSummary.append("</table>");
         diseaseSummary.append("</li><br/>");
         String summary = diseaseSummary.toString();
         return summary;
     }
+
     /**
      * The getter of the list matches.
+     *
      * @return the list of matches.
      */
     public final List getMatches() {
@@ -209,8 +227,10 @@ public class Disease {
             throw new NullPointerException("matches is not filled");
         }
     }
+
     /**
      * This method adds a given string to the StringList matches.
+     *
      * @param match the list of matches.
      */
     public final void setMatches(final List match) {

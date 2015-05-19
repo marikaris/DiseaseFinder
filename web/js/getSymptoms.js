@@ -23,7 +23,6 @@ function initialize() {
                 //selected nodes
                 $.each(parents, function(index, value) {
                     if ($.inArray(value, selectedNodes) === -1 && value !== "#") {
-                        console.log(value);
                         var thisNode = $("#ontology-tree").jstree("get_node", value);
                         if ($.inArray(thisNode.text, selectedNodes) === -1 && thisNode.text !== "All") {
                             selectedNodes.push(thisNode.text);
@@ -64,6 +63,10 @@ function sendSymptoms(symptoms) {
             localStorage.setItem("omimNumber", $(this).attr("id"));
             loadDisease();
         });
+        $("#highlightButton").click(function(){
+            alert("click");
+            $(".highlight").toggleClass("highlighted");
+        });
     });
 }
 function loadDisease() {
@@ -77,7 +80,7 @@ function loadDisease() {
         $("body").tooltip({selector: '[data-toggle=tooltip]'});
         //load results again
         $("#back2results").click(function() {
-            sendSymptoms();
+            sendSymptoms();        
         });
     });
 };

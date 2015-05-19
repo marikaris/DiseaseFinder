@@ -11,7 +11,6 @@
         <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="jsTree-style/jsTree-style.css" rel="stylesheet" type="text/css"/>
-        <script src="js_plugins/hilitor.js" type="text/javascript"></script>
         <link href="css/disease_matcher_layout.css" rel="stylesheet" type="text/css"/>
         <script src="js_plugins/jquery.min.js" type="text/javascript"></script>
         <script src="js_plugins/bootstrap.min.js" type="text/javascript"></script>
@@ -35,7 +34,7 @@
                     </div>
                     <div id="ontology-tree" class="demo" style="margin-top:2em;"></div>
                     <div id="event_result"></div>
-                    <button id="search-button" class="button btn btn-info"">Search for diseases</button>
+                    <button id="search-button" class="button btn btn-info">Search for diseases</button>
                 </div>
                 <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id ="result">        
                     <h2>Results</h2>
