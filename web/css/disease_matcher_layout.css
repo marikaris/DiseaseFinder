@@ -218,7 +218,26 @@ body::-webkit-scrollbar-thumb {
 .clickTitle :hover{
     cursor:pointer;
 }
-.highlight{
-    color: blue;
-    font-weight: bold;
+#highlight{
+    float:right;
+    margin-top: 2em;
 }
+#remove{   float:right;
+           margin-left: 10em;
+           margin-right: 1em;
+           margin-top: 2em;
+}
+#extraPage{
+    height: 50em;
+}
+#extraPage h2{
+    text-align: center;
+}
+.examplePic{
+    height:5em;
+}
+.bigger{
+    height:30em;
+}
+.text{ width: 30em;
+       margin-top:1em;}
