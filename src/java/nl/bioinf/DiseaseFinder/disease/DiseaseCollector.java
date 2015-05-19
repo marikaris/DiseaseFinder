@@ -20,7 +20,7 @@ import org.json.JSONException;
 /**
  * This class collects all the possible diseases which are found.
  *
- * @author mkslofstra
+ * @author mkslofstra and aroeters
  */
 public class DiseaseCollector {
 
@@ -78,18 +78,18 @@ public class DiseaseCollector {
      */
     private HashMap<String, String> getOmimNumbers(final String[] features)
             throws JSONException, IOException {
-        // Using the config files for security reasons
+        // Using the config files for security reasons made by aroeters
         Properties config = new Properties();
         InputStream in = getClass().getResourceAsStream(
                 "/config/config.properties");
         config.load(in);
-
         String url = config.getProperty("omimUrlNumbers");
         String apiKey = config.getProperty("omimKey");
+        in.close();
         OmimDataRetriever omimResultGetter = new OmimDataRetriever(url, apiKey);
         HashMap<String, String> diseases = omimResultGetter
                 .getOmimNumbers(features);
-        in.close();
+
         return diseases;
     }
 
