@@ -161,10 +161,10 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
 }
 /*align the result data*/
 td.label{
-    width: 20em;
+    width: 45em;
 }
 td.value{
-    width: 20em;
+    width: 45em;
 }
 /*http://stackoverflow.com/questions/18838964/add-bootstrap-glyphicon-to-input-box*/
 /* enable absolute positioning */
