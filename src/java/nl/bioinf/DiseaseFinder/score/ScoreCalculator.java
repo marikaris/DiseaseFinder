@@ -5,14 +5,12 @@
  */
 package nl.bioinf.DiseaseFinder.score;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import nl.bioinf.DiseaseFinder.disease.Disease;
 import nl.bioinf.DiseaseFinder.disease.DiseaseCollector;
-import org.json.JSONException;
 
 /**
  * This class will check if hits are true positive and score them.
@@ -20,27 +18,19 @@ import org.json.JSONException;
  * @author mkslofstra
  */
 public class ScoreCalculator {
-
-    public static void main(String[] args) throws JSONException, IOException {
-        String[] features = new String[]{"dizziness", "blurry vision",
-            "ptosis"};
-        DiseaseCollector dc = new DiseaseCollector(features);
-        ScoreCalculator sc = new ScoreCalculator(dc);
-
-    }
     /**
-     * matchCount is the hashmap with the occurence of all matches in the
+     * matchCount is the HashMap with the occurrence of all matches in the
      * search.
      */
-    private HashMap<String, Double> matchCount = new HashMap();
+    private final HashMap<String, Double> matchCount = new HashMap();
     /**
      * The diseasecollection which is getting a score.
      */
-    private HashMap diseases;
+    private final HashMap diseases;
     /**
      * diseaseScore is the score given the matches and their score.
      */
-    private HashMap<String, Double> diseaseScore = new HashMap();
+    private final HashMap<String, Double> diseaseScore = new HashMap();
 
     /**
      * ScoreCalculator calculates the score of a disease hit. This is the
@@ -55,12 +45,12 @@ public class ScoreCalculator {
     }
 
     /**
-     * countMatches fills the hashmap matchCount which contains all the matches
+     * countMatches fills the HashMap matchCount which contains all the matches
      * and their number of occurrence through the search.
      *
      * @param matches the list of matches of a certain disease.
      */
-    private void countMatches(List matches) {
+    private void countMatches(final List matches) {
         String matchWord;
         for (Object match : matches) {
             if (match.toString().startsWith(" ")) {
@@ -85,7 +75,8 @@ public class ScoreCalculator {
      * method to process them.
      */
     private void processMatches() {
-        HashMap<String, Disease> diseasesCopy = (HashMap<String, Disease>) diseases.clone();
+        HashMap<String, Disease> diseasesCopy = (HashMap<String, Disease>)
+                diseases.clone();
         Iterator it = diseasesCopy.entrySet().iterator();
         while (it.hasNext()) {
             HashMap.Entry pair = (HashMap.Entry) it.next();
@@ -93,17 +84,16 @@ public class ScoreCalculator {
             Disease disease = (Disease) pair.getValue();
             List matches = disease.getMatches();
             this.countMatches(matches);
-//            this.calculateDiseaseScore(omimNumber, matches);
             it.remove(); // avoids a ConcurrentModificationException
         }
     }
-
     /**
      * This class runs through the diseases and processes them by calling the
      * method to process them.
      */
     private void processDiseases() {
-        HashMap<String, Disease> diseasesCopy = (HashMap<String, Disease>) diseases.clone();
+        HashMap<String, Disease> diseasesCopy = (HashMap<String, Disease>)
+                diseases.clone();
         Iterator it = diseasesCopy.entrySet().iterator();
         while (it.hasNext()) {
             HashMap.Entry pair = (HashMap.Entry) it.next();
@@ -111,25 +101,27 @@ public class ScoreCalculator {
             Disease disease = (Disease) pair.getValue();
             List matches = disease.getMatches();
             Double score = this.calculateDiseaseScore(omimNumber, matches);
-            score = new BigDecimal(score ).setScale(3, BigDecimal
+            score = new BigDecimal(score).setScale(3, BigDecimal
                     .ROUND_HALF_UP).doubleValue();
             disease.setScore(score);
             disease.setHits(matches.size());
             it.remove(); // avoids a ConcurrentModificationException
         }
     }
-
     /**
      * This void fills diseaseScore given the matches a disease has and their
      * importance.
+     * @param omimNumber the omimNumber of the disease
+     * @param matches the total number of matches
+     * @return the score for the disease
      */
-    private Double calculateDiseaseScore(String omimNumber, List matches) {
-        //score per match = 1/totalOfMatch, which will give a max score of 1 per match.
+    private Double calculateDiseaseScore(final String omimNumber,
+            final List matches) {
+        //score per match = 1/totalOfMatch,
+        //which will give a max score of 1 per match.
         Double score = 0.0;
         String matchWord;
-        System.out.println("\n***" + omimNumber);
         for (Object match : matches) {
-            System.out.println("match:"+match);
             if (match.toString().startsWith(" ")) {
                 matchWord = match.toString().substring(1);
             } else {
@@ -138,11 +130,8 @@ public class ScoreCalculator {
             if (matchWord.endsWith(" ")) {
                 matchWord = matchWord.substring(0, matchWord.length() - 1);
             }
-            System.out.println(matchWord+":"+matchCount.get(matchWord));
             score += 1 / matchCount.get(matchWord);
-            System.out.println("1/"+matchCount.get(matchWord)+"="+1/ matchCount.get(matchWord));
         }
         return score;
-
     }
 }

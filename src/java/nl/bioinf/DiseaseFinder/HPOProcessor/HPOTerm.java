@@ -121,7 +121,7 @@ public class HPOTerm {
     }
     /**
      * The setter of the Definition.
-     * @param setDef String containing the def
+     * @param setDef String containing the definition
      */
     public final void setDef(final String setDef) {
         if (setDef == null) {
@@ -146,18 +146,4 @@ public class HPOTerm {
         }
         isARelations.add(addIsARelation);
     }
-//    /**
-//     * returns all the synonyms in a list containing Strings.
-//     * @return synonyms in a list
-//     */
-//    public final List getSynonyms() {
-//        return synonyms;
-//    }
-//    /**
-//     * Should get a String with a synonym in it.
-//     * @param addSynonym should be a String with a synonym in it
-//     */
-//    public final void addSynonym(final String addSynonym) {
-//        synonyms.add(addSynonym);
-//    }
 }
