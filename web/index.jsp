@@ -11,6 +11,7 @@
         <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="jsTree-style/jsTree-style.css" rel="stylesheet" type="text/css"/>
+        <script src="js_plugins/hilitor.js" type="text/javascript"></script>
         <link href="css/disease_matcher_layout.css" rel="stylesheet" type="text/css"/>
         <script src="js_plugins/jquery.min.js" type="text/javascript"></script>
         <script src="js_plugins/bootstrap.min.js" type="text/javascript"></script>

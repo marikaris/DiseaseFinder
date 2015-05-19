@@ -198,6 +198,8 @@ public class Disease {
                 .append(mimNumber).append("</td></tr>");
         diseaseSummary.append("<tr><td class=\"label\">Score: "
                 + "</td><td class=\"value\">").append(score)
+                .append("<tr><td class=\"label\">Hits: "
+                + "</td><td class=\"value\">").append(hits)
                 .append("</td></tr>").append("<tr><td class=\"label\">Matches: "
                 + "</td><td class=\"value\">").append(matches)
                 .append("</td></tr>");
