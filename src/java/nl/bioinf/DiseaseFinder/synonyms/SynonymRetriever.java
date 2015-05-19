@@ -30,7 +30,7 @@ public class SynonymRetriever {
             StringBuilder buffer = new StringBuilder();
             buffer.append(word);
             String wordForm = buffer.toString();
-            //  Get the synsets containing the wrod form
+            //  Get the synsets containing the word form
             WordNetDatabase database = WordNetDatabase.getFileInstance();
             Synset[] synsets = database.getSynsets(wordForm);
             //  Display the word forms and definitions for synsets retrieved
@@ -42,12 +42,12 @@ public class SynonymRetriever {
                     }
                 }
             } else {
-                System.err.println("No synsets exist that contain "
-                        + "the word form '" + wordForm + "'");
+                System.err.println("No synset exists that resembles "
+                        + "the word '" + wordForm + "'");
             }
         } else {
             System.err.println("You must specify "
-                    + "a word form for which to retrieve synsets.");
+                    + "a word where the synsets are needed from.");
         }
     return synonyms; }
 }

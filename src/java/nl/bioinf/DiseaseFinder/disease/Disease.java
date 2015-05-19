@@ -18,7 +18,6 @@ import java.util.TreeMap;
  * @author mkslofstra
  */
 public class Disease {
-
     /**
      * constructor of the class disease.
      *
@@ -62,7 +61,6 @@ public class Disease {
      * the score which is given for this disease given the phenotype.
      */
     private Double score;
-
     /**
      * The getter of hits.
      *
@@ -71,7 +69,6 @@ public class Disease {
     public final Integer getHits() {
         return hits;
     }
-
     /**
      * The setter of hits.
      *
@@ -80,11 +77,10 @@ public class Disease {
     public final void setHits(final Integer count) {
         this.hits = count;
     }
-
     /**
      * The getter of the score.
      *
-     * @return score which is determined given the fenotype.
+     * @return score which is determined given the phenotype.
      */
     public final Double getScore() {
         return score;
@@ -92,7 +88,7 @@ public class Disease {
 
     /**
      * toString method of the function changed to a readable output which is
-     * html that will be nicelooking on the webpage.
+     * HTML that will be nice looking on the web-page.
      *
      * @return the string of the function.
      */
@@ -142,25 +138,21 @@ public class Disease {
                 + "<br/><b>Matches: </b>" + this.matches + "<br/>"
                 + "<b>hits :</b> " + hits + sb.toString() + "</div>";
     }
-
     /**
      * The setter of score.
-     *
      * @param givenScore the score which is given.
      */
     public final void setScore(final Double givenScore) {
         this.score = givenScore;
     }
-
     /**
-     * The getter of the omim number.
+     * The getter of the OMIM number.
      *
-     * @return mimNumber the omim number of the disease.
+     * @return mimNumber the OMIM number of the disease.
      */
     public final String getMimNumber() {
         return mimNumber;
     }
-
     /**
      * The getter of the title of the disease.
      *
@@ -169,7 +161,6 @@ public class Disease {
     public final String getTitle() {
         return title;
     }
-
     /**
      * The getter of getFeatures.
      *
@@ -178,12 +169,11 @@ public class Disease {
     public final TreeMap getFeatures() {
         return features;
     }
-
     /**
-     * printSummary prints the summary of the disease in html.
+     * printSummary prints the summary of the disease in HTML.
      *
      * @return summary, the summary of the disease which can be shown on the
-     * website.
+     * web-site.
      */
     public final String printSummary() {
         StringBuilder diseaseSummary = new StringBuilder();
@@ -208,10 +198,8 @@ public class Disease {
         String summary = diseaseSummary.toString();
         return summary;
     }
-
     /**
      * The getter of the list matches.
-     *
      * @return the list of matches.
      */
     public final List getMatches() {
@@ -221,10 +209,8 @@ public class Disease {
             throw new NullPointerException("matches is not filled");
         }
     }
-
     /**
-     * This method adds a given string to the matches stringlist.
-     *
+     * This method adds a given string to the StringList matches.
      * @param match the list of matches.
      */
     public final void setMatches(final List match) {

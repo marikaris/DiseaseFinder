@@ -6,15 +6,16 @@
 package nl.bioinf.DiseaseFinder.disease;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import nl.bioinf.DiseaseFinder.connection.OmimDataRetriever;
 import nl.bioinf.DiseaseFinder.dataFinder.DiseasePhenotypeGetter;
 import org.json.JSONException;
-import java.util.logging.Logger;
 
 /**
  * This class collects all the possible diseases which are found.
@@ -25,16 +26,10 @@ public class DiseaseCollector {
 
     /**
      * diseaseCollection is the collection of all found diseases given a
-     * phenotype. This hashmap has as id the omim number and as value the
-     * Disease object which belongs to this omim number.
+     * phenotype. This HashMap has as id the OMIM number and as value the
+     * Disease object which belongs to this OMIM number.
      */
     private HashMap<String, Disease> diseaseCollection = new HashMap();
-
-    public static void main(String[] args) throws JSONException, IOException {
-        String[] features = new String[]{"dizziness", "blurry vision",
-            "ptosis"};
-        DiseaseCollector diseaseCollection = new DiseaseCollector(features);
-    }
 
     /**
      * DiseaseCollector is the constructor of the class.
@@ -53,7 +48,6 @@ public class DiseaseCollector {
             Disease disease = this.getDiseaseContent(id);
             String match = (String) pair.getValue();
             List matches = Arrays.asList(match.split(","));
-//            disease.setMatches(matches);
             try {
                 //if the disease is not empty
                 disease.setMatches(matches);
@@ -80,24 +74,37 @@ public class DiseaseCollector {
      * @param features is the list of features to look for.
      * @throws JSONException when page is invalid JSON.
      * @throws IOException when URL is invalid.
-     * @return diseases, an arraylist of diseases.
+     * @return diseases, an ArrayList of diseases.
      */
     private HashMap<String, String> getOmimNumbers(final String[] features)
             throws JSONException, IOException {
-//        OmimSearcher search = new OmimSearcher(features);
-        //test url
-        String url = "http://api.europe.omim.org/api/entry/search?search="
-                + "%1$s&filter=&fields=&retrieve=&start=0&limit=10&sort="
-                + "&operator=&format=json&apiKey=%2$s";
-        String apiKey = "3F48B5AE34656CC9211E0A476E28AF0C370E3F94";
-        OmimDataRetriever omimResultGetter = new OmimDataRetriever(url, apiKey);
-        HashMap<String, String> diseases = omimResultGetter.getOmimNumbers(features);
+        // Using the config files for security reasons
+        Properties config = new Properties();
+        InputStream in = getClass().getResourceAsStream(
+                "/config/config.properties");
+        config.load(in);
 
+        String url = config.getProperty("omimUrlNumbers");
+        String apiKey = config.getProperty("omimKey");
+        OmimDataRetriever omimResultGetter = new OmimDataRetriever(url, apiKey);
+        HashMap<String, String> diseases = omimResultGetter
+                .getOmimNumbers(features);
+        in.close();
         return diseases;
     }
 
-    private Disease getDiseaseContent(String disease) throws IOException, JSONException {
-        DiseasePhenotypeGetter diseasePhenotype = new DiseasePhenotypeGetter(disease);
+    /**
+     * Retrieves the content of the disease.
+     *
+     * @param disease the disease to get the content from
+     * @return a disease Object
+     * @throws IOException if the URL is malformed
+     * @throws JSONException if the JSON format is not correct
+     */
+    private Disease getDiseaseContent(final String disease) throws IOException,
+            JSONException {
+        DiseasePhenotypeGetter diseasePhenotype
+                = new DiseasePhenotypeGetter(disease);
         return diseasePhenotype.getDisease();
     }
 
@@ -112,20 +119,15 @@ public class DiseaseCollector {
         //input should not be null
         if (mimNumber != null && disease != null) {
             diseaseCollection.put(mimNumber, disease);
-        } else {
-            // this is covered later
-//            System.out.println(mimNumber);
-//            System.out.println(disease.printSummary());
-//            throw new NullPointerException("Neighter omimNumber nor the"
-//                    + "diseaseobject should be null.");
         }
+        // this is covered later
     }
 
     /**
-     * getInfoOfDisease needs an omim number and gets the information of this
+     * getInfoOfDisease needs an OMIM number and gets the information of this
      * disease.
      *
-     * @param omimNumber is the omimnumber of the disease a person wants
+     * @param omimNumber is the OMIM number of the disease a person wants
      * information of.
      * @return info the information about the disease.
      */
