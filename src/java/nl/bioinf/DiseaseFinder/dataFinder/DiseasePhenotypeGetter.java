@@ -6,9 +6,11 @@
 package nl.bioinf.DiseaseFinder.dataFinder;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.logging.Level;
 import nl.bioinf.DiseaseFinder.bodyFeatures.FeatureCollection;
 import nl.bioinf.DiseaseFinder.connection.OmimDataRetriever;
@@ -33,11 +35,11 @@ public class DiseasePhenotypeGetter {
      * featuresToFind: the features selected from the webpage where the parent
      * is true.
      */
-    private ArrayList<String> featuresToFind = new ArrayList();
+    private final ArrayList<String> featuresToFind = new ArrayList();
     /**
      * phenotypes are the phenotypes of the disease.
      */
-    private TreeMap<String, String> phenotypes = new TreeMap();
+    private final TreeMap<String, String> phenotypes = new TreeMap();
     /**
      * Disease is the disease object of the found disease.
      */
@@ -45,10 +47,9 @@ public class DiseasePhenotypeGetter {
 
     /**
      * The getter of the created diseaseobject.
-     *
      * @return disease the disease object.
      */
-    public Disease getDisease() {
+    public final Disease getDisease() {
         return disease;
     }
 
@@ -79,23 +80,6 @@ public class DiseasePhenotypeGetter {
         }
 
     }
-
-    /**
-     * The main of this class.
-     *
-     * @param args the arguments which are given when running the file.
-     * @throws java.io.IOException thrown when the url from the connector is
-     * invalid.
-     * @throws org.json.JSONException when the structure of the website is not
-     * valid json.
-     * @author mkslofstra
-     */
-    public static void main(final String[] args) throws IOException,
-            JSONException {
-//        DiseasePhenotypeGetter phenotype = new DiseasePhenotypeGetter("606232");
-        DiseasePhenotypeGetter phenotype = new DiseasePhenotypeGetter("275000");
-    }
-
     /**
      * getOmimData gets all the data from the omim page of a given omim number
      * in a String.
@@ -108,10 +92,14 @@ public class DiseasePhenotypeGetter {
      */
     private JSONObject getOmimData(final String omimNr)
             throws IOException, JSONException {
-        //this url is for testing
-        String url = "http://api.europe.omim.org/api/clinicalSynopsis?mimNumber=%1$s&include=all&format=json&apiKey=%2$s";
-        //apiKey for testing, will be in config file
-        String apiKey = "3F48B5AE34656CC9211E0A476E28AF0C370E3F94";
+        Properties config = new Properties();
+        InputStream in = getClass().getResourceAsStream(
+                "/config/config.properties");
+        config.load(in);
+
+        String url = config.getProperty("omimUrlResult");
+        String apiKey = config.getProperty("omimKey");
+        in.close();
         OmimDataRetriever omimConnector = new OmimDataRetriever(url, apiKey);
         features = omimConnector.getOmimResult(omimNr);
         return features;
