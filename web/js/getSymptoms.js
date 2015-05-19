@@ -1,4 +1,4 @@
-//Created by mkslofstra
+//Created by mkslofstra and aroeters
 $(document).ready(initialize);
 function initialize() {
     $("#search-symptome").click(function() {
@@ -6,45 +6,47 @@ function initialize() {
     });
     var symptoms;
     $("#ontology-tree").on('changed.jstree', function(e, data) {
-        var i, j, r = [];
+        var i, j, selectedNodes = [];
         //run through all selected nodes
         for (i = 0, j = data.selected.length; i < j; i++) {
             //get the selected node
             var selected = data.instance.get_node(data.selected[i]);
-            if ($.inArray(selected.text, r) === -1) {
-                r.push(selected.text);
+            if ($.inArray(selected.id, selectedNodes) === -1) {
+                selectedNodes.push(selected.text);
             }
             //get all parents
-            parents = uiGetParents(selected);
-            //The if makes sure that the parents are more than one, so if it
+            parents = selected.parents;
+//The if makes sure that the parents are more than one, so if it
             //is one word, it will not be divided in characters
             if (parents.length !== 1) {
                 //check for each parent, if the parent is in the array of 
                 //selected nodes
                 $.each(parents, function(index, value) {
-                    if ($.inArray(value, r) === -1) {
-                        r.push(value);
-                    } else {
+                    if ($.inArray(value, selectedNodes) === -1 && value !== "#") {
+                        var thisNode = $("#ontology-tree").jstree("get_node", value);
+                        if ($.inArray(thisNode.text, selectedNodes) === -1) {
+//                        console.log(thisNode.text);
+                            selectedNodes.push(thisNode.text);
+                        }
                     }
                 }
-
                 );
             } else {
                 //if the list of parents consist of one parent, check if that
                 //parent is in the list of selected items, if not, add it to
                 //the list
-                if ($.inArray(parents[0], r) === -1) {
-                    r.push(parents[0]);
+                if ($.inArray(parents[0], selectedNodes) === -1) {
+                    selectedNodes.push(parents[0]);
                 }
                 ;
             }
-            localStorage.setItem("symptoms", r);
+            localStorage.setItem("symptoms", selectedNodes);
         }
         $("#search-button").click(function() {
             sendSymptoms();
         });
         //add the selected nodes (and their parents) to the page, below the tree
-        $('#event_result').html('<br/>Selected:<br/>' + r.join(', '));
+        $('#event_result').html('<br/>Selected:<br/>' + selectedNodes.join(', '));
     });
 }
 //this function will send data to the servlet and get diseases back
@@ -59,18 +61,18 @@ function sendSymptoms(symptoms) {
         $("#result").append(diseases);
         $("#result").append("</ul>");
         $(".clickTitle").click(function() {
-            localStorage.setItem("omimNumber", $(this).attr("id"));            
+            localStorage.setItem("omimNumber", $(this).attr("id"));
             loadDisease();
         });
     });
 }
 function loadDisease() {
-    var diseaseServlet = "RetrieveDisease.do";    
+    var diseaseServlet = "RetrieveDisease.do";
     $.get(diseaseServlet, {"omimNumber": localStorage.getItem("omimNumber"),
         "symptoms[]": localStorage.getItem("symptoms")}, function(disease) {
         $("#result").text("");
         //put the disease data in the results div
-        $("#result").append(disease);        
+        $("#result").append(disease);
         //set the bootstrap styling on the tooltip 
         $("body").tooltip({selector: '[data-toggle=tooltip]'});
         //load results again

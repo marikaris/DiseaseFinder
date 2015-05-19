@@ -14,6 +14,7 @@ import java.util.Map;
 import nl.bioinf.DiseaseFinder.connection.OmimDataRetriever;
 import nl.bioinf.DiseaseFinder.dataFinder.DiseasePhenotypeGetter;
 import org.json.JSONException;
+import java.util.logging.Logger;
 
 /**
  * This class collects all the possible diseases which are found.
