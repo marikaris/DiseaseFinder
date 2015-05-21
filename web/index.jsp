@@ -11,7 +11,6 @@
         <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="jsTree-style/jsTree-style.css" rel="stylesheet" type="text/css"/>
-        <script src="js_plugins/hilitor.js" type="text/javascript"></script>
         <link href="css/disease_matcher_layout.css" rel="stylesheet" type="text/css"/>
         <script src="js_plugins/jquery.min.js" type="text/javascript"></script>
         <script src="js_plugins/bootstrap.min.js" type="text/javascript"></script>
@@ -35,14 +34,15 @@
                     </div>
                     <div id="ontology-tree" class="demo" style="margin-top:2em;"></div>
                     <div id="event_result"></div>
-                    <button id="search-button" class="button btn btn-info"">Search for diseases</button>
+                    <button id="search-button" class="button btn btn-info">Search for diseases</button>
                 </div>
                 <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id ="result">        
                     <h2>Results</h2>
                     Select symptoms in the left column and click on "Search for diseases". 
                 </div>
                 <div id="footer" class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
-                    <a href="#" class="clickUp">About</a><span id="pipe"> | </span><a class="clickUp" href="#">How to</a><p id="copyright">&copy;2015-2025 Phenotype to Disease Converter</p>
+                    <a href="#" class="clickUp">About</a><span id="pipe"> | </span><a class="clickUp" href="jsp/how_to.jsp">How to</a><p id="copyright">&copy;2015-2025 Phenotype to Disease Converter</p><br/> 
+                    <small id="warning">ATTENTION: This tool is not a doctor, when you have certain symptoms, it is always recommended to visit a doctor.</small><br/> 
                 </div>
             </div>
 

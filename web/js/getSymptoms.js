@@ -23,7 +23,6 @@ function initialize() {
                 //selected nodes
                 $.each(parents, function(index, value) {
                     if ($.inArray(value, selectedNodes) === -1 && value !== "#") {
-                        console.log(value);
                         var thisNode = $("#ontology-tree").jstree("get_node", value);
                         if ($.inArray(thisNode.text, selectedNodes) === -1 && thisNode.text !== "All") {
                             selectedNodes.push(thisNode.text);
@@ -75,9 +74,13 @@ function loadDisease() {
         $("#result").append(disease);
         //set the bootstrap styling on the tooltip 
         $("body").tooltip({selector: '[data-toggle=tooltip]'});
+        $("#highlightButton").click(function() {
+            $(".highlight").toggleClass("highlighted");
+        });
         //load results again
         $("#back2results").click(function() {
             sendSymptoms();
         });
     });
-};
+}
+;
