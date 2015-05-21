@@ -247,3 +247,18 @@ highlight{
     text-align: right;
     color: grey;
 }
+h4 {
+    text-align: center;
+    font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
+    text-transform: uppercase;
+}
+.centerAlignment {
+    text-align: center;
+}
+#extraPage {
+    overflow: auto;
+    margin-bottom: 4em;
+}
+.caution {
+    color: red;
+}
