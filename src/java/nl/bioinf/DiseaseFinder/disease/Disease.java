@@ -17,7 +17,7 @@ import java.util.TreeMap;
  *
  * @author mkslofstra
  */
-public class Disease {
+public class Disease  implements Comparable{
 
     /**
      * constructor of the class disease.
@@ -133,9 +133,7 @@ public class Disease {
         String diseaseInfo = sb.toString();
         for (String match : this.matches) {
             match = match.replaceAll(" ", "");
-            System.out.println("********"+match);
             diseaseInfo = diseaseInfo.replaceAll("(?i)" + match.toLowerCase(), "<span class=\"highlight\">" + match + "</span>");
-            System.out.println(diseaseInfo);
         }
         return "<h2>" + title + "</h2><div id =\"disease\">"
                 + "<p id=\"back2results\"><span class = \"glyphicon"
@@ -237,5 +235,26 @@ public class Disease {
      */
     public final void setMatches(final List match) {
         this.matches = match;
+    }
+
+    /**
+     * The compare function to compare two disease objects.
+     *
+     * @param otherDisease the disease object which should be compared with this
+     * one.
+     * @return if the comparison is the same more or less.
+     */
+    @Override
+    public final int compareTo(Object otherDisease) {
+        Disease disease = (Disease) otherDisease;
+//        int comparison = Double.compare(disease.getScore(), this.score);
+        if (this.score.equals(disease.getScore())) {
+            return 0;
+        } else if (this.score > disease.getScore()) {
+            return -1;
+        } else {
+            return 1;
+        }
+//        return comparison;
     }
 }

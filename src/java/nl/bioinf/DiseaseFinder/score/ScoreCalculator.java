@@ -42,6 +42,7 @@ public class ScoreCalculator {
         diseases = collection.getDiseaseCollection();
         this.processMatches();
         this.processDiseases();
+        collection.sortDiseaseCollection();
     }
 
     /**
@@ -107,6 +108,7 @@ public class ScoreCalculator {
             disease.setHits(matches.size());
             it.remove(); // avoids a ConcurrentModificationException
         }
+        
     }
     /**
      * This void fills diseaseScore given the matches a disease has and their
