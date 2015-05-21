@@ -243,3 +243,7 @@ body::-webkit-scrollbar-thumb {
 highlight{
     float:right;
 }
+#warning{
+    text-align: right;
+    color: grey;
+}

@@ -132,6 +132,8 @@ public class Disease {
         }
         String diseaseInfo = sb.toString();
         for (String match : this.matches) {
+            match = match.replaceAll(" ", "");
+            System.out.println("********"+match);
             diseaseInfo = diseaseInfo.replaceAll("(?i)" + match.toLowerCase(), "<span class=\"highlight\">" + match + "</span>");
             System.out.println(diseaseInfo);
         }

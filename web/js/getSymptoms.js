@@ -63,10 +63,6 @@ function sendSymptoms(symptoms) {
             localStorage.setItem("omimNumber", $(this).attr("id"));
             loadDisease();
         });
-        $("#highlightButton").click(function(){
-            alert("click");
-            $(".highlight").toggleClass("highlighted");
-        });
     });
 }
 function loadDisease() {
@@ -78,9 +74,13 @@ function loadDisease() {
         $("#result").append(disease);
         //set the bootstrap styling on the tooltip 
         $("body").tooltip({selector: '[data-toggle=tooltip]'});
+        $("#highlightButton").click(function() {
+            $(".highlight").toggleClass("highlighted");
+        });
         //load results again
         $("#back2results").click(function() {
-            sendSymptoms();        
+            sendSymptoms();
         });
     });
-};
+}
+;
