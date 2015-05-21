@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package nl.bioinf.DiseaseFinder.view;
 
 import java.io.IOException;
@@ -27,7 +26,7 @@ import org.json.JSONObject;
  *
  * @author aroeters
  */
-@WebServlet(name = "JsTreePasserServlet", urlPatterns = { "/PassTree.do" })
+@WebServlet(name = "JsTreePasserServlet", urlPatterns = {"/PassTree.do"})
 public class JsTreePasserServlet extends HttpServlet {
 
     /**
@@ -46,10 +45,10 @@ public class JsTreePasserServlet extends HttpServlet {
         response.setContentType("application/json");
 
         HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
-        HPOFileReader hr = new HPOFileReader(
-                "/homes/aroeters/Desktop/Thema11/hp.obo");
+        String path = JsTreePasserServlet.class.getClassLoader()
+                .getResource("/config/hp.obo").toString();
+        HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
         HashMap collection = hr.readFile().getHPOHashMap();
-
         String requestedNodeChildren = request.getParameter("id");
         String jsonChildren = "";
         if (requestedNodeChildren.equals("#")) {
@@ -74,16 +73,6 @@ public class JsTreePasserServlet extends HttpServlet {
         out.write(jsonChildren);
         out.close();
     }
-
-
-
-
-
-
-
-
-
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

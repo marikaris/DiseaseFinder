@@ -22,8 +22,9 @@ public class HPOJsonObjectCreator {
      * @throws IOException when the file is not found
      */
     public HPOJsonObjectCreator() throws IOException {
-        HPOFileReader hr = new HPOFileReader(
-                "/homes/aroeters/Desktop/Thema11/hp.obo");
+        String path = HPOJsonObjectCreator.class.getClassLoader()
+                .getResource("/config/hp.obo").toString();
+        HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
         this.hpoCollection = hr.readFile().getHPOHashMap();
     }
     /**
