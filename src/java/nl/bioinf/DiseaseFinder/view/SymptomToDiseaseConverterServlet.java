@@ -26,8 +26,9 @@ import org.json.JSONException;
  *
  * @author mkslofstra
  */
-@WebServlet(name = "SymptomeToDiseaseConverterServlet", urlPatterns = {"/getDisease.do"})
-public class SymptomeToDiseaseConverterServlet extends HttpServlet {
+@WebServlet(name = "SymptomToDiseaseConverterServlet", urlPatterns = {
+    "/getDisease.do" })
+public class SymptomToDiseaseConverterServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -77,7 +78,7 @@ public class SymptomeToDiseaseConverterServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (JSONException ex) {
-            Logger.getLogger(SymptomeToDiseaseConverterServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SymptomToDiseaseConverterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -95,7 +96,7 @@ public class SymptomeToDiseaseConverterServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (JSONException ex) {
-            Logger.getLogger(SymptomeToDiseaseConverterServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SymptomToDiseaseConverterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

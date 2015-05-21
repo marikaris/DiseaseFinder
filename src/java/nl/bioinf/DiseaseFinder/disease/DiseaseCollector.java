@@ -7,9 +7,12 @@ package nl.bioinf.DiseaseFinder.disease;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -29,7 +32,7 @@ public class DiseaseCollector {
      * phenotype. This HashMap has as id the OMIM number and as value the
      * Disease object which belongs to this OMIM number.
      */
-    private HashMap<String, Disease> diseaseCollection = new HashMap();
+    private LinkedHashMap<String, Disease> diseaseCollection = new LinkedHashMap();
 
     /**
      * DiseaseCollector is the constructor of the class.
@@ -41,6 +44,18 @@ public class DiseaseCollector {
     public DiseaseCollector(final String[] features) throws JSONException,
             IOException {
         HashMap diseaseMatches = this.getOmimNumbers(features);
+        this.fillDiseaseCollection(diseaseMatches);
+    }
+
+    /**
+     * This void fills the diseasecollection.
+     *
+     * @param diseaseMatches the matches a disease has.
+     * @throws IOException when URL is malformed.
+     * @throws JSONException when json structure is invalid.
+     */
+    private void fillDiseaseCollection(final HashMap diseaseMatches)
+            throws IOException, JSONException {
         Iterator it = diseaseMatches.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
@@ -56,6 +71,22 @@ public class DiseaseCollector {
             }
             addToDiseaseCollection(disease, id);
             it.remove(); // avoids a ConcurrentModificationException
+        }
+//        this.sortDiseaseCollection();
+
+    }
+
+    /**
+     * This function sorts the diseasecollection.
+     */
+    public void sortDiseaseCollection() {
+//        System.out.println(dise);
+        List<Disease> diseaseList = new ArrayList(diseaseCollection.values());
+        this.diseaseCollection = new LinkedHashMap();
+        Collections.sort(diseaseList);
+        for (Object sortedDisease : diseaseList) {
+            Disease disease = (Disease) sortedDisease;
+            addToDiseaseCollection(disease, disease.getMimNumber());
         }
     }
 

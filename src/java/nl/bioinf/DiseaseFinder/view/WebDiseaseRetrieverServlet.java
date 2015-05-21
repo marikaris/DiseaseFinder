@@ -40,8 +40,6 @@ public class WebDiseaseRetrieverServlet extends HttpServlet {
             throws ServletException, IOException, JSONException {
         response.setContentType("text/html;charset=UTF-8");
         String omimNumber = request.getParameter("omimNumber");
-        System.out.println("****"+request.getParameter(
-                "symptoms[]"));
         DiseaseCollector diseases = new DiseaseCollector(request
                 .getParameter("symptoms[]").split(","));
         ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
