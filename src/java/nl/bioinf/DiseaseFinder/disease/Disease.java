@@ -247,14 +247,7 @@ public class Disease  implements Comparable{
     @Override
     public final int compareTo(Object otherDisease) {
         Disease disease = (Disease) otherDisease;
-//        int comparison = Double.compare(disease.getScore(), this.score);
-        if (this.score.equals(disease.getScore())) {
-            return 0;
-        } else if (this.score > disease.getScore()) {
-            return -1;
-        } else {
-            return 1;
-        }
-//        return comparison;
+        int comparison = Double.compare(disease.getScore(), this.score);
+        return comparison;
     }
 }

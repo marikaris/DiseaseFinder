@@ -18,6 +18,7 @@ import nl.bioinf.DiseaseFinder.disease.DiseaseCollector;
  * @author mkslofstra
  */
 public class ScoreCalculator {
+
     /**
      * matchCount is the HashMap with the occurrence of all matches in the
      * search.
@@ -76,8 +77,7 @@ public class ScoreCalculator {
      * method to process them.
      */
     private void processMatches() {
-        HashMap<String, Disease> diseasesCopy = (HashMap<String, Disease>)
-                diseases.clone();
+        HashMap<String, Disease> diseasesCopy = (HashMap<String, Disease>) diseases.clone();
         Iterator it = diseasesCopy.entrySet().iterator();
         while (it.hasNext()) {
             HashMap.Entry pair = (HashMap.Entry) it.next();
@@ -88,13 +88,13 @@ public class ScoreCalculator {
             it.remove(); // avoids a ConcurrentModificationException
         }
     }
+
     /**
      * This class runs through the diseases and processes them by calling the
      * method to process them.
      */
     private void processDiseases() {
-        HashMap<String, Disease> diseasesCopy = (HashMap<String, Disease>)
-                diseases.clone();
+        HashMap<String, Disease> diseasesCopy = (HashMap<String, Disease>) diseases.clone();
         Iterator it = diseasesCopy.entrySet().iterator();
         while (it.hasNext()) {
             HashMap.Entry pair = (HashMap.Entry) it.next();
@@ -102,17 +102,18 @@ public class ScoreCalculator {
             Disease disease = (Disease) pair.getValue();
             List matches = disease.getMatches();
             Double score = this.calculateDiseaseScore(omimNumber, matches);
-            score = new BigDecimal(score).setScale(3, BigDecimal
-                    .ROUND_HALF_UP).doubleValue();
+            score = new BigDecimal(score).setScale(3, BigDecimal.ROUND_HALF_UP)
+                    .doubleValue();
             disease.setScore(score);
             disease.setHits(matches.size());
             it.remove(); // avoids a ConcurrentModificationException
         }
-        
     }
+
     /**
      * This void fills diseaseScore given the matches a disease has and their
      * importance.
+     *
      * @param omimNumber the omimNumber of the disease
      * @param matches the total number of matches
      * @return the score for the disease
