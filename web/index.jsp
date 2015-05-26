@@ -33,17 +33,37 @@
                         <i id = "glyph" class="glyphicon glyphicon-search" aria-hidden="true"></i>
                     </div>
                     <div id="ontology-tree" class="demo" style="margin-top:2em;"></div>
-                    <div id="event_result"></div>
-                    <button id="search-button" class="button btn btn-info">Search for diseases</button>
+
                 </div>
                 <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id ="result">        
-                    <h2>Results</h2>
-                    Select symptoms in the left column and click on "Search for diseases". 
+                    <div role="tabpanel">
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#searchTab" aria-controls="searchTab" role="tab" data-toggle="tab">Search</a></li>
+                            <li role="presentation"><a href="#resultTab" aria-controls="resultTab" role="tab" data-toggle="tab">Results</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="searchTab">
+                                <br/><br/>
+                                <div id="event_result">Select symptoms on the right side of the page.</div>
+                                <button id="search-button" class="button btn btn-info">Search for diseases</button>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="resultTab">
+                                <br/><br/>
+                                Click in the search-tab on the search button to get results here.
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
                 <div id="footer" class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
                     <a href="jsp/about.jsp" class="clickUp">About</a><span id="pipe"> | </span><a class="clickUp" href="jsp/how_to.jsp">How to</a><p id="copyright">&copy;2015-2025 Phenotype to Disease Converter</p><br/> 
                     <small id="warning">ATTENTION: This tool is not a doctor, when you have certain symptoms, it is always recommended to visit a doctor.</small><br/> 
-                </div>
+                </div>            
+
             </div>
 
         </div>

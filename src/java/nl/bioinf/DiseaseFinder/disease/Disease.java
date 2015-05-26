@@ -151,7 +151,7 @@ public class Disease implements Comparable {
                 + hits + "<br/><b><a data"
                 + "-toggle=\"tooltip\" title=\"The score is calculated through:"
                 + " The sum of 1 / occurence of each match through the search"
-                + ".\"data-placement=\"right\">Score:</a></b>"
+                + ".\"data-placement=\"right\">Score: </a></b>"
                 + score + "<br/><br/><button id=\"highlightButton\""
                 + " class=\"button btn btn-info\">"
                 + "Highlight matches</button>" + diseaseInfo + "</div>";

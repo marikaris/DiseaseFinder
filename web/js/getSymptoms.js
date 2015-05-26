@@ -41,24 +41,26 @@ function initialize() {
             }
             localStorage.setItem("symptoms", selectedNodes);
         }
-        $("#search-button").click(function() {
-            sendSymptoms();
-        });
         //add the selected nodes (and their parents) to the page, below the tree
-        $('#event_result').html('<br/>Selected:<br/>' + selectedNodes.join(', '));
+//        $('#event_result').html('Selected symptoms:<br/>' + selectedNodes.join(', '));
+        $('#event_result').html('Selected symptoms:<br/>');
+        
+    });
+    $("#search-button").click(function() {
+        sendSymptoms();
     });
 }
 //this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
+    $('.nav-tabs a[href="#resultTab"]').tab('show');
 //the name of the servlet
     var servlet = "getDisease.do";
     //use the servlet
     $.get(servlet, {"symptoms[]": localStorage.getItem("symptoms")}, function(diseases) {
-        $("#result").text("");
-        $("#result").append("<h2>Results</h2>");
-        $("#result").append("<ul>");
-        $("#result").append(diseases);
-        $("#result").append("</ul>");
+        $("#resultTab").text("");
+        $("#resultTab").append("<br/><br/><ul>");
+        $("#resultTab").append(diseases);
+        $("#resultTab").append("</ul>");
         $("body").tooltip({selector: '[data-toggle=tooltip]'});
         $(".clickTitle").click(function() {
             localStorage.setItem("omimNumber", $(this).attr("id"));
@@ -70,9 +72,9 @@ function loadDisease() {
     var diseaseServlet = "RetrieveDisease.do";
     $.get(diseaseServlet, {"omimNumber": localStorage.getItem("omimNumber"),
         "symptoms[]": localStorage.getItem("symptoms")}, function(disease) {
-        $("#result").text("");
+        $("#resultTab").text("");
         //put the disease data in the results div
-        $("#result").append(disease);
+        $("#resultTab").append(disease);
         //set the bootstrap styling on the tooltip 
         $("body").tooltip({selector: '[data-toggle=tooltip]'});
         $("#highlightButton").click(function() {
