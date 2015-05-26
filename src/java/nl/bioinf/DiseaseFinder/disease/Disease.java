@@ -145,7 +145,15 @@ public class Disease implements Comparable {
                 + " title=\"Click here to open the disease on"
                 + " the omim website\"id=\"omimSiteLink\">" + mimNumber + "</a>"
                 + "<br/><b>Matches: </b>" + this.matches + "<br/>"
-                + "<b>hits :</b> " + hits + "<br/><br/><button id=\"highlightButton\" class=\"button btn btn-info\">"
+                + "<b><a data"
+                + "-toggle=\"tooltip\" title=\"The number of matched "
+                + "symptoms.\"data-placement=\"right\">Hits :</a></b> "
+                + hits + "<br/><b><a data"
+                + "-toggle=\"tooltip\" title=\"The score is calculated through:"
+                + " The sum of 1 / occurence of each match through the search"
+                + ".\"data-placement=\"right\">Score:</a></b>"
+                + score + "<br/><br/><button id=\"highlightButton\""
+                + " class=\"button btn btn-info\">"
                 + "Highlight matches</button>" + diseaseInfo + "</div>";
     }
 
@@ -204,8 +212,8 @@ public class Disease implements Comparable {
                 .append(mimNumber).append("</td></tr>");
         diseaseSummary.append("<tr><td class=\"label\"><a data"
                 + "-toggle=\"tooltip\" title=\"The score is calculated through:"
-                + "The sum of 1 / occurence of each match through the search.\""
-                + "id=\"score\"data-placement=\"right\">"
+                + " The sum of 1 / occurence of each match through the "
+                + "search.\" id=\"score\"data-placement=\"right\">"
                 + "Score: </a></td><td class=\"value\">").append(score)
                 .append("<tr><td class=\"label\"><a data"
                         + "-toggle=\"tooltip\" title=\"The number of matched "
