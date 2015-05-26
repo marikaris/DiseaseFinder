@@ -265,3 +265,11 @@ h4 {
 div.tooltip-inner {
     max-width: 50em;
 }
+.closeSymptom{
+    background-color: indianred;
+    color: white;
+    border-radius: 2px;
+    width: 3em;
+    border-color: indianred;
+    border-style: solid;
+}

@@ -6,13 +6,14 @@ function initialize() {
     });
     var symptoms;
     $("#ontology-tree").on('changed.jstree', function(e, data) {
-        var i, j, selectedNodes = [];
+        var i, j, selectedNodes = [], selectedIds = [];
         //run through all selected nodes
         for (i = 0, j = data.selected.length; i < j; i++) {
             //get the selected node
             var selected = data.instance.get_node(data.selected[i]);
             if ($.inArray(selected.id, selectedNodes) === -1 && selected.text !== "All") {
                 selectedNodes.push(selected.text);
+                selectedIds.push(selected.id);
             }
             //get all parents
             parents = selected.parents;
@@ -26,25 +27,32 @@ function initialize() {
                         var thisNode = $("#ontology-tree").jstree("get_node", value);
                         if ($.inArray(thisNode.text, selectedNodes) === -1 && thisNode.text !== "All") {
                             selectedNodes.push(thisNode.text);
+                            selectedIds.push(value);
                         }
                     }
                 }
                 );
             } else {
-                //if the list of parents consist of one parent, check if that
-                //parent is in the list of selected items, if not, add it to
-                //the list
-                if ($.inArray(parents[0], selectedNodes) === -1 && parents[0] !== "#") {
+                //checks if the parent is #, this should not be added to the list.
+                if (parents[0] !== "#") {
                     selectedNodes.push(parents[0]);
+                    console.log(parents[0]);
                 }
                 ;
             }
             localStorage.setItem("symptoms", selectedNodes);
+            console.log(selectedIds);
         }
         //add the selected nodes (and their parents) to the page, below the tree
 //        $('#event_result').html('Selected symptoms:<br/>' + selectedNodes.join(', '));
         $('#event_result').html('Selected symptoms:<br/>');
-        
+        for (i = 0; i < selectedIds.length; i++) {
+            $("#event_result").append("<button class=\"btn btn-default\">"
+                    + selectedNodes[i] + " <span class=\"closeSymptom\" data-close=\"" + selectedIds[i] + "\"> X </span></button>");
+        }
+        $(".closeSymptom").click(function() {
+            $("#ontology-tree").jstree("deselect_node", $(this).data("close"));
+        });
     });
     $("#search-button").click(function() {
         sendSymptoms();
