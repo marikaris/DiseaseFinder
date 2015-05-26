@@ -262,3 +262,6 @@ h4 {
 .caution {
     color: red;
 }
+div.tooltip-inner {
+    max-width: 50em;
+}

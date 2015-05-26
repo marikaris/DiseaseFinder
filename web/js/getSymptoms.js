@@ -59,6 +59,7 @@ function sendSymptoms(symptoms) {
         $("#result").append("<ul>");
         $("#result").append(diseases);
         $("#result").append("</ul>");
+        $("body").tooltip({selector: '[data-toggle=tooltip]'});
         $(".clickTitle").click(function() {
             localStorage.setItem("omimNumber", $(this).attr("id"));
             loadDisease();

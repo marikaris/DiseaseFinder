@@ -17,7 +17,7 @@ import java.util.TreeMap;
  *
  * @author mkslofstra
  */
-public class Disease  implements Comparable{
+public class Disease implements Comparable {
 
     /**
      * constructor of the class disease.
@@ -202,10 +202,15 @@ public class Disease  implements Comparable{
         diseaseSummary.append("<tr>\n"
                 + "<td class=\"label\">Omimnumber: </td><td class=\"value\">")
                 .append(mimNumber).append("</td></tr>");
-        diseaseSummary.append("<tr><td class=\"label\">Score: "
-                + "</td><td class=\"value\">").append(score)
-                .append("<tr><td class=\"label\">Hits: "
-                        + "</td><td class=\"value\">").append(hits)
+        diseaseSummary.append("<tr><td class=\"label\"><a data"
+                + "-toggle=\"tooltip\" title=\"The score is calculated through:"
+                + "The sum of 1 / occurence of each match through the search.\""
+                + "id=\"score\"data-placement=\"right\">"
+                + "Score: </a></td><td class=\"value\">").append(score)
+                .append("<tr><td class=\"label\"><a data"
+                        + "-toggle=\"tooltip\" title=\"The number of matched "
+                        + "symptoms.\"data-placement=\"right\">Hits: "
+                        + "</a></td><td class=\"value\">").append(hits)
                 .append("</td></tr>").append("<tr><td class=\"label\">Matches: "
                         + "</td><td class=\"value\">").append(matches)
                 .append("</td></tr>");
