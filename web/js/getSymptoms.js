@@ -45,7 +45,7 @@ function initialize() {
         }
         //add the selected nodes (and their parents) to the page, below the tree
 //        $('#event_result').html('Selected symptoms:<br/>' + selectedNodes.join(', '));
-        $('#event_result').html('Selected symptoms:<br/>');
+        $('#event_result').html('<b>Selected symptoms:</b><br/>');
         for (i = 0; i < selectedIds.length; i++) {
             $("#event_result").append("<button class=\"btn btn-default\">"
                     + selectedNodes[i] + " <span class=\"closeSymptom\" data-close=\"" + selectedIds[i] + "\"> X </span></button>");
