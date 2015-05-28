@@ -20,8 +20,7 @@
         <script src="js/buildTree.js" type="text/javascript"></script>
         <script src="js/getSymptoms.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Phenotype Disease Match Application
-        </title>       
+        <title>PheDiMAp</title>       
 
     </head>
     <body>
