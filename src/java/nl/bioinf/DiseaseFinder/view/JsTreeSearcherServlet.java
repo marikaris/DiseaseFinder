@@ -3,33 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package nl.bioinf.DiseaseFinder.view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import nl.bioinf.DiseaseFinder.disease.Disease;
-import nl.bioinf.DiseaseFinder.disease.DiseaseCollector;
-import nl.bioinf.DiseaseFinder.score.ScoreCalculator;
-import org.json.JSONException;
 
 /**
  *
- * @author mkslofstra
+ * @author aroeters
  */
-@WebServlet(name = "SymptomToDiseaseConverterServlet", urlPatterns = {
-    "/getDisease.do" })
-public class SymptomToDiseaseConverterServlet extends HttpServlet {
+@WebServlet(name = "JsTreeSearcherServlet", urlPatterns = {"/SearchTree.do"})
+public class JsTreeSearcherServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,27 +29,22 @@ public class SymptomToDiseaseConverterServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws org.json.JSONException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, JSONException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String[] symptoms = request.getParameter("symptoms[]").split(",");
-            System.out.println(Arrays.toString(symptoms));
-            DiseaseCollector diseases = new DiseaseCollector(symptoms);
-            ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
-            HashMap<String, Disease> HashMapOfDiseases = diseases
-                    .getDiseaseCollection();
-            Iterator it = HashMapOfDiseases.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry pair = (Map.Entry) it.next();
-                Disease disease = (Disease) pair.getValue();
-                out.println(disease.printSummary());
-//                System.out.println(disease.printSummary());
-                it.remove(); // avoids a ConcurrentModificationException
-            }
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet JsTreeSearcherServlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet JsTreeSearcherServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         } finally {
             out.close();
         }
@@ -77,11 +62,7 @@ public class SymptomToDiseaseConverterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (JSONException ex) {
-            Logger.getLogger(SymptomToDiseaseConverterServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -95,11 +76,7 @@ public class SymptomToDiseaseConverterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (JSONException ex) {
-            Logger.getLogger(SymptomToDiseaseConverterServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
