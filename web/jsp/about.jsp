@@ -8,20 +8,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="../js_plugins/jquery.min.js" type="text/javascript"></script>
-        <script src="../js_plugins/bootstrap.min.js" type="text/javascript"></script>
-        <link href="../css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
-        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="../css/disease_matcher_layout.css" rel="stylesheet" type="text/css"/>
-        <script src="../js/resizePics.js" type="text/javascript"></script>
-        <script src="../js/autoSize.js" type="text/javascript"></script>
+        <base href="${initParam.base_url}">
+        <script src="js_plugins/jquery.min.js" type="text/javascript"></script>
+        <script src="js_plugins/bootstrap.min.js" type="text/javascript"></script>
+        <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="css/disease_matcher_layout.css" rel="stylesheet" type="text/css"/>
+        <script src="js/resizePics.js" type="text/javascript"></script>
+        <script src="js/autoSize.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Phenotype to disease converter - about</title>       
 
     </head>
     <body>
         <div id="container">
-            <div id="logo" class="jumbotron"><h1>Phenotype to Disease Converter</h1></div>
+            <%@include file="../includes/header.jsp" %>
             <div id="wrapper" class ="col-md-10 col-xs-10 col-sm-10 col-lg-10">
                 <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12" id="extraPage">
                     <div class="col-md-3 col-xs-3 col-sm-3 col-lg-3"></div>
@@ -79,10 +80,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="footer" class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
-                    <a href="#" class="clickUp">About</a><span id="pipe"> | </span><a class="clickUp" href="how_to.jsp">How to</a><span id="pipe"> | </span><a class="clickUp" href="../index.jsp">Home</a><p id="copyright">
-                        &copy;2015-2025 Phenotype to Disease Converter</p>
-                </div>
+                <%@include file="../includes/footer.jsp" %>
             </div>
 
         </div>

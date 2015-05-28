@@ -55,6 +55,12 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
    text-transform: uppercase;
    padding:1em;
 }
+h2 small{
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-mask-image: -webkit-linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.5) 50%, rgba(0,0,0,1));
+    -webkit-mask-image: linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.5) 50%, rgba(0,0,0,1));
+}
 /*the searchbar itself*/
 #search-symptome{
     border-radius: 5px;
@@ -75,10 +81,10 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
     padding:2em;
     margin-top:-2.2em;
     height: 100%;
-    padding-bottom: 4em;
+    padding-bottom: 5em;
     margin-left: -1.05em;
     width:50%;
-    margin-bottom:4em;
+    margin-bottom:5em;
     margin-top:-0.1em;
     overflow: auto;
 }
@@ -86,9 +92,9 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
 #result{
     height: 100%;
     padding:2em;
-    padding-bottom: 4em;
+    padding-bottom: 5em;
     width:50%;
-    margin-bottom:4em;
+    margin-bottom:5em;
     list-style-type: none;
     overflow: auto;
 
@@ -122,7 +128,7 @@ h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a0d8ef', endColorstr='#cecece',GradientType=0 ); /* IE6-9 */
     position:absolute;
     bottom:0;
-    height: 4em;
+    height: 5em;
     width: 100%;
     margin-left: -1.07em;
     border-bottom-left-radius: 20px;
@@ -244,7 +250,7 @@ highlight{
     float:right;
 }
 #warning{
-    text-align: right;
+    text-transform: uppercase;
     color: grey;
 }
 h4 {
@@ -257,7 +263,7 @@ h4 {
 }
 #extraPage {
     overflow: auto;
-    margin-bottom: 4em;
+    margin-bottom: 5em;
 }
 .caution {
     color: red;

@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <base href="${initParam.base_url}">
         <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="jsTree-style/jsTree-style.css" rel="stylesheet" type="text/css"/>
@@ -19,12 +20,13 @@
         <script src="js/buildTree.js" type="text/javascript"></script>
         <script src="js/getSymptoms.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Phenotype to disease converter</title>       
+        <title>Phenotype Disease Match Application
+        </title>       
 
     </head>
     <body>
         <div id="container">
-            <div id="logo" class="jumbotron"><h1>Phenotype to Disease Converter</h1></div>
+            <%@include file="includes/header.jsp" %>
             <div id="wrapper" class ="col-md-10 col-xs-10 col-sm-10 col-lg-10">
                 <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id = "search">                
                     <h2>Select symptoms</h2>
@@ -59,10 +61,7 @@
 
                     </div>
                 </div>
-                <div id="footer" class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
-                    <a href="jsp/about.jsp" class="clickUp">About</a><span id="pipe"> | </span><a class="clickUp" href="jsp/how_to.jsp">How to</a><p id="copyright">&copy;2015-2025 Phenotype to Disease Converter</p><br/> 
-                    <small id="warning">ATTENTION: This tool is not a doctor, when you have certain symptoms, it is always recommended to visit a doctor.</small><br/> 
-                </div>            
+                <%@include file="includes/footer.jsp" %>           
 
             </div>
 
