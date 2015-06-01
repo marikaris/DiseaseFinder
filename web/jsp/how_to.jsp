@@ -1,7 +1,8 @@
 <%-- 
-    Document   : index
+    Document   : how_to.jsp
     Created on : Feb 5, 2015, 9:10:34 AM
-    Author     : mkslofstra
+    Author     : aroeters
+    css:        mksloftra
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -26,12 +27,16 @@
             <div id="wrapper" class ="col-md-10 col-xs-10 col-sm-10 col-lg-10">
                 <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12" id="extraPage">
                     <h2>How to use</h2>
-                    <a class="image" data-toggle="tooltip" data-placement="top" title="Click here to make the image bigger."><img src="img/step1.png" alt="step1" class="examplePic" /></a><br/>
-                    <p class="text"><b>Step 1:</b>Select symptoms a patient has in the left column of the page. The symptoms are in a tree. To see the more detailed levels, click on the general levels. </p>
+                    <p class="text"><b>Step 1:</b> Select the symptoms that a patient has from the Human Phenotype Ontology tree on the left side of the screen. 
+                    If you don't know where the symptom is, put the name of the symptom in the search bar.</p>
+                    <a class="image" data-toggle="tooltip" data-placement="right" title="Click on the image to change image size."><img src="img/step1.png" alt="step1" class="examplePic" /></a><br/>
+                    <p class="text"><b>Step 2:</b> If you selected all the symptoms, click on "Search for diseases". </p>
                     <a class="image"><img src="img/step2.png" alt="step2" class="pic" /></a><br/>
-                    <p class="text"><b>Step 2:</b>Click on "Search for diseases". </p>
-                    <p class="text"><b>Step 3:</b>A list of diseases which matched the disease show up on the left side of the page.
-                        By clicking on the title, the information about the disease shows on a new screen. </p>
+                    <p class="text"><b>Step 3:</b> When you clicked on "search for diseases" a list of diseases 
+                        that match the given symptoms best shows up on the right side of the screen.</p>
+                    <p class="text"><b>Step 4:</b> You can now select the diseases by clicking on them. in the current screen a new tab opens with the information
+                    of the disease on it.</p>
+                    <p class="text"><b>Step 5:</b> To go back to the other diseases click on back to results.</p>
                 </div>
                 <%@include file="../includes/footer.jsp" %>
             </div>

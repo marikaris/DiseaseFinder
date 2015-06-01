@@ -27,7 +27,7 @@ import org.json.JSONObject;
  *
  * @author aroeters
  */
-@WebServlet(name = "JsTreePasserServlet", urlPatterns = {"/PassTree.do"})
+@WebServlet(name = "JsTreePasserServlet", urlPatterns = {"/PassTree.do" })
 public class JsTreePasserServlet extends HttpServlet {
 
     /**

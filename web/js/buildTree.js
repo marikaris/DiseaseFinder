@@ -7,7 +7,6 @@ function initialize() {
             'data': {
                 'url': url,
                 'data': function(node) {
-                    console.log(node.icon);
                     return {'id': node.id, 'icon':node.icon};
                 }
             }

@@ -237,6 +237,10 @@ body::-webkit-scrollbar-thumb {
 }
 .examplePic{
     height:5em;
+    padding-left: 5em;
+}
+.examplePic :hover{
+    cursor: pointer;
 }
 .bigger{
     height:30em;
