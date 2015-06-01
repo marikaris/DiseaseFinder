@@ -40,13 +40,13 @@
                     <div role="tabpanel">
 
                         <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
+                        <ul class="nav nav-tabs" role="tablist" id ="tablist">
                             <li role="presentation" class="active"><a href="#searchTab" aria-controls="searchTab" role="tab" data-toggle="tab">Search</a></li>
                             <li role="presentation"><a href="#resultTab" aria-controls="resultTab" role="tab" data-toggle="tab">Results</a></li>
                         </ul>
 
                         <!-- Tab panes -->
-                        <div class="tab-content">
+                        <div class="tab-content" id="tabcontent">
                             <div role="tabpanel" class="tab-pane active" id="searchTab">
                                 <br/><br/>
                                 <div id="event_result">Select symptoms on the right side of the page.</div>

@@ -88,9 +88,17 @@ function loadDisease() {
     var diseaseServlet = "RetrieveDisease.do";
     $.get(diseaseServlet, {"omimNumber": localStorage.getItem("omimNumber"),
         "symptoms[]": localStorage.getItem("symptoms")}, function(disease) {
+//        var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
+//        var title = disease.match(pattern)[1];
+//        var id = title.replace(" ", "");
+//        console.log(title);
         $("#resultTab").text("");
         //put the disease data in the results div
         $("#resultTab").append(disease);
+//        $("#tablist").append("<li role=\"presentation\"><a href=\"#"+id+"\" aria-controls=\""+id+"\" role=\"tab\" data-toggle=\"tab\">"+title+"</a></li>");
+//        $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\""+id+"\"></div>");
+//        $("#diseaseTab").append("<br/><br/>");
+//        $("#diseaseTab").append(disease);
         //set the bootstrap styling on the tooltip 
         $("body").tooltip({selector: '[data-toggle=tooltip]'});
         $("#highlightButton").click(function() {
