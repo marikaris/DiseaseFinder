@@ -1,12 +1,11 @@
 //Created by mkslofstra and aroeters
 $(document).ready(initialize);
 function initialize() {
-    $("#search-symptome").click(function() {
-        $("#search-symptome").val("");
-    });
     var symptoms;
+    //by aroeters (lists made by mkslofstra)
     $("#ontology-tree").on('changed.jstree', function(e, data) {
         var i, j, selectedNodes = [], selectedIds = [];
+
         //run through all selected nodes
         for (i = 0, j = data.selected.length; i < j; i++) {
             //get the selected node
@@ -42,8 +41,7 @@ function initialize() {
             localStorage.setItem("symptoms", selectedNodes);
             localStorage.setItem("selectedIds", selectedIds);
         }
-        //add the selected nodes (and their parents) to the page, below the tree
-//        $('#event_result').html('Selected symptoms:<br/>' + selectedNodes.join(', '));
+        // by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
         $('#event_result').html('Selected symptoms:<br/>');
         for (i = 0; i < selectedIds.length; i++) {
             $("#event_result").append("<button class=\"btn btn-default\">"
@@ -52,27 +50,22 @@ function initialize() {
         $(".closeSymptom").click(function() {
             $("#ontology-tree").jstree("deselect_node", $(this).data("close"));
         });
-        $("#ontology-tree").click(
-                function() {
-                    $.each(selectedIds, function(index, id) {
-                        var node = $("#ontology-tree").jstree("get_node", id);
-                        if ($("#ontology-tree").jstree("is_loaded", node)) {
-                            console.log(node.children);
-                        } else {
-                            $("#ontology-tree").bind("load_node.jstree", function() {
-                                console.log(node.children);
-                            });
-
-                        }
-                    });
-
-                });
+        //make sure that when a node opens, it it closed (otherwise the children will not be loaded in the search)
+        $("#ontology-tree").on('open_node.jstree', function(e, data) {
+            var node = data.node;
+            var children = node.children;
+            $("#ontology-tree").jstree("check_node", node);
+            $.each(children, function(index, child) {
+                $("#ontology-tree").jstree("deselect_node", child);
+            });
+            
+        });
     });
     $("#search-button").click(function() {
         sendSymptoms();
     });
 }
-//this function will send data to the servlet and get diseases back
+//by mkslofstra: this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
     $('.nav-tabs a[href="#resultTab"]').tab('show');
 //the name of the servlet
@@ -90,6 +83,7 @@ function sendSymptoms(symptoms) {
         });
     });
 }
+//by mkslofstra
 function loadDisease() {
     var diseaseServlet = "RetrieveDisease.do";
     $.get(diseaseServlet, {"omimNumber": localStorage.getItem("omimNumber"),
