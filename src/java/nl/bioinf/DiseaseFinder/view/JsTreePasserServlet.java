@@ -5,6 +5,7 @@
  */
 package nl.bioinf.DiseaseFinder.view;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -46,10 +47,16 @@ public class JsTreePasserServlet extends HttpServlet {
 
         HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
         String path = JsTreePasserServlet.class.getClassLoader()
-                .getResource("/config/hp.obo").toString();
+                .getResource(File.separator + "config" + File.separator
+                        + "hp.obo").toString();
         HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
         HashMap collection = hr.readFile().getHPOHashMap();
         String requestedNodeChildren = request.getParameter("id");
+        HashMap<String, String> icons = new HashMap<String, String>();
+        icons.put("HP:0000005", "img/dna.png");
+        icons.put("HP:0000118", "img/human.png");
+        icons.put("HP:0040006", "img/skull.png");
+        icons.put("HP:0012823", "img/clock.png");
         String jsonChildren = "";
         if (requestedNodeChildren.equals("#")) {
             /*based on request attribute "id", fetch the children for that ID.*/
@@ -65,6 +72,11 @@ public class JsTreePasserServlet extends HttpServlet {
             for (HPOTerm child : parent.getChildren()) {
                 JSONObject childNode = new JSONObject(hj.createSubTree(
                         child, parent.getId()));
+                if (icons.containsKey(child.getId())) {
+                    childNode.put("icon", icons.get(child.getId()));
+                } else {
+                    childNode.put("icon", request.getParameter("icon"));
+                }
                 children.put(childNode);
             }
             jsonChildren = children.toString();

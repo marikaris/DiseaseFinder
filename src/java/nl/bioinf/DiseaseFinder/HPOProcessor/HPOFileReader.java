@@ -63,7 +63,6 @@ public class HPOFileReader {
         }
         // To add the last HPOTerm
         hc.addToHPOHashMap(hp.getId(), hp);
-
         HashMap allTerms = hc.getHPOHashMap();
         for (Object key : allTerms.keySet()) {
             HPOTerm child = (HPOTerm) allTerms.get(key);
@@ -77,4 +76,5 @@ public class HPOFileReader {
         }
         return hc;
     }
+
 }
