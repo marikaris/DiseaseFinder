@@ -5,6 +5,7 @@
  */
 package nl.bioinf.DiseaseFinder.view;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -46,7 +47,8 @@ public class JsTreePasserServlet extends HttpServlet {
 
         HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
         String path = JsTreePasserServlet.class.getClassLoader()
-                .getResource("/config/hp.obo").toString();
+                .getResource(File.separator + "config" + File.separator
+                        + "hp.obo").toString();
         HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
         HashMap collection = hr.readFile().getHPOHashMap();
         String requestedNodeChildren = request.getParameter("id");

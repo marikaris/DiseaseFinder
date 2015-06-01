@@ -5,6 +5,7 @@
  */
 package nl.bioinf.DiseaseFinder.HPOProcessor;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -27,7 +28,8 @@ public class HPOJsonObjectCreator {
      */
     public HPOJsonObjectCreator() throws IOException {
         String path = HPOJsonObjectCreator.class.getClassLoader()
-                .getResource("/config/hp.obo").toString();
+                .getResource(File.separator + "config" + File.separator
+                        + "hp.obo").toString();
         HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
         this.hpoCollection = hr.readFile().getHPOHashMap();
 
