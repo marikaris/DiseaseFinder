@@ -36,16 +36,15 @@ function initialize() {
                 //checks if the parent is #, this should not be added to the list.
                 if (parents[0] !== "#") {
                     selectedNodes.push(parents[0]);
-                    console.log(parents[0]);
                 }
                 ;
             }
             localStorage.setItem("symptoms", selectedNodes);
-            console.log(selectedIds);
+            localStorage.setItem("selectedIds", selectedIds);
         }
         //add the selected nodes (and their parents) to the page, below the tree
 //        $('#event_result').html('Selected symptoms:<br/>' + selectedNodes.join(', '));
-        $('#event_result').html('<b>Selected symptoms:</b><br/>');
+        $('#event_result').html('Selected symptoms:<br/>');
         for (i = 0; i < selectedIds.length; i++) {
             $("#event_result").append("<button class=\"btn btn-default\">"
                     + selectedNodes[i] + " <span class=\"closeSymptom\" data-close=\"" + selectedIds[i] + "\"> X </span></button>");
@@ -53,6 +52,21 @@ function initialize() {
         $(".closeSymptom").click(function() {
             $("#ontology-tree").jstree("deselect_node", $(this).data("close"));
         });
+        $("#ontology-tree").click(
+                function() {
+                    $.each(selectedIds, function(index, id) {
+                        var node = $("#ontology-tree").jstree("get_node", id);
+                        if ($("#ontology-tree").jstree("is_loaded", node)) {
+                            console.log(node.children);
+                        } else {
+                            $("#ontology-tree").bind("load_node.jstree", function() {
+                                console.log(node.children);
+                            });
+
+                        }
+                    });
+
+                });
     });
     $("#search-button").click(function() {
         sendSymptoms();
