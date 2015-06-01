@@ -13,12 +13,16 @@ import java.util.HashMap;
  * @author aroeters
  */
 public class HPOJsonObjectCreator {
+
     /**
      * Contains the hpoTerms.
      */
     private final HashMap<String, HPOTerm> hpoCollection;
+
+
     /**
      * The constructor of the class.
+     *
      * @throws IOException when the file is not found
      */
     public HPOJsonObjectCreator() throws IOException {
@@ -26,9 +30,12 @@ public class HPOJsonObjectCreator {
                 .getResource("/config/hp.obo").toString();
         HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
         this.hpoCollection = hr.readFile().getHPOHashMap();
+
     }
+
     /**
      * Creates the child branch of the requested parent.
+     *
      * @param hpoTerm the HPoTerm object of the parent
      * @param parent the id of the parent
      * @return a HashMap with all the information for jsTree.js
@@ -37,18 +44,11 @@ public class HPOJsonObjectCreator {
             final String parent) {
         HashMap tree = new HashMap();
         HashMap<String, Boolean> state = new HashMap<String, Boolean>();
-
-        if (hpoTerm.getId().equals("HP:0000001")) {
-            state.put("opened", true);
-            state.put("selected", false);
-        } else {
-            state.put("opened", false);
-            state.put("selected", false);
-        }
+        state.put("opened", false);
+        state.put("selected", false);
         tree.put("id", hpoTerm.getId());
         tree.put("text", hpoTerm.getName());
         tree.put("parent", parent);
-        tree.put("icon", "glyphicon glyphicon-user");
         tree.put("state", state);
         if (hpoTerm.hasChildren()) {
             tree.put("children", true);
@@ -58,4 +58,3 @@ public class HPOJsonObjectCreator {
         return tree;
     }
 }
-
