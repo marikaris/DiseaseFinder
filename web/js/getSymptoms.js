@@ -108,6 +108,14 @@ function loadDisease() {
             $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
             $("#" + id).append("<br/><br/>");
             $("#" + id).append(disease);
+            $(".closeDiseaseTab").click(function() {
+                var close_id = $(this).data("close");
+                var elem = document.getElementById(close_id);
+                elem.parentNode.removeChild(elem);
+                var tab = document.getElementById(close_id + "Tab");
+                tab.parentNode.removeChild(tab);
+                $('.nav-tabs a[href="#resultTab"]').tab('show');
+            });
         }
         //go to the disease tab
         $('.nav-tabs a[href="#' + id + '"]').tab('show');
@@ -120,14 +128,7 @@ function loadDisease() {
         $(".back2results").click(function() {
             $('.nav-tabs a[href="#resultTab"]').tab('show');
         });
-        $(".closeDiseaseTab").click(function() {
-            var close_id = $(this).data("close");
-            var elem = document.getElementById(close_id);
-            elem.parentNode.removeChild(elem);
-            var tab = document.getElementById(close_id + "Tab");
-            tab.parentNode.removeChild(tab);
-            $('.nav-tabs a[href="#resultTab"]').tab('show');
-        });
+
     });
 }
 ;
