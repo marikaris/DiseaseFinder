@@ -94,7 +94,6 @@ function loadDisease() {
         var id = title.replace(/[ ,;.-]* /g, "");
         var idPat = new RegExp(id);
         var matchId = localStorage.getItem("ids").match(idPat);
-        console.log(matchId);
         //make sure, the tab is only created one time
         if (matchId === null) {
             localStorage.setItem("ids", localStorage.getItem("ids") + id);

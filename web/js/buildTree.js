@@ -22,6 +22,9 @@ function initialize() {
             var v = $('#search-symptome').val();
             $('#ontology-tree').jstree(true).search(v);
         }, 250);
+        });
+        $('#search-symptome').focus(function() {
+            $('#search-symptome').attr('value', '');
     });
 }
 
