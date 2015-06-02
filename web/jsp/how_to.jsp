@@ -28,15 +28,19 @@
                 <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12" id="extraPage">
                     <h2>How to use</h2>
                     <p class="text"><b>Step 1:</b> Select the symptoms that a patient has from the Human Phenotype Ontology tree on the left side of the screen. 
-                    If you don't know where the symptom is, put the name of the symptom in the search bar.</p>
+                        If you don't know where the symptom is, put the name of the symptom in the search bar.</p>
                     <a class="image" data-toggle="tooltip" data-placement="right" title="Click on the image to change image size."><img src="img/step1.png" alt="step1" class="examplePic" /></a><br/>
                     <p class="text"><b>Step 2:</b> If you selected all the symptoms, click on "Search for diseases". </p>
                     <a class="image"><img src="img/step2.png" alt="step2" class="pic" /></a><br/>
                     <p class="text"><b>Step 3:</b> When you clicked on "search for diseases" a list of diseases 
-                        that match the given symptoms best shows up on the right side of the screen.</p>
+                        that match the given symptoms best shows up on the right side of the screen. By clicking on the X in the button with the
+                        name of a symptom, the symptom gets deselected.</p>
+                    <img src="img/step3.png" alt="step3" class="examplePic1" />
                     <p class="text"><b>Step 4:</b> You can now select the diseases by clicking on them. in the current screen a new tab opens with the information
-                    of the disease on it.</p>
+                        of the disease on it.</p>
                     <p class="text"><b>Step 5:</b> To go back to the other diseases click on back to results.</p>
+                    <p class="text"><b>Step 6:</b> To highlight matches, click on "Highlight matches". The matches will only highlight when the found matches are found literally in 
+                        the disease description. </p>
                 </div>
                 <%@include file="../includes/footer.jsp" %>
             </div>
