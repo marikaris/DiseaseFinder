@@ -138,7 +138,7 @@ public class Disease implements Comparable {
         return "<h2>" + title + "</h2><div id =\"disease\">"
                 + "<p class=\"back2results\"><span class = \"glyphicon"
                 + " glyphicon-arrow-left\" aria-hidden=\"true\">"
-                + "</span>  Back to results</p><br/>"
+                + "  Back to results</p></span><br/>"
                 + "<b>Omim number : </b>"
                 + "<a href=\"http://omim.org/entry/" + mimNumber
                 + "\"target=\"blank\"data-toggle=\"tooltip\""

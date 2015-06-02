@@ -45,7 +45,9 @@ function initialize() {
         // by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
         $('#event_result').html('Selected symptoms:<br/>');
         for (i = 0; i < selectedIds.length; i++) {
-            $("#event_result").append("<button class=\"btn btn-default\">"
+            var this_node = $("#ontology-tree").jstree("get_node", selectedIds[i]);
+            var icon = this_node.icon;
+            $("#event_result").append("<button class=\"btn btn-default\"> <img alt=\""+icon+"\" src=\""+icon+"\"> "
                     + selectedNodes[i] + " <span class=\"closeSymptom\" data-close=\"" + selectedIds[i] + "\"> X </span></button>");
         }
         $(".closeSymptom").click(function() {
@@ -112,6 +114,7 @@ function loadDisease() {
             matchId = localStorage.getItem("ids").match(idPat);
             var close_id = $(this).data("close");
             var elem = document.getElementById(close_id);
+            if(elem !== null){
             elem.parentNode.removeChild(elem);
             var tab = document.getElementById(close_id + "Tab");
             tab.parentNode.removeChild(tab);
@@ -120,7 +123,7 @@ function loadDisease() {
             var idString = localStorage.getItem("ids");
             var firstPart = idString.substring(0, matchId.index);
             var lastPart = idString.substring(matchId.index+id.length, idString.length);
-            localStorage.setItem("ids", firstPart+lastPart);
+            localStorage.setItem("ids", firstPart+lastPart);}
         });
         //go to the disease tab
         $('.nav-tabs a[href="#' + id + '"]').tab('show');

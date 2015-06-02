@@ -42,8 +42,8 @@
 
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist" id ="tablist">
-                            <li role="presentation" class="active"><a href="#searchTab" aria-controls="searchTab" role="tab" data-toggle="tab">Search</a></li>
-                            <li role="presentation"><a href="#resultTab" aria-controls="resultTab" role="tab" data-toggle="tab">Results</a></li>
+                            <li role="presentation" class="active"><a href="#searchTab" aria-controls="searchTab" role="tab" data-toggle="tab" class = "tab">Search</a></li>
+                            <li role="presentation" ><a href="#resultTab" aria-controls="resultTab" role="tab" data-toggle="tab" class = "tab">Results</a></li>
                         </ul>
 
                         <!-- Tab panes -->
