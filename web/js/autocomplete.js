@@ -6,15 +6,17 @@
 $(document).ready(initialize);
 
 function initialize() {
-    $("#search-symptom").autocomplete({
-        source: "search.php",
-        minLength: 2,
-        select: function(event, ui) {
-            log(ui.item ?
-                    "Selected: " + ui.item.value + " aka " + ui.item.id :
-                    "Nothing selected, input was " + this.value);
+    var url = "SearchBarAutocomplete.do";
+    var suggestions;
+    $.get(url, function(data) {
+        suggestions = data;
+    });
+    $('#search-symptom').devbridgeAutocomplete({
+        lookup: suggestions,
+        onSelect: function(suggestion) {
+            alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
         }
     });
-
 }
+
 

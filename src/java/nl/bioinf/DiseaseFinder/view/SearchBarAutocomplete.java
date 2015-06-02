@@ -6,20 +6,26 @@
 
 package nl.bioinf.DiseaseFinder.view;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import nl.bioinf.DiseaseFinder.HPOProcessor.HPOFileReader;
+import nl.bioinf.DiseaseFinder.HPOProcessor.HPOJsonObjectCreator;
+import nl.bioinf.DiseaseFinder.HPOProcessor.HPOTerm;
 
 /**
  *
  * @author aroeters
  */
-@WebServlet(name = "JsTreeSearcherServlet", urlPatterns = {"/SearchTree.do"})
-public class JsTreeSearcherServlet extends HttpServlet {
+@WebServlet(name = "SearchBarAutocomplete", urlPatterns = {"/SearchBarAutocomplete.do"})
+public class SearchBarAutocomplete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,12 +36,23 @@ public class JsTreeSearcherServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
-        
+        HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
+        String path = JsTreePasserServlet.class.getClassLoader()
+                .getResource(File.separator + "config" + File.separator
+                        + "hp.obo").toString();
+        HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
+        HashMap collection = hr.readFile().getHPOHashMap();
+        ArrayList<String> terms = new ArrayList<String>();
+        for (Object term : collection.values()) {
+            HPOTerm idGetter = (HPOTerm) term;
+            terms.add(idGetter.getName());
+        }
+        out.write(terms.toString());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
