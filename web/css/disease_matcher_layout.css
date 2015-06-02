@@ -284,21 +284,25 @@ div.tooltip-inner {
 }
 .tab-pane {
     padding: 2em;
-    background-color:rgba(255,255,255,0.5);
+    background-color:rgba(255,255,255,0.7);
     border-bottom-left-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
     border-top-right-radius: 0.5em;
     border: 1px;
-    border-left-color: #DBDBDB;
+    border-left-color: grey;
     border-left-style: solid;
-    border-right-color: #DBDBDB;
+    border-right-color: grey;
     border-right-style: solid;
-    border-bottom-color: #DBDBDB;
+    border-bottom-color: grey;
     border-bottom-style: solid;
     margin-bottom: 2em;
 }
 .tab{
     height: 3em;
-    border-style: solid;
-    border-color: grey;
+    border-top-style: solid !important;
+    border-left-style: solid !important;
+    border-right-style: solid !important;
+    border-top-color: grey !important;
+    border-left-color: grey !important;
+    border-right-color: grey !important;
 }
