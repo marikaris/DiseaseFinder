@@ -30,7 +30,7 @@
                 <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id = "search">                
                     <h2>Select symptoms</h2>
                     <div id="search-bar" class="inner-addon right-addon">
-                        <input type="text" id="search-symptome" value="Search symptoms" class="input form-control" />
+                        <input type="text" id="search-symptom" value="Search symptoms" class="input form-control" />
                         <i id = "glyph" class="glyphicon glyphicon-search" aria-hidden="true"></i>
                     </div>
                     <div id="ontology-tree" class="demo" style="margin-top:2em;"></div>

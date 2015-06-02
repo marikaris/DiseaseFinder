@@ -14,17 +14,17 @@ function initialize() {
         'plugins': ["checkbox", "search"]
     });
     var to = false;
-    $('#search-symptome').keyup(function() {
+    $('#search-symptom').keyup(function() {
         if (to) {
             clearTimeout(to);
         }
         to = setTimeout(function() {
-            var v = $('#search-symptome').val();
+            var v = $('#search-symptom').val();
             $('#ontology-tree').jstree(true).search(v);
         }, 250);
         });
-        $('#search-symptome').focus(function() {
-            $('#search-symptome').attr('value', '');
+        $('#search-symptom').focus(function() {
+            $('#search-symptom').attr('value', '');
     });
 }
 
