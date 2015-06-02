@@ -103,7 +103,7 @@ function loadDisease() {
             }
             //put the data in an extra tab
             $("#tablist").append("<li role=\"presentation\"><a href=\"#" + id + "\" aria-controls=\"" + id
-                    + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
+                    + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\" class=\"tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
             $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
             $("#" + id).append("<br/><br/>");
             $("#" + id).append(disease);
