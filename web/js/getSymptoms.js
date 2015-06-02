@@ -45,7 +45,9 @@ function initialize() {
         // by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
         $('#event_result').html('Selected symptoms:<br/>');
         for (i = 0; i < selectedIds.length; i++) {
-            $("#event_result").append("<button class=\"btn btn-default\">"
+            var this_node = $("#ontology-tree").jstree("get_node", selectedIds[i]);
+            var icon = this_node.icon;
+            $("#event_result").append("<button class=\"btn btn-default\"> <img alt=\""+icon+"\" src=\""+icon+"\"> "
                     + selectedNodes[i] + " <span class=\"closeSymptom\" data-close=\"" + selectedIds[i] + "\"> X </span></button>");
         }
         $(".closeSymptom").click(function() {
