@@ -112,6 +112,7 @@ function loadDisease() {
             matchId = localStorage.getItem("ids").match(idPat);
             var close_id = $(this).data("close");
             var elem = document.getElementById(close_id);
+            if(elem !== null){
             elem.parentNode.removeChild(elem);
             var tab = document.getElementById(close_id + "Tab");
             tab.parentNode.removeChild(tab);
@@ -120,7 +121,7 @@ function loadDisease() {
             var idString = localStorage.getItem("ids");
             var firstPart = idString.substring(0, matchId.index);
             var lastPart = idString.substring(matchId.index+id.length, idString.length);
-            localStorage.setItem("ids", firstPart+lastPart);
+            localStorage.setItem("ids", firstPart+lastPart);}
         });
         //go to the disease tab
         $('.nav-tabs a[href="#' + id + '"]').tab('show');
