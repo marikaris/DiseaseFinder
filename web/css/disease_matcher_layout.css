@@ -208,7 +208,7 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
-}
+}important
 #disease{
     margin-left: 5em;
     margin-right: 5em;

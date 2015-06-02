@@ -88,25 +88,37 @@ function loadDisease() {
     var diseaseServlet = "RetrieveDisease.do";
     $.get(diseaseServlet, {"omimNumber": localStorage.getItem("omimNumber"),
         "symptoms[]": localStorage.getItem("symptoms")}, function(disease) {
-//        var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
-//        var title = disease.match(pattern)[1];
-//        var id = title.replace(" ", "");
-//        console.log(title);
-        $("#resultTab").text("");
+        var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
+        var title = disease.match(pattern)[1];
+        console.log(title);
+        var id = title.replace(/[ ,;.-]* /g, "");
+        console.log(id);
+//        $("#resultTab").text("");
         //put the disease data in the results div
-        $("#resultTab").append(disease);
-//        $("#tablist").append("<li role=\"presentation\"><a href=\"#"+id+"\" aria-controls=\""+id+"\" role=\"tab\" data-toggle=\"tab\">"+title+"</a></li>");
-//        $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\""+id+"\"></div>");
-//        $("#diseaseTab").append("<br/><br/>");
-//        $("#diseaseTab").append(disease);
+//        $("#resultTab").append(disease);
+        $("#tablist").append("<li role=\"presentation\"><a href=\"#"+id+"\" aria-controls=\""+id
+                +"\" role=\"tab\" data-toggle=\"tab\" id=\""+id+"Tab\">"+title+" <button class=\"closeDiseaseTab\" data-close=\""+id+"\">X</button></a></li>");
+        $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\""+id+"\"></div>");
+        $("#"+id).append("<br/><br/>");
+        $("#"+id).append(disease);
         //set the bootstrap styling on the tooltip 
         $("body").tooltip({selector: '[data-toggle=tooltip]'});
         $("#highlightButton").click(function() {
             $(".highlight").toggleClass("highlighted");
         });
+        //go to the disease tab
+        $('.nav-tabs a[href="#'+id+'"]').tab('show');
         //load results again
-        $("#back2results").click(function() {
-            sendSymptoms();
+        $(".back2results").click(function() {
+            $('.nav-tabs a[href="#resultTab"]').tab('show');
+        });
+        $(".closeDiseaseTab").click(function(){
+            var close_id = $(this).data("close");
+            var elem = document.getElementById(close_id);
+            elem.parentNode.removeChild(elem);
+            var tab = document.getElementById(close_id+"Tab");
+            tab.parentNode.removeChild(tab);
+            $('.nav-tabs a[href="#resultTab"]').tab('show');
         });
     });
 }

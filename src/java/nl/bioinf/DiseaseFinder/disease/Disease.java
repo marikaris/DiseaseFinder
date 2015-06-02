@@ -136,8 +136,8 @@ public class Disease implements Comparable {
             diseaseInfo = diseaseInfo.replaceAll("(?i)" + match.toLowerCase(), "<span class=\"highlight\">" + match + "</span>");
         }
         return "<h2>" + title + "</h2><div id =\"disease\">"
-                + "<p id=\"back2results\"><span class = \"glyphicon"
-                + " glyphicon-arrow-left\" aria-hidden=\"true\""
+                + "<p class=\"back2results\"><span class = \"glyphicon"
+                + " glyphicon-arrow-left\" aria-hidden=\"true\">"
                 + "</span>  Back to results</p><br/>"
                 + "<b>Omim number : </b>"
                 + "<a href=\"http://omim.org/entry/" + mimNumber
