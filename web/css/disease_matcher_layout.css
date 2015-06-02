@@ -62,7 +62,7 @@ h2 small{
     -webkit-mask-image: linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.5) 50%, rgba(0,0,0,1));
 }
 /*the searchbar itself*/
-#search-symptome{
+#search-symptom{
     border-radius: 5px;
     border-color: silver;
     color: grey;
