@@ -213,10 +213,10 @@ body::-webkit-scrollbar-thumb {
     margin-left: 5em;
     margin-right: 5em;
 }
-#back2results{
+.back2results{
     color: #666666;
 }
-#back2results :hover{
+.back2results :hover{
     color: black;
     text-decoration: underline;
     cursor: pointer;

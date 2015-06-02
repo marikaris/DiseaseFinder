@@ -2,6 +2,7 @@
 $(document).ready(initialize);
 function initialize() {
     var symptoms;
+    localStorage.setItem("ids", "");
     //by aroeters (lists made by mkslofstra)
     $("#ontology-tree").on('changed.jstree', function(e, data) {
         var i, j, selectedNodes = [], selectedIds = [];
@@ -58,7 +59,7 @@ function initialize() {
             $.each(children, function(index, child) {
                 $("#ontology-tree").jstree("deselect_node", child);
             });
-            
+
         });
     });
     $("#search-button").click(function() {
@@ -90,33 +91,40 @@ function loadDisease() {
         "symptoms[]": localStorage.getItem("symptoms")}, function(disease) {
         var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
         var title = disease.match(pattern)[1];
-        console.log(title);
         var id = title.replace(/[ ,;.-]* /g, "");
-        console.log(id);
-//        $("#resultTab").text("");
-        //put the disease data in the results div
-//        $("#resultTab").append(disease);
-        $("#tablist").append("<li role=\"presentation\"><a href=\"#"+id+"\" aria-controls=\""+id
-                +"\" role=\"tab\" data-toggle=\"tab\" id=\""+id+"Tab\">"+title+" <button class=\"closeDiseaseTab\" data-close=\""+id+"\">X</button></a></li>");
-        $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\""+id+"\"></div>");
-        $("#"+id).append("<br/><br/>");
-        $("#"+id).append(disease);
+        var idPat = new RegExp(id);
+        var matchId = localStorage.getItem("ids").match(idPat);
+        console.log(matchId);
+        //make sure, the tab is only created one time
+        if (matchId === null) {
+            localStorage.setItem("ids", localStorage.getItem("ids") + id);
+            title = title.charAt(0) + title.substring(1, title.length).toLowerCase();
+            if (title.length > 15) {
+                title = title.substring(0, 12) + "...";
+            }
+            //put the data in an extra tab
+            $("#tablist").append("<li role=\"presentation\"><a href=\"#" + id + "\" aria-controls=\"" + id
+                    + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
+            $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
+            $("#" + id).append("<br/><br/>");
+            $("#" + id).append(disease);
+        }
+        //go to the disease tab
+        $('.nav-tabs a[href="#' + id + '"]').tab('show');
         //set the bootstrap styling on the tooltip 
         $("body").tooltip({selector: '[data-toggle=tooltip]'});
         $("#highlightButton").click(function() {
             $(".highlight").toggleClass("highlighted");
         });
-        //go to the disease tab
-        $('.nav-tabs a[href="#'+id+'"]').tab('show');
         //load results again
         $(".back2results").click(function() {
             $('.nav-tabs a[href="#resultTab"]').tab('show');
         });
-        $(".closeDiseaseTab").click(function(){
+        $(".closeDiseaseTab").click(function() {
             var close_id = $(this).data("close");
             var elem = document.getElementById(close_id);
             elem.parentNode.removeChild(elem);
-            var tab = document.getElementById(close_id+"Tab");
+            var tab = document.getElementById(close_id + "Tab");
             tab.parentNode.removeChild(tab);
             $('.nav-tabs a[href="#resultTab"]').tab('show');
         });
