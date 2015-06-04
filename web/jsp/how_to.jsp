@@ -34,13 +34,20 @@
                     <a class="image"><img src="img/step2.png" alt="step2" class="pic" /></a><br/>
                     <p class="text"><b>Step 3:</b> When you clicked on "search for diseases" a list of diseases 
                         that match the given symptoms best shows up on the right side of the screen. By clicking on the X in the button with the
-                        name of a symptom, the symptom gets deselected.</p>
+                        name of a symptom, the symptom gets deselected.<br/>
+                        *NOTE: The deselecting part in the right column does not work with mozilla firefox.</p>
                     <img src="img/step3.png" alt="step3" class="examplePic1" />
                     <p class="text"><b>Step 4:</b> You can now select the diseases by clicking on them. in the current screen a new tab opens with the information
                         of the disease on it.</p>
-                    <p class="text"><b>Step 5:</b> To go back to the other diseases click on back to results.</p>
-                    <p class="text"><b>Step 6:</b> To highlight matches, click on "Highlight matches". The matches will only highlight when the found matches are found literally in 
-                        the disease description. </p>
+                    <img src="img/step4.png" alt="step4" class="examplePic" />
+                    <img src="img/step5.png" alt="step5" class="examplePic" />
+                    <p class="text"><b>Step 5:</b> To highlight matches, click on "Highlight matches". The matches will only highlight when the found matches are found literally in 
+                        the disease description. <br/>
+                    </p>
+                    <img src="img/step6.png" alt="step6" class="examplePic1" />
+                    <p class="text"><b>Step6:</b> By clicking on the omim number, the omim page of the disease opens in another tab in your web-browser.</p>
+                    <img src="img/step7.png" alt="step7" /><br/>
+                    <p class="text"><b>Step 7:</b> To go back to the other diseases click on back to results.</p><br/>
                 </div>
                 <%@include file="../includes/footer.jsp" %>
             </div>
