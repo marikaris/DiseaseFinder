@@ -66,8 +66,9 @@ h2 small{
     border-radius: 5px;
     border-color: silver;
     color: grey;
-    padding-left: 1.5em;
-    width: 12em;
+    padding-left: 1em;
+    padding-right: 2.5em;
+    width: 20em;
 
 }
 /*the div in which is the searchbar*/
@@ -305,4 +306,9 @@ div.tooltip-inner {
     border-top-color: grey !important;
     border-left-color: grey !important;
     border-right-color: grey !important;
+}
+.ui-autocomplete {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 15em;
 }

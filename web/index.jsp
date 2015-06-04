@@ -9,6 +9,7 @@
 <html>
     <head>
         <base href="${initParam.base_url}">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="jsTree-style/jsTree-style.css" rel="stylesheet" type="text/css"/>
@@ -19,8 +20,10 @@
         <script src="js/autoSize.js" type="text/javascript"></script>
         <script src="js/buildTree.js" type="text/javascript"></script>
         <script src="js/getSymptoms.js" type="text/javascript"></script>
-        <script src="js/autocomplete.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="js/autocomplete.js" type="text/javascript"></script>
         <title>PheDiMAp</title>       
 
     </head>
@@ -34,6 +37,7 @@
                         <input type="text" id="search-symptom" value="Search symptoms" class="input form-control" />
                         <i id = "glyph" class="glyphicon glyphicon-search" aria-hidden="true"></i>
                     </div>
+
                     <div id="ontology-tree" class="demo" style="margin-top:2em;"></div>
 
                 </div>

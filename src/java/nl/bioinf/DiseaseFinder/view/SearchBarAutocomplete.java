@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import nl.bioinf.DiseaseFinder.HPOProcessor.HPOFileReader;
 import nl.bioinf.DiseaseFinder.HPOProcessor.HPOJsonObjectCreator;
 import nl.bioinf.DiseaseFinder.HPOProcessor.HPOTerm;
+import org.json.JSONArray;
 
 /**
  *
@@ -41,6 +42,7 @@ public class SearchBarAutocomplete extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+
         HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
         String path = JsTreePasserServlet.class.getClassLoader()
                 .getResource(File.separator + "config" + File.separator
@@ -52,7 +54,21 @@ public class SearchBarAutocomplete extends HttpServlet {
             HPOTerm idGetter = (HPOTerm) term;
             terms.add(idGetter.getName());
         }
-        out.write(terms.toString());
+        response.setContentType("text/html");
+        response.setHeader("Cache-control", "no-cache, no-store");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Expires", "-1");
+        JSONArray arrayObj = new JSONArray();
+        String query = request.getParameter("term");
+        query = query.toLowerCase();
+        for (String term : terms) {
+            String country = term.toLowerCase();
+            if (country.startsWith(query)) {
+                arrayObj.put(term);
+            }
+        }
+        out.println(arrayObj.toString());
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
