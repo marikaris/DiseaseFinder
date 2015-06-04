@@ -244,7 +244,10 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
 }
 .bigger{
-    height:30em;
+    height:50em;
+}
+.examplePic1{
+    height: 20em;
 }
 .text{ width: 30em;
        margin-top:1em;}
