@@ -21,6 +21,9 @@ function initialize() {
                     response(items);
                 }
             });
+        },
+        select : function() {
+            alert();
         }
     });
 }

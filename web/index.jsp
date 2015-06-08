@@ -16,7 +16,8 @@
         <link href="css/disease_matcher_layout.css" rel="stylesheet" type="text/css"/>
         <script src="js_plugins/jquery.min.js" type="text/javascript"></script>
         <script src="js_plugins/bootstrap.min.js" type="text/javascript"></script>
-        <script src="js_plugins/jstree.min.js" type="text/javascript"></script>
+        <!--<script src="js_plugins/jstree.min.js" type="text/javascript"></script>-->
+        <script src="js_plugins/jstree.js" type="text/javascript"></script>
         <script src="js/autoSize.js" type="text/javascript"></script>
         <script src="js/buildTree.js" type="text/javascript"></script>
         <script src="js/getSymptoms.js" type="text/javascript"></script>
