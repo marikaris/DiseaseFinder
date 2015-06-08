@@ -47,21 +47,25 @@ function initialize() {
         for (i = 0; i < selectedIds.length; i++) {
             var this_node = $("#ontology-tree").jstree("get_node", selectedIds[i]);
             var icon = this_node.icon;
-            $("#event_result").append("<button class=\"btn btn-default\"> <img alt=\""+icon+"\" src=\""+icon+"\"> "
-                    + selectedNodes[i] + " <span class=\"closeSymptom\" data-close=\"" + selectedIds[i] + "\"> X </span></button>");
+            $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
+                    + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button>");
         }
-        $(".closeSymptom").click(function() {
+        $(".dontClick").click(function() {
             $("#ontology-tree").jstree("deselect_node", $(this).data("close"));
         });
-        //make sure that when a node opens, it it closed (otherwise the children will not be loaded in the search)
+
+
+        //make sure that when a node opens, it is not selected (otherwise the children will not be loaded in the search)
         $("#ontology-tree").on('open_node.jstree', function(e, data) {
             var node = data.node;
-            var children = node.children;
-            $("#ontology-tree").jstree("check_node", node);
-            $.each(children, function(index, child) {
-                $("#ontology-tree").jstree("deselect_node", child);
-            });
+            if ($("#ontology-tree").jstree("is_checked", node)) {
+                var children = node.children;
+                $("#ontology-tree").jstree("check_node", node);
+                $.each(children, function(index, child) {
+                    $("#ontology-tree").jstree("deselect_node", child);
+                });
 
+            }
         });
     });
     $("#search-button").click(function() {
@@ -79,10 +83,14 @@ function sendSymptoms(symptoms) {
         $("#resultTab").append("<br/><br/><ul>");
         $("#resultTab").append(diseases);
         $("#resultTab").append("</ul>");
+        $("#resultTab").append("<button id = \"save\">Save this result</button>");
         $("body").tooltip({selector: '[data-toggle=tooltip]'});
         $(".clickTitle").click(function() {
             localStorage.setItem("omimNumber", $(this).attr("id"));
             loadDisease();
+        });
+        $("#save").click(function() {
+            saveResults();
         });
     });
 }
@@ -114,16 +122,17 @@ function loadDisease() {
             matchId = localStorage.getItem("ids").match(idPat);
             var close_id = $(this).data("close");
             var elem = document.getElementById(close_id);
-            if(elem !== null){
-            elem.parentNode.removeChild(elem);
-            var tab = document.getElementById(close_id + "Tab");
-            tab.parentNode.removeChild(tab);
-            $('.nav-tabs a[href="#resultTab"]').tab('show');
-            //remove string from id list, so that it can be opened again
-            var idString = localStorage.getItem("ids");
-            var firstPart = idString.substring(0, matchId.index);
-            var lastPart = idString.substring(matchId.index+id.length, idString.length);
-            localStorage.setItem("ids", firstPart+lastPart);}
+            if (elem !== null) {
+                elem.parentNode.removeChild(elem);
+                var tab = document.getElementById(close_id + "Tab");
+                tab.parentNode.removeChild(tab);
+                $('.nav-tabs a[href="#resultTab"]').tab('show');
+                //remove string from id list, so that it can be opened again
+                var idString = localStorage.getItem("ids");
+                var firstPart = idString.substring(0, matchId.index);
+                var lastPart = idString.substring(matchId.index + id.length, idString.length);
+                localStorage.setItem("ids", firstPart + lastPart);
+            }
         });
         //go to the disease tab
         $('.nav-tabs a[href="#' + id + '"]').tab('show');
@@ -138,5 +147,13 @@ function loadDisease() {
         });
 
     });
+}
+;
+function saveResults() {
+    var results = $("#resultTab").text();
+    var symptoms = localStorage.getItem("symptoms");
+    symptoms = symptoms.replace(/,/g, "\n");
+    var file = new Blob(["Symptoms\n" + symptoms + "\n\nResults:\n" + results], {type: "text/plain;charset=utf-8"});
+    saveAs(file, "results.txt");
 }
 ;

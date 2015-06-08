@@ -21,6 +21,7 @@
         <script src="js/autoSize.js" type="text/javascript"></script>
         <script src="js/buildTree.js" type="text/javascript"></script>
         <script src="js/getSymptoms.js" type="text/javascript"></script>
+        <script src="js_plugins/FileSaver.min.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
