@@ -117,6 +117,7 @@ function loadDisease() {
             $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
             $("#" + id).append("<br/><br/>");
             $("#" + id).append(disease);
+            $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease</button>");
         }
         $(".closeDiseaseTab").click(function() {
             matchId = localStorage.getItem("ids").match(idPat);
@@ -134,6 +135,10 @@ function loadDisease() {
                 localStorage.setItem("ids", firstPart + lastPart);
             }
         });
+        $(".saveDisease").click(function() {
+            localStorage.setItem("disease2save", $(this).data("disease_id"));
+            saveDisease();
+        });
         //go to the disease tab
         $('.nav-tabs a[href="#' + id + '"]').tab('show');
         //set the bootstrap styling on the tooltip 
@@ -149,31 +154,64 @@ function loadDisease() {
     });
 }
 ;
+//by mkslofstra
 function saveResults() {
     var results = $("#resultTab").text();
-    var symptoms = localStorage.getItem("symptoms");
-    symptoms = symptoms.replace(/,/g, "\n");
+    //for nice formating of the results
     var pattern = /\d[H|M|S]/g;
     var last = 0;
     var myArray;
-    var resultPrint = "";
+    var print = "";
     while ((myArray = pattern.exec(results)) !== null) {
-        resultPrint += results.substring(last, pattern.lastIndex - 1);
-        resultPrint += "\n";
+        print += results.substring(last, pattern.lastIndex - 1);
+        print += ";";
         var last = pattern.lastIndex - 1;
 
     }
-    var pattern = /\]/g;
-    var last = 0;
-    var match;
-    var print = "";
-    while ((match = pattern.exec(resultPrint)) !== null) {
-        print += resultPrint.substring(last, pattern.lastIndex);
-        print += "\n";
-        var last = pattern.lastIndex;
-
-    }
-    var file = new Blob(["Symptoms: \n" + symptoms + "\n\nResults:\n\n" + print], {type: "text/plain;charset=utf-8"});
-    saveAs(file, "results.txt");
+    //add last matches, without the save button
+    print += results.substring(last, results.length - 16);
+    //remove the semicolons in the title, this can cause problems in the csv format
+    var result = print.replace(/;/g, "");
+    //make a csv format table (labels are not needed)
+    result = result.replace(/\nOmimnumber: /g, ";");
+    result = result.replace(/Score: /g, ";");
+    result = result.replace(/Hits: /g, ";");
+    result = result.replace(/Matches: /g, ";");
+    //make the blob with the content of the csv file
+    var resultFile = new Blob(["Title;OmimNumber;Score;Hits;Matches\n" + result], {type: "text/plain;charset=utf-8"});
+    //save the file
+    saveAs(resultFile, "results.csv");
 }
 ;
+//by mkslofstra
+function saveDisease() {
+    var disease = $("#" + localStorage.getItem("disease2save"));
+    var disease_info = disease.html();
+    //delete all the html code (html instead of text is needed to make \n where needed)
+    disease_info = disease_info.replace(/<div id="disease"><p class="back2results"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true">  Back to results/, "");
+    disease_info = disease_info.replace(/<button id="highlightButton" class="button btn btn-info">Highlight matches/, "");
+    disease_info = disease_info.replace(/\<br\>/g, "\n");
+    disease_info = disease_info.replace(/\<[\w0-9]+\>/g, "");
+    disease_info = disease_info.replace(/<a data-toggle="tooltip" title="The number of matched symptoms." data-placement="right">/g, "");
+    disease_info = disease_info.replace(/<a data-toggle="tooltip" title="The score is calculated through: The sum of 1 \/ occurence of each match through the search." data-placement="right">/g, "");
+    disease_info = disease_info.replace(/\<[\/\w0-9]+\>/g, "");
+    disease_info = disease_info.replace(/<a href="http:\/\/omim.org\/entry\/\w{6}" target="blank" data-toggle="tooltip" title="Click here to open the disease on the omim website" id="omimSiteLink">/g, "");
+    //for nice formating of the score etc.
+    var pattern = /(\d[H|M|S])|]H/g;
+    var last = 2;
+    var myArray;
+    var print = "";
+    while ((myArray = pattern.exec(disease_info)) !== null) {
+        print += disease_info.substring(last, pattern.lastIndex - 1);
+        print += "\n";
+        var last = pattern.lastIndex - 1;
+
+    }
+    //ignore the last button
+    print += disease_info.substring(last, disease_info.length-80-localStorage.getItem("disease2save").length);
+    //the file saved in a blob object
+    var diseaseFile = new Blob([print], {type: "text/plain;charset=utf-8"});
+    //save the file with its id as name in a txt file
+    saveAs(diseaseFile, localStorage.getItem("disease2save") + ".txt");
+
+}
