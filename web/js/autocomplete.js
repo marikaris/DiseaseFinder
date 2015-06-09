@@ -22,8 +22,8 @@ function initialize() {
                 }
             });
         },
-        select : function() {
-            alert();
+        select : function(e, ui) {
+            $.get("SearchTree.do", {"autoCompleteResult": ui.item.value});
         }
     });
 }
