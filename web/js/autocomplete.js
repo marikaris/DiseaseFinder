@@ -23,7 +23,7 @@ function initialize() {
             });
         },
         select : function(e, ui) {
-            $.get("SearchTree.do", {"autoCompleteResult": ui.item.value});
+            $.get("SearchTree.do", {"autoCompleteResult":ui.item.value});
         }
     });
 }

@@ -7,7 +7,6 @@ package nl.bioinf.DiseaseFinder.view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -47,17 +46,15 @@ public class SymptomToDiseaseConverterServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String[] symptoms = request.getParameter("symptoms[]").split(",");
-            System.out.println(Arrays.toString(symptoms));
             DiseaseCollector diseases = new DiseaseCollector(symptoms);
             ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
-            HashMap<String, Disease> HashMapOfDiseases = diseases
+            HashMap<String, Disease> hashMapOfDiseases = diseases
                     .getDiseaseCollection();
-            Iterator it = HashMapOfDiseases.entrySet().iterator();
+            Iterator it = hashMapOfDiseases.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry) it.next();
                 Disease disease = (Disease) pair.getValue();
                 out.println(disease.printSummary());
-//                System.out.println(disease.printSummary());
                 it.remove(); // avoids a ConcurrentModificationException
             }
         } finally {

@@ -6,13 +6,19 @@
 
 package nl.bioinf.DiseaseFinder.view;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import nl.bioinf.DiseaseFinder.HPOProcessor.HPOFileReader;
+import nl.bioinf.DiseaseFinder.HPOProcessor.HPOJsonObjectCreator;
+import nl.bioinf.DiseaseFinder.HPOProcessor.HPOTerm;
 
 /**
  *
@@ -33,10 +39,19 @@ public class JsTreeSearcherServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
+        String path = JsTreePasserServlet.class.getClassLoader()
+                .getResource(File.separator + "config" + File.separator
+                        + "hp.obo").toString();
+        HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
+        HashMap collection = hr.readFile().getHPOHashMap();
+
         PrintWriter out = response.getWriter();
         String autoComp = request.getParameter("autoCompleteResult");
-        System.out.println(autoComp);
-
+        System.out.println(collection.keySet());
+        HPOTerm selectedNode = (HPOTerm) collection.get(autoComp.toLowerCase());
+        ArrayList<String> nodesToShow = new ArrayList<String>();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
