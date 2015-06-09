@@ -163,17 +163,18 @@ function saveResults() {
         var last = pattern.lastIndex - 1;
 
     }
-    print += results.substring(last, results.length-16);
-//    var file = new Blob(["Symptoms: \n" + symptoms + "\n\nResults:\n\n" + print], {type: "text/plain;charset=utf-8"});
-//    saveAs(file, "results.txt");
+    //add last matches, without the save button
+    print += results.substring(last, results.length - 16);
+    //remove the semicolons in the title, this can cause problems in the csv format
     var result = print.replace(/;/g, "");
+    //make a csv format table (labels are not needed)
     result = result.replace(/\nOmimnumber: /g, ";");
-    result= result.replace(/Score: /g, ";");
-    result= result.replace(/Hits: /g, ";");
-    result= result.replace(/Matches: /g, ";");
-    var resultFile = new Blob(["Title;OmimNumber;Score;Hits;Matches\n"+result]);
+    result = result.replace(/Score: /g, ";");
+    result = result.replace(/Hits: /g, ";");
+    result = result.replace(/Matches: /g, ";");
+    //make the blob with the content of the csv file
+    var resultFile = new Blob(["Title;OmimNumber;Score;Hits;Matches\n" + result]);
+    //save the file
     saveAs(resultFile, "results.csv");
-    
-    
 }
 ;
