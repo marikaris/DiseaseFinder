@@ -83,7 +83,7 @@ function sendSymptoms(symptoms) {
         $("#resultTab").append("<br/><br/><ul>");
         $("#resultTab").append(diseases);
         $("#resultTab").append("</ul>");
-        $("#resultTab").append("<button id = \"save\">Save this result</button>");
+        $("#resultTab").append("<button id = \"save\" class=\"btn btn-default\">Save this result</button>");
         $("body").tooltip({selector: '[data-toggle=tooltip]'});
         $(".clickTitle").click(function() {
             localStorage.setItem("omimNumber", $(this).attr("id"));
@@ -153,7 +153,27 @@ function saveResults() {
     var results = $("#resultTab").text();
     var symptoms = localStorage.getItem("symptoms");
     symptoms = symptoms.replace(/,/g, "\n");
-    var file = new Blob(["Symptoms\n" + symptoms + "\n\nResults:\n" + results], {type: "text/plain;charset=utf-8"});
+    var pattern = /\d[H|M|S]/g;
+    var last = 0;
+    var myArray;
+    var resultPrint = "";
+    while ((myArray = pattern.exec(results)) !== null) {
+        resultPrint += results.substring(last, pattern.lastIndex - 1);
+        resultPrint += "\n";
+        var last = pattern.lastIndex - 1;
+
+    }
+    var pattern = /\]/g;
+    var last = 0;
+    var match;
+    var print = "";
+    while ((match = pattern.exec(resultPrint)) !== null) {
+        print += resultPrint.substring(last, pattern.lastIndex);
+        print += "\n";
+        var last = pattern.lastIndex;
+
+    }
+    var file = new Blob(["Symptoms: \n" + symptoms + "\n\nResults:\n\n" + print], {type: "text/plain;charset=utf-8"});
     saveAs(file, "results.txt");
 }
 ;
