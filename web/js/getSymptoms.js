@@ -149,31 +149,31 @@ function loadDisease() {
     });
 }
 ;
+//by mkslofstra
 function saveResults() {
     var results = $("#resultTab").text();
-    var symptoms = localStorage.getItem("symptoms");
-    symptoms = symptoms.replace(/,/g, "\n");
+    //for nice formating of the results
     var pattern = /\d[H|M|S]/g;
     var last = 0;
     var myArray;
-    var resultPrint = "";
+    var print = "";
     while ((myArray = pattern.exec(results)) !== null) {
-        resultPrint += results.substring(last, pattern.lastIndex - 1);
-        resultPrint += "\n";
+        print += results.substring(last, pattern.lastIndex - 1);
+        print += ";";
         var last = pattern.lastIndex - 1;
 
     }
-    var pattern = /\]/g;
-    var last = 0;
-    var match;
-    var print = "";
-    while ((match = pattern.exec(resultPrint)) !== null) {
-        print += resultPrint.substring(last, pattern.lastIndex);
-        print += "\n";
-        var last = pattern.lastIndex;
-
-    }
-    var file = new Blob(["Symptoms: \n" + symptoms + "\n\nResults:\n\n" + print], {type: "text/plain;charset=utf-8"});
-    saveAs(file, "results.txt");
+    print += results.substring(last, results.length-16);
+//    var file = new Blob(["Symptoms: \n" + symptoms + "\n\nResults:\n\n" + print], {type: "text/plain;charset=utf-8"});
+//    saveAs(file, "results.txt");
+    var result = print.replace(/;/g, "");
+    result = result.replace(/\nOmimnumber: /g, ";");
+    result= result.replace(/Score: /g, ";");
+    result= result.replace(/Hits: /g, ";");
+    result= result.replace(/Matches: /g, ";");
+    var resultFile = new Blob(["Title;OmimNumber;Score;Hits;Matches\n"+result]);
+    saveAs(resultFile, "results.csv");
+    
+    
 }
 ;
