@@ -9,7 +9,6 @@ package nl.bioinf.DiseaseFinder.view;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import nl.bioinf.DiseaseFinder.HPOProcessor.HPOFileReader;
 import nl.bioinf.DiseaseFinder.HPOProcessor.HPOJsonObjectCreator;
 import nl.bioinf.DiseaseFinder.HPOProcessor.HPOTerm;
+import org.json.JSONArray;
 
 /**
  *
@@ -48,10 +48,24 @@ public class JsTreeSearcherServlet extends HttpServlet {
         HashMap collection = hr.readFile().getHPOHashMap();
 
         PrintWriter out = response.getWriter();
-        String autoComp = request.getParameter("autoCompleteResult");
-        System.out.println(collection.keySet());
-        HPOTerm selectedNode = (HPOTerm) collection.get(autoComp.toLowerCase());
-        ArrayList<String> nodesToShow = new ArrayList<String>();
+        String autoComp = request.getParameter("autoCompleteResult")
+                .toLowerCase();
+
+        JSONArray nodesToShow = new JSONArray();
+        String id = "";
+        for (Object key: collection.keySet()) {
+            HPOTerm node = (HPOTerm) collection.get(key.toString());
+            if (node.getName().equalsIgnoreCase(autoComp)) {
+                id = node.getId();
+            }
+        }
+        while (!id.equals("HP:0000001")) {
+            HPOTerm term = (HPOTerm) collection.get(id);
+            nodesToShow.put(term.getName());
+            id = term.getIsA().get(0).toString();
+        }
+        out.println(nodesToShow);
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

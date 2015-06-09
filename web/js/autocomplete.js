@@ -16,14 +16,24 @@ function initialize() {
                 url: url,
                 dataType: "json",
                 data: request,
-                success: function(data, textStatus, jqXHR) {
+                success: function(data) {
                     var items = data;
                     response(items);
                 }
             });
         },
-        select : function(e, ui) {
-            $.get("SearchTree.do", {"autoCompleteResult":ui.item.value});
+        select: function(e, ui) {
+            $.ajax({
+                url: "SearchTree.do",
+                dataType: "text",
+                data: {"autoCompleteResult": ui.item.value},
+                success: function(data) {
+                    data = data.replace(/\[|\]/g, "");
+                    var newData = data.replace(/\"|\n/g, "").split(",");
+                    console.log(newData);
+                }
+            });
+
         }
     });
 }
