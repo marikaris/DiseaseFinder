@@ -26,7 +26,7 @@ import org.json.JSONArray;
  * @author aroeters
  */
 @WebServlet(name = "SearchBarAutocomplete", urlPatterns = {"/SearchBarAutocomplete.do"})
-public class SearchBarAutocomplete extends HttpServlet {
+public class SearchBarAutocompleteServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
