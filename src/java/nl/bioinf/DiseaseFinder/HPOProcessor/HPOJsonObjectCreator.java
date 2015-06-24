@@ -27,9 +27,10 @@ public class HPOJsonObjectCreator {
      * @throws IOException when the file is not found
      */
     public HPOJsonObjectCreator() throws IOException {
-        String path = HPOJsonObjectCreator.class.getClassLoader()
-                .getResource(File.separator + "config" + File.separator
-                        + "hp.obo").toString();
+//        String path = HPOJsonObjectCreator.class.getClassLoader()
+//                .getResource(File.separator + "config" + File.separator
+//                        + "hp.obo").toString();
+        String path = "C:\\Users\\Arne\\Documents\\NetBeansProjects\\DiseaseFinder\\src\\java\\config\\hp.obo";
         HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
         this.hpoCollection = hr.readFile().getHPOHashMap();
 

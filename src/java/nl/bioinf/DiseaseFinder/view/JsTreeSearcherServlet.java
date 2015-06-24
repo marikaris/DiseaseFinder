@@ -41,9 +41,10 @@ public class JsTreeSearcherServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
-        String path = JsTreePasserServlet.class.getClassLoader()
-                .getResource(File.separator + "config" + File.separator
-                        + "hp.obo").toString();
+//        String path = JsTreePasserServlet.class.getClassLoader()
+//                .getResource(File.separator + "config" + File.separator
+//                        + "hp.obo").toString();
+        String path = "C:\\Users\\Arne\\Documents\\NetBeansProjects\\DiseaseFinder\\src\\java\\config\\hp.obo";
         HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
         HashMap collection = hr.readFile().getHPOHashMap();
 
@@ -61,7 +62,7 @@ public class JsTreeSearcherServlet extends HttpServlet {
         }
         while (!id.equals("HP:0000001")) {
             HPOTerm term = (HPOTerm) collection.get(id);
-            nodesToShow.put(term.getName());
+            nodesToShow.put(term.getId());
             id = term.getIsA().get(0).toString();
         }
         out.println(nodesToShow);
