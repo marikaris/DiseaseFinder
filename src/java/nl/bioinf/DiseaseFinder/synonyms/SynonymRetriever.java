@@ -1,9 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class is implemented, works fine, but it is not used yet
+ * it could be interesting in future work with the application
  */
-
 package nl.bioinf.DiseaseFinder.synonyms;
 
 import edu.smu.tspell.wordnet.Synset;
@@ -12,12 +10,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- *
+ * This class gets synonyms of words by the wordnet plugin
  * @author aroeters
  */
 public class SynonymRetriever {
+
     /**
      * searches in the WordNetDatabase for synonyms of the given word.
+     *
      * @param word the word to get synonyms for
      * @return an array with synonyms
      */
@@ -49,5 +49,6 @@ public class SynonymRetriever {
             System.err.println("You must specify "
                     + "a word where the synsets are needed from.");
         }
-    return synonyms; }
+        return synonyms;
+    }
 }

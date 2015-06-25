@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package nl.bioinf.DiseaseFinder.view;
 
 import java.io.IOException;
@@ -15,16 +9,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import nl.bioinf.DiseaseFinder.dataFinder.DiseasePhenotypeGetter;
 import nl.bioinf.DiseaseFinder.disease.DiseaseCollection;
 import nl.bioinf.DiseaseFinder.score.ScoreCalculator;
 import org.json.JSONException;
 
 /**
- *
+ * This servlet asks the disease object from the serverside of the
+ * application and sends it to the webpage.
  * @author mkslofstra
  */
-@WebServlet(name = "WebDiseaseRetrieverServlet", urlPatterns = {"/RetrieveDisease.do"})
+@WebServlet(name = "WebDiseaseRetrieverServlet", urlPatterns =
+        { "/RetrieveDisease.do" })
 public class WebDiseaseRetrieverServlet extends HttpServlet {
 
     /**
@@ -35,8 +30,10 @@ public class WebDiseaseRetrieverServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws org.json.JSONException when url of omim is malformed
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected final void processRequest(final HttpServletRequest request,
+            final HttpServletResponse response)
             throws ServletException, IOException, JSONException {
         response.setContentType("text/html;charset=UTF-8");
         String omimNumber = request.getParameter("omimNumber");

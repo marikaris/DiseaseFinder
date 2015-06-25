@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.bioinf.DiseaseFinder.score;
 
 import java.math.BigDecimal;
@@ -73,11 +68,11 @@ public class ScoreCalculator {
     }
 
     /**
-     * This class runs through the matches and processes them by calling the
-     * method to process them.
+     * This void processes the matches and counts them.
      */
     private void processMatches() {
-        HashMap<String, Disease> diseasesCopy = (HashMap<String, Disease>) diseases.clone();
+        HashMap<String, Disease> diseasesCopy =
+                (HashMap<String, Disease>) diseases.clone();
         Iterator it = diseasesCopy.entrySet().iterator();
         while (it.hasNext()) {
             HashMap.Entry pair = (HashMap.Entry) it.next();
@@ -90,11 +85,12 @@ public class ScoreCalculator {
     }
 
     /**
-     * This class runs through the diseases and processes them by calling the
-     * method to process them.
+     * This function processes diseases and calculates their
+     * score by calling methords.
      */
     private void processDiseases() {
-        HashMap<String, Disease> diseasesCopy = (HashMap<String, Disease>) diseases.clone();
+        HashMap<String, Disease> diseasesCopy =
+                (HashMap<String, Disease>) diseases.clone();
         Iterator it = diseasesCopy.entrySet().iterator();
         while (it.hasNext()) {
             HashMap.Entry pair = (HashMap.Entry) it.next();
