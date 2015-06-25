@@ -44,10 +44,9 @@ public class SearchBarAutocompleteServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
-//        String path = JsTreePasserServlet.class.getClassLoader()
-//                .getResource(File.separator + "config" + File.separator
-//                        + "hp.obo").toString();
-        String path = "C:\\Users\\Arne\\Documents\\NetBeansProjects\\DiseaseFinder\\src\\java\\config\\hp.obo";
+        String path = JsTreePasserServlet.class.getClassLoader()
+                .getResource(File.separator + "config" + File.separator
+                        + "hp.obo").toString();
         HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
         HashMap collection = hr.readFile().getHPOHashMap();
         ArrayList<String> terms = new ArrayList<String>();

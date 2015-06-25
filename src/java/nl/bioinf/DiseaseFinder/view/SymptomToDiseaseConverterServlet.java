@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import nl.bioinf.DiseaseFinder.disease.Disease;
-import nl.bioinf.DiseaseFinder.disease.DiseaseCollector;
+import nl.bioinf.DiseaseFinder.disease.DiseaseCollection;
 import nl.bioinf.DiseaseFinder.score.ScoreCalculator;
 import org.json.JSONException;
 
@@ -46,7 +46,7 @@ public class SymptomToDiseaseConverterServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String[] symptoms = request.getParameter("symptoms[]").split(",");
-            DiseaseCollector diseases = new DiseaseCollector(symptoms);
+            DiseaseCollection diseases = new DiseaseCollection(symptoms);
             ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
             HashMap<String, Disease> hashMapOfDiseases = diseases
                     .getDiseaseCollection();

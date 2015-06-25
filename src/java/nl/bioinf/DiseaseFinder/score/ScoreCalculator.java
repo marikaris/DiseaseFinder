@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import nl.bioinf.DiseaseFinder.disease.Disease;
-import nl.bioinf.DiseaseFinder.disease.DiseaseCollector;
+import nl.bioinf.DiseaseFinder.disease.DiseaseCollection;
 
 /**
  * This class will check if hits are true positive and score them.
@@ -39,7 +39,7 @@ public class ScoreCalculator {
      *
      * @param collection the diseasecollection to calculate the score on.
      */
-    public ScoreCalculator(final DiseaseCollector collection) {
+    public ScoreCalculator(final DiseaseCollection collection) {
         diseases = collection.getDiseaseCollection();
         this.processMatches();
         this.processDiseases();

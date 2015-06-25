@@ -18,7 +18,7 @@
         <script src="js/resizePics.js" type="text/javascript"></script>
         <script src="js/autoSize.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Phenotype to disease converter</title>       
+        <title>PheDiMAp - how to</title>       
 
     </head>
     <body>

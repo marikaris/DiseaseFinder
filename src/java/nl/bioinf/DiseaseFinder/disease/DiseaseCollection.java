@@ -25,7 +25,7 @@ import org.json.JSONException;
  *
  * @author mkslofstra and aroeters
  */
-public class DiseaseCollector {
+public class DiseaseCollection {
 
     /**
      * diseaseCollection is the collection of all found diseases given a
@@ -41,7 +41,7 @@ public class DiseaseCollector {
      * @throws JSONException when the page is not valid JSON
      * @throws IOException if the URL is invalid.
      */
-    public DiseaseCollector(final String[] features) throws JSONException,
+    public DiseaseCollection(final String[] features) throws JSONException,
             IOException {
         HashMap diseaseMatches = this.getOmimNumbers(features);
         this.fillDiseaseCollection(diseaseMatches);

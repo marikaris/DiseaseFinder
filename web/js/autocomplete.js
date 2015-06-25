@@ -33,18 +33,12 @@ function initialize() {
                     alert(newData);
                     while (newData.length !== 0) {
                     $("#ontology-tree").jstree("open_node", newData[0]);
-                    newData.splice(0,1);
-                    alert(newData);
+                    if (newData.length === 1) {
+                        $.jstree._reference("#ontology-tree").check_node('#'+newData[0]);
                     }
-//                    for (i = 0; i < newData.length; i++) {
-//                        $('.jstree-node').each(function () {
-//                            var id = $(this).attr('id');
-//                            var text = $(this).children('a').text();
-//                            if (text.toLowerCase().trim() === newData[i].toLowerCase().trim()) {
-//                                alert(id);
-//                            }
-//                        });
-//                    }
+                    newData.splice(0,1);
+                    }
+
                 }
             });
         }
