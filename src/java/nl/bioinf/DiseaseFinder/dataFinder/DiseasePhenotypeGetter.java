@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.bioinf.DiseaseFinder.dataFinder;
 
 import java.io.IOException;
@@ -72,6 +67,8 @@ public class DiseasePhenotypeGetter {
             String title = this.getTitleOfDisease();
             this.saveDisease(omimNumber, title);
         } catch (org.json.JSONException ex) {
+            //when the clinical synopsis of a disease is not available, this disease
+            //is not interesting for the application.
             Logger logger = Logger.getLogger(DiseasePhenotypeGetter.class
                     .getName());
             logger.log(Level.FINEST, omimNumber + " not usefulll, clinical"
@@ -88,15 +85,16 @@ public class DiseasePhenotypeGetter {
      * @throws JSONException if the stirng from the website is not valid json.
      * @return omimData the webpage of omim in a string.
      * @param omimNr the number of the disease.
-     * @author mkslofstra
+     * @author mkslofstra and aroeters
      */
     private JSONObject getOmimData(final String omimNr)
             throws IOException, JSONException {
         Properties config = new Properties();
+        //get information from properties file
         InputStream in = getClass().getResourceAsStream(
                 "/config/config.properties");
         config.load(in);
-
+        //save the url and the apiKey
         String url = config.getProperty("omimUrlResult");
         String apiKey = config.getProperty("omimKey");
         in.close();
@@ -144,10 +142,9 @@ public class DiseasePhenotypeGetter {
      * @param allFeatures an arraylist which contains all the features which can
      * be true.
      * @throws JSONException when the website has not a valid json structure.
-     * @return phenotypes all the phenotypes of the disease.
      * @author mkslofstra
      */
-    private final void collectPhenotypes(
+    private void collectPhenotypes(
             final ArrayList<String> allFeatures) throws JSONException {
         for (String feature : allFeatures) {
             //check for each feature if the value of it is true or false.
@@ -166,7 +163,6 @@ public class DiseasePhenotypeGetter {
      * features of these parent and adds this to featuresToFind.
      *
      * @throws JSONException when the website is not a valid json structure.
-     * @return featuresToFind is the global ArrayList of all features which are
      * possible true.
      * @author mkslofstra
      */
@@ -210,6 +206,7 @@ public class DiseasePhenotypeGetter {
      *
      * @return title is the title of the disease.
      * @author mkslofstra
+     * @throws JSONException when json is not properly structured.
      */
     private String getTitleOfDisease() throws JSONException {
         String title = features.getString("preferredTitle");

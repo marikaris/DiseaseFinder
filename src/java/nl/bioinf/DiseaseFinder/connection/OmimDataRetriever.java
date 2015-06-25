@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.bioinf.DiseaseFinder.connection;
 
 import java.io.BufferedReader;
@@ -37,17 +32,6 @@ public class OmimDataRetriever {
      */
     private String omimKey;
 
-    public static void main(String[] args) throws IOException, JSONException {
-//        OmimDataRetriever mimMumbers = new OmimDataRetriever("http://api.europe.omim.org/api/clinicalSynopsis?"
-//                + "mimNumber=%1$s&include=all&format=json&apiKey=%2$s", "3F48B5AE34656CC9211E0A476E28AF0C370E3F94");
-        OmimDataRetriever mimMumbers = new OmimDataRetriever("http://api.europe.omim.org/api/entry/search?search="
-                + "%1$s&filter=&fields=&retrieve=&start=0&limit=10&sort="
-                + "&operator=&format=json&apiKey=%2$s", "3F48B5AE34656CC9211E0A476E28AF0C370E3F94");
-        
-//        System.out.println(mimMumbers.getOmimResult("520000"));  
-        System.out.println(mimMumbers.getOmimNumbers(new String[]{"dizziness", "blurry vision", "ptosis"}));
-    }
-
     /**
      * The constructor of the class.
      *
@@ -61,8 +45,13 @@ public class OmimDataRetriever {
 
     /**
      * Gets the result from the website given an omim number.
+     * @param omimNumber the id of the disease on omim
+     * @return the webpage object so the disease information page on omim.
+     * @throws java.io.IOException when the url is malformed
+     * @throws org.json.JSONException when the json structure is incorrect
      */
-    public JSONObject getOmimResult(String omimNumber) throws IOException, JSONException {
+    public final JSONObject getOmimResult(final String omimNumber)
+            throws IOException, JSONException {
         String siteUrl = this.getResultUrl(omimURL, omimNumber, omimKey);
         String content = this.getSiteContent(siteUrl);
         content = getSuitableContent(makeJSONObject(content), "omim");
@@ -192,17 +181,15 @@ public class OmimDataRetriever {
      * @return diseases is an arraylist of strings which are the omimnumbers.
      */
     private HashMap<String, String> getDiseases(final String entries) {
-        ArrayList<String> diseases = new ArrayList();
         HashMap<String, String> diseaseMatches = new HashMap();
         Pattern numbers = Pattern.compile("\\d{6}");
         Matcher match = numbers.matcher(entries);
         Pattern symptomMatches = Pattern.compile("(\"matches\":\")([^}]+\")");
         Matcher symptomMatcher = symptomMatches.matcher(entries);
         while (match.find() && symptomMatcher.find()) {
-            diseases.add(match.group());
             String matches = symptomMatcher.group(2).replace("\\", "");
             matches = matches.replace("\"", "");
-            diseaseMatches.put(match.group(), matches); 
+            diseaseMatches.put(match.group(), matches);
         }
         return diseaseMatches;
     }

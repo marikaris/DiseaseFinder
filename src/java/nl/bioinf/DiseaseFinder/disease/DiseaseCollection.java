@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.bioinf.DiseaseFinder.disease;
 
 import java.io.IOException;
@@ -31,8 +26,11 @@ public class DiseaseCollection {
      * diseaseCollection is the collection of all found diseases given a
      * phenotype. This HashMap has as id the OMIM number and as value the
      * Disease object which belongs to this OMIM number.
+     *
+     * @author mkslofstra
      */
-    private LinkedHashMap<String, Disease> diseaseCollection = new LinkedHashMap();
+    private LinkedHashMap<String, Disease> diseaseCollection
+            = new LinkedHashMap();
 
     /**
      * DiseaseCollector is the constructor of the class.
@@ -40,6 +38,7 @@ public class DiseaseCollection {
      * @param features the features to look for
      * @throws JSONException when the page is not valid JSON
      * @throws IOException if the URL is invalid.
+     * @author mkslofstra
      */
     public DiseaseCollection(final String[] features) throws JSONException,
             IOException {
@@ -53,6 +52,7 @@ public class DiseaseCollection {
      * @param diseaseMatches the matches a disease has.
      * @throws IOException when URL is malformed.
      * @throws JSONException when json structure is invalid.
+     * @author mkslofstra
      */
     private void fillDiseaseCollection(final HashMap diseaseMatches)
             throws IOException, JSONException {
@@ -72,14 +72,14 @@ public class DiseaseCollection {
             addToDiseaseCollection(disease, id);
             it.remove(); // avoids a ConcurrentModificationException
         }
-//        this.sortDiseaseCollection();
-
     }
 
     /**
      * This function sorts the diseasecollection.
+     *
+     * @author mkslofstra
      */
-    public void sortDiseaseCollection() {
+    public final void sortDiseaseCollection() {
 //        System.out.println(dise);
         List<Disease> diseaseList = new ArrayList(diseaseCollection.values());
         this.diseaseCollection = new LinkedHashMap();
@@ -94,6 +94,7 @@ public class DiseaseCollection {
      * getDiseaseCollection is the getter of diseaseCollection.
      *
      * @return diseaseCollection the collection of all found diseases.
+     * @author mkslofstra
      */
     public final HashMap<String, Disease> getDiseaseCollection() {
         return diseaseCollection;
@@ -106,6 +107,7 @@ public class DiseaseCollection {
      * @throws JSONException when page is invalid JSON.
      * @throws IOException when URL is invalid.
      * @return diseases, an ArrayList of diseases.
+     * @author mkslofstra and aroeters
      */
     private HashMap<String, String> getOmimNumbers(final String[] features)
             throws JSONException, IOException {
@@ -131,6 +133,7 @@ public class DiseaseCollection {
      * @return a disease Object
      * @throws IOException if the URL is malformed
      * @throws JSONException if the JSON format is not correct
+     * @author mkslofstra
      */
     private Disease getDiseaseContent(final String disease) throws IOException,
             JSONException {
@@ -144,6 +147,7 @@ public class DiseaseCollection {
      *
      * @param disease the disease of the id.
      * @param mimNumber the id of the disease.
+     * @author mkslofstra
      */
     public final void addToDiseaseCollection(
             final Disease disease, final String mimNumber) {
@@ -160,6 +164,7 @@ public class DiseaseCollection {
      *
      * @param omimNumber is the OMIM number of the disease a person wants
      * information of.
+     * @author mkslofstra
      * @return info the information about the disease.
      */
     public final String getInfoOfDisease(final String omimNumber) {
