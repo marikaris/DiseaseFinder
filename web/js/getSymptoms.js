@@ -36,8 +36,7 @@ function initialize() {
                 //checks if the parent is #, this should not be added to the list.
                 if (parents[0] !== "#") {
                     selectedNodes.push(parents[0]);
-                }
-                ;
+                };
             }
             localStorage.setItem("symptoms", selectedNodes);
             localStorage.setItem("selectedIds", selectedIds);

@@ -17,7 +17,7 @@
         <script src="js/resizePics.js" type="text/javascript"></script>
         <script src="js/autoSize.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Phenotype to disease converter - about</title>       
+        <title>PheDiMAp - about</title>       
 
     </head>
     <body>
@@ -29,7 +29,7 @@
                     <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6">
                         <h2>About</h2>
                         <div class="centerAlignment">
-                            This page is about the Phenotype to Disease Converter application.
+                            This page is about the Phenotype Disease Match Application also called PheDiMAp.
                             It will tell you more about why the application was made, 
                             what everything on the page is, how we got to the scoring of 
                             the diseases and who made the application.
@@ -39,7 +39,7 @@
                         <div class="centerAlignment">
                             This application was commisioned by M. Noback for Alife. <br/>
                             They wanted an application that would match symptoms, selected from the Human Phenotype 
-                            Ontology database, to diseases collected from the OMIM database.
+                            Ontology database, to genetically inherited diseases collected from the OMIM database.
                             <br/><br/>
 
                         </div>

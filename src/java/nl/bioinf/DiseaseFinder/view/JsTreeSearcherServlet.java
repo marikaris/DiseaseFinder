@@ -61,7 +61,7 @@ public class JsTreeSearcherServlet extends HttpServlet {
         }
         while (!id.equals("HP:0000001")) {
             HPOTerm term = (HPOTerm) collection.get(id);
-            nodesToShow.put(term.getName());
+            nodesToShow.put(term.getId());
             id = term.getIsA().get(0).toString();
         }
         out.println(nodesToShow);
