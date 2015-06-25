@@ -1,3 +1,6 @@
+//by mkslofstra
+//by resizing of the page, this script could cause errors, but that does not affect the application
+//a refresh will remove the error
 $(document).ready(initialize);
 
 function initialize() {

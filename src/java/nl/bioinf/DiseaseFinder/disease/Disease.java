@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.bioinf.DiseaseFinder.disease;
 
 import java.util.Iterator;
@@ -133,7 +128,8 @@ public class Disease implements Comparable {
         String diseaseInfo = sb.toString();
         for (String match : this.matches) {
             match = match.replaceAll(" ", "");
-            diseaseInfo = diseaseInfo.replaceAll("(?i)" + match.toLowerCase(), "<span class=\"highlight\">" + match + "</span>");
+            diseaseInfo = diseaseInfo.replaceAll("(?i)" + match.toLowerCase(),
+                    "<span class=\"highlight\">" + match + "</span>");
         }
         return "<h2>" + title + "</h2><div id =\"disease\">"
                 + "<p class=\"back2results\"><span class = \"glyphicon"
